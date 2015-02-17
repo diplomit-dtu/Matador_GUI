@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="MatadorUsingGUI/GUI.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/GUI/GUI.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/GUI/About.odt"/>
+        <file path="/GUI/About.pdf"/>
+        <javaElement handleIdentifier="=GUI/board.codeBehind"/>
+        <file path="/GUI/Forbedringsforslag til GUI fra grupperne.doc"/>
+        <file path="/GUI/MatadorGUI-ToBoundary.jardesc"/>
+        <file path="/GUI/CDIO_opgave_del1.doc"/>
+        <file path="/GUI/ToDo"/>
+        <file path="/GUI/CDIO_opgave_del2.doc"/>
+        <file path="/GUI/CDIO_opgave_del3.doc"/>
+        <file path="/GUI/build.xml"/>
+        <javaElement handleIdentifier="=GUI/board"/>
+        <javaElement handleIdentifier="=GUI/GUI"/>
+        <file path="/GUI/.classpath"/>
+        <file path="/GUI/MatadorGUI-ToMatadorUsingGUI.jardesc"/>
+        <file path="/GUI/Opgaveformulering 3 ugers.doc"/>
+        <javaElement handleIdentifier="=GUI/board.fields"/>
+        <folder path="/GUI/doc"/>
+        <file path="/GUI/Brug af udleveret GUI.doc"/>
+        <javaElement handleIdentifier="=GUI/tests"/>
+        <file path="/GUI/MatadorGUI-ToXX_del1.jardesc"/>
+        <file path="/GUI/.project"/>
+    </selectedElements>
+</jardesc>

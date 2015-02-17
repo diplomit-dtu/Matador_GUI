@@ -1,0 +1,264 @@
+	type::Start;;
+	backgroundColor::255,,0,,0;;
+	foregroundColor::0,,0,,0;;
+	title::START;; 
+	subText::Modtag: 200;; 
+	description::Modtag kr. 200,-\nnår de passerer start;;
+||		
+	type::Street;;
+	backgroundColor::75,,155,,225;;
+	foregroundColor::0,,0,,0;;
+	title::Rødovrevej;; 
+	subText::Pris:	60;; 
+	description::Rødovrevej;;
+	leje::Leje: 20;;
+||	
+	type::Chance;;
+||	
+	type::Street;;
+	backgroundColor::75,,155,,225;;
+	foregroundColor::0,,0,,0;;
+	title::Hvidovrevej;; 
+	subText::Pris:	60;; 
+	description::Hvidovrevej;;
+	leje::Leje: 20;;
+||	
+	type::Tax;;
+	title::Betal\nindkomst-\nskat;; 
+	subText::10% el. 200;; 
+	description::Betal indkomstskat\n10% eller kr. 200,-;;
+||	
+	type::Shipping;;
+	picture::Default;;
+	title::Øresund;; 
+	subText::Pris:  200;; 
+	description::Øresundsredderiet;;
+	leje::Leje: 75;;
+||	
+	type::Street;;
+	backgroundColor::255,,135,,120;;
+	foregroundColor::0,,0,,0;;
+	title::Roskildevej;; 
+	subText::Pris:	100;; 
+	description::Roskildevej;;
+	leje::Leje: 40;;
+||	
+	type::Chance;;
+||	
+	type::Street;;
+	backgroundColor::255,,135,,120;;
+	foregroundColor::0,,0,,0;;
+	title::Valby \nLanggade;; 
+	subText::Pris:	100;; 
+	description::Valby Langgade;;
+	leje::Leje: 40;;
+||	
+	type::Street;;
+	backgroundColor::255,,135,,120;;
+	foregroundColor::0,,0,,0;;
+	title::Allégade;; 
+	subText::Pris:	120;; 
+	description::Allégade;;
+	leje::Leje: 45;;
+||	
+	type::Jail;;
+	picture::Default;;
+	title::Fængsel;; 
+	subText::Fængsel;; 
+	description::På besøg i fængslet;;
+||	
+	type::Street;;
+	backgroundColor::102,,204,,0;;
+	foregroundColor::0,,0,,0;;
+	title::Frederiks-\nberg Allé;; 
+	subText::Pris:	140;; 
+	description::Frederiksberg Allé;;
+	leje::Leje: 50;;
+||	
+	type::Brewery;;
+	picture::Default;;
+	title::Tuborg;; 
+	subText::Pris:  150;; 
+	description::Tuborg bryggeri;;
+	leje::Leje: 10 x [Terningslag];;
+||	
+	type::Street;;
+	backgroundColor::102,,204,,0;;
+	foregroundColor::0,,0,,0;;
+	title::Bülowsvej;; 
+	subText::Pris:	140;; 
+	description::Bülowsvej;;
+	leje::Leje: 50;;
+||	
+	type::Street;;
+	backgroundColor::102,,204,,0;;
+	foregroundColor::0,,0,,0;;
+	title::Gammel\nKongevej;; 
+	subText::Pris:	140;; 
+	description::Gammel Kongevej;;
+	leje::Leje: 50;;
+||	
+	type::Shipping;;
+	picture::Default;;
+	title::D.F.D.S.;; 
+	subText::Pris:  200;; 
+	description::D.F.D.S. redderiet;;
+	leje::Leje: 75;;
+||	
+	type::Street;;
+	backgroundColor::153,,153,,153;;
+	foregroundColor::0,,0,,0;;
+	title::Bernstorffs-\nvej;; 
+	subText::Pris:	180;; 
+	description::Bernstorffsvej;;
+	leje::Leje: 60;;
+||	
+	type::Chance;;
+||	
+	type::Street;;
+	backgroundColor::153,,153,,153;;
+	foregroundColor::0,,0,,0;;
+	title::Hellerupvej;; 
+	subText::Pris:	180;; 
+	description::Hellerupvej;;
+	leje::Leje: 60;;
+||	
+	type::Street;;
+	backgroundColor::153,,153,,153;;
+	foregroundColor::0,,0,,0;;
+	title::Strandvejen;; 
+	subText::Pris:	180;; 
+	description::Strandvejen;;
+	leje::Leje: 60;;
+||	
+	type::Refuge;;
+	picture::Default;;
+	title::Helle;; 
+	subText::Helle;; 
+	description::Ta' en pause;;
+||	
+	type::Street;;
+	backgroundColor::255,,0,,0;;
+	foregroundColor::0,,0,,0;;
+	title::Trianglen;; 
+	subText::Pris:	220;; 
+	description::Trianglen;;
+	leje::Leje: 70;;
+||	
+	type::Chance;;
+||	
+	type::Street;;
+	backgroundColor::255,,0,,0;;
+	foregroundColor::0,,0,,0;;
+	title::Østerbro-\ngade;; 
+	subText::Pris:	220;; 
+	description::Østerbrogade;;
+	leje::Leje: 70;;
+||	
+	type::Street;;
+	backgroundColor::255,,0,,0;;
+	foregroundColor::0,,0,,0;;
+	title::Grønningen;; 
+	subText::Pris:	240;; 
+	description::Grønningen;;
+	leje::Leje: 80;;
+||	
+	type::Shipping;;
+	picture::Default;;
+	title::Ø.S.;; 
+	subText::Pris:  200;; 
+	description::Ø.S. redderiet;;
+	leje::Leje: 75;;
+||	
+	type::Street;;
+	backgroundColor::255,,255,,255;;
+	foregroundColor::0,,0,,0;;
+	title::Bredgade;; 
+	subText::Pris:	260;; 
+	description::Bredgade;;
+	leje::Leje: 80;;
+||	
+	type::Street;;
+	backgroundColor::255,,255,,255;;
+	foregroundColor::0,,0,,0;;
+	title::Kgs. Nytorv;; 
+	subText::Pris:	260;; 
+	description::Kongens Nytorv;;
+	leje::Leje: 80;;
+||	
+	type::Brewery;;
+	picture::Default;;
+	title::Carlsberg;; 
+	subText::Pris:  150;; 
+	description::Carlsberg bryggeri;;
+	leje::Leje: 10 x [Terningslag];;
+||	
+	type::Street;;
+	backgroundColor::255,,255,,255;;
+	foregroundColor::0,,0,,0;;
+	title::Østergade;; 
+	subText::Pris:	280;; 
+	description::Østergade;;
+	leje::Leje: 85;;
+||	
+	type::Jail;;
+	picture::Default;;
+	title::Gå i fængsel;; 
+	subText::Gå i fængsel;; 
+	description::De fængsles\nSlå to ens for at komme ud;;
+||	
+	type::Street;;
+	backgroundColor::255,,255,,50;;
+	foregroundColor::0,,0,,0;;
+	title::Amagertorv;; 
+	subText::Pris:	300;; 
+	description::Amagertorv;;
+	leje::Leje: 95;;
+||	
+	type::Street;;
+	backgroundColor::255,,255,,50;;
+	foregroundColor::0,,0,,0;;
+	title::Vimmel-\nskaftet;; 
+	subText::Pris:	300;; 
+	description::Vimmelskaftet;;
+	leje::Leje: 95;;
+||	
+	type::Chance;;
+||	
+	type::Street;;
+	backgroundColor::255,,255,,50;;
+	foregroundColor::0,,0,,0;;
+	title::Nygade;; 
+	subText::Pris:	320;; 
+	description::Nygade;;
+	leje::Leje: 100;;
+||	
+	type::Shipping;;
+	picture::Default;;
+	title::Bornholm;; 
+	subText::Pris:  200;; 
+	description::Bornholms redderi;;
+	leje::Leje: 75;;
+||	
+	type::Chance;;
+||	
+	type::Street;;
+	backgroundColor::150,,60,,150;;
+	foregroundColor::255,,255,,255;;
+	title::Frederiks-\nberggade;; 
+	subText::Pris:	350;; 
+	description::Frederiksberggade;;
+	leje::Leje: 120;;
+||	
+	type::Tax;;
+	title::Ekstra-\nordinær\nstatsskat;; 
+	subText::Betal 100;; 
+	description::Betal ekstraordinær\n statsskat: kr. 100,-;;
+||	
+	type::Street;;
+	backgroundColor::150,,60,,150;;
+	foregroundColor::255,,255,,255;;
+	title::Rådhus-\npladsen;; 
+	subText::Pris:	400;; 
+	description::Rådhuspladsen;;
+	leje::Leje: 150;;

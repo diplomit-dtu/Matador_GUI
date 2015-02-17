@@ -1,0 +1,39 @@
+	Need to have:
+	1	Farven på border på de grunde man ejer sættes forkert hvis man kun er en farve.
+	7	Projektet skal på Git-Hub eller lign.
+	
+	Nice to have:
+	95 GUI - Brugerne skal kunne vælge en hvilken som helst farve til spillere/biler
+	
+OK = Er lavet.
+NOT = Forkastet, bliver ikke lavet.
+
+ER LAVET:
+---------
+OK	1	De 11 felter der bruges i del2 og del3 skal have de samme navne som i beskrivelserne.
+OK	2	setCar skal fjerne bilen fra alle andre felter først. (removeCar skal stadig være der til når en spiller går fallit.)
+OK	3	enum PlayerColor skal flyttes ud i GUI (eller derudaf).
+OK	5	Pak det hele pænt ind, så de studerende ikke træder for meget forkert.
+OK	6	html? visning af tekst ordentligt.
+OK	7	StartField does not use Title, Subtext or Description for anything.
+OK	8	Kommentarer i BoardController skal flyttes ind i GUI og tilpasses til de studerende.
+OK	9	ChanceCardText skal vises pænt på center.
+OK	10	Ryk Spillerens formue ned på næste linie, så både navn og formue ses ok.
+OK	91	Taxes --> Tax
+OK	94	Sørge for at terningerne ikke kan lande ovenpå spillerne.
+OK	94	GUI - Brugerne skal kunne sætte vinklen på terningerne frit (360 grader). 
+			Se disse to links for ideer: 
+				http://docs.oracle.com/javase/tutorial/2d/advanced/transforming.html 
+				(http://stackoverflow.com/questions/14884480/rotate-an-image-in-java-by-the-specified-angle)
+NOT	92	Specielle karakterer vises forkert på bræt og i konsol i linux. De vises korrekt hvis man bruger UTF-8.
+OK	1	GUI og Input sættes sammen
+		a	Input laves som et panel, hvor programmøren kan kalde 
+			InputString, InputInteger, InputBoolean(Yes/No, OK/Cancel, Ja/Nej), InputChoice(A, B, C, ...)(Knapper/DropDown).
+			ShowMessage.
+		b	Fjern beskederne igen.
+OK	2	GUI - Mulighed for at ændre billeder
+OK	3	Flyt FieldFactory ud i en tekstfil der indlæses.
+OK	4	Change the default field-names, så de studerende gerne vil ændre dem.
+NOT	5	Change the default colours, så de studerende gerne vil ændre dem.
+OK	6	GUI - Brugerne skal have mulighed for selv at placere terningerne + vinkel
+OK	93	setColor(foreground, background)

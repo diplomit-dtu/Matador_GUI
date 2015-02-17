@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<project>
+
+	<target name="echotest">
+		<echo>
+			Hej
+		</echo>
+	</target>
+
+	<target name="compile">
+		<javac target="1.7" srcdir="." />
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="GUI_ant.jar" basedir="." includes="*.class" />
+	</target>
+	
+</project>

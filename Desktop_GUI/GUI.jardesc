@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="MatadorUsingGUI/GUI.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/GUI/GUI.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <folder path="/GUI/doc"/>
+        <javaElement handleIdentifier="=GUI/board.codeBehind"/>
+        <folder path="/GUI/miscellaneous"/>
+        <javaElement handleIdentifier="=GUI/tests"/>
+        <javaElement handleIdentifier="=GUI/board"/>
+        <javaElement handleIdentifier="=GUI/GUI"/>
+        <file path="/GUI/.project"/>
+        <file path="/GUI/.classpath"/>
+        <javaElement handleIdentifier="=GUI/board.fields"/>
+    </selectedElements>
+</jardesc>

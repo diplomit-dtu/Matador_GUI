@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="MatadorUsingGUI/MatadorGUI.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/GUICore/MatadorGUI.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=GUICore/GUI&lt;boundaryToMatador"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;board.codeBehind"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;board.fields"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;buildings"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;cars"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;board"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;dice"/>
+        <file path="/GUICore/.classpath"/>
+        <javaElement handleIdentifier="=GUICore/GUI&lt;pics"/>
+        <file path="/GUICore/.project"/>
+    </selectedElements>
+</jardesc>
