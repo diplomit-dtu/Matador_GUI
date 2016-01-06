@@ -36,12 +36,12 @@ public final class FieldFactory {
     
     public static void makeFields() {
         FieldFactory fact = new FieldFactory();
-        if (fields == null || fields.size() == 0) {
-            try {
-                fact.parse();
-            } catch (NumberFormatException e) {
-                System.out.println("NumberFormatException");
-            }
+        fields = new ArrayList<Field>(40);
+        
+        try {
+            fact.parse();
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException");
         }
     }
     
@@ -52,8 +52,6 @@ public final class FieldFactory {
             return false;
         }
         
-        // 75% > 40 so increase in capacity is required
-        fields = new ArrayList<Field>(54);
         
         for (String field : str.split("\\|\\|")) {
             String[] attributes = field.split(";;");
@@ -65,32 +63,15 @@ public final class FieldFactory {
                 return false;
             }
             switch(T) {
-                case BREWERY:
-                    createBrewery(attributes);
-                    break;
-                case CHANCE:
-                    createChance(/* attributes */);
-                    break;
-                case JAIL:
-                    createJail(attributes);
-                    break;
-                case REFUGE:
-                    createRefuge(attributes);
-                    break;
-                case SHIPPING:
-                    createShipping(attributes);
-                    break;
-                case START:
-                    createStart(attributes);
-                    break;
-                case STREET:
-                    createStreet(attributes);
-                    break;
-                case TAX:
-                    createTax(attributes);
-                    break;
+                case BREWERY: createBrewery(attributes); break;
+                case CHANCE: createChance(); break;
+                case JAIL: createJail(attributes); break;
+                case REFUGE: createRefuge(attributes); break;
+                case SHIPPING: createShipping(attributes); break;
+                case START: createStart(attributes); break;
+                case STREET: createStreet(attributes); break;
+                case TAX: createTax(attributes); break;
                 default:
-                    break;
             }
         }
         return true;

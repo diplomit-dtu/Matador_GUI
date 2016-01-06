@@ -43,7 +43,7 @@ public final class BoardController {
 	 * Contains service methods for board for controlling the board.
 	 */
 	public BoardController() {
-		this.board = Board.getInstance();
+		this.board = new Board();
 	}
 	/**
 	 * Displays a message for the user. The user presses OK when the message is read Is a breaking
@@ -56,7 +56,7 @@ public final class BoardController {
 		okButton.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
@@ -81,7 +81,7 @@ public final class BoardController {
 		okButton.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				BoardController.userInput = tf.getText();
 				BoardController.this.board.clearInputPanel();
 				latch.countDown();
@@ -122,7 +122,7 @@ public final class BoardController {
 		tf.addKeyListener(new KeyListener() {
 			
 			@Override
-			public void keyTyped(@SuppressWarnings("unused") KeyEvent ke) {}
+			public void keyTyped(KeyEvent ke) {}
 			@Override
 			public void keyReleased(KeyEvent ke) {
 				String input = tf.getText() + ke.getKeyChar();
@@ -150,12 +150,12 @@ public final class BoardController {
 				okButton.setEnabled(tf.getForeground().equals(Color.BLACK));
 			}
 			@Override
-			public void keyPressed(@SuppressWarnings("unused") KeyEvent ke) {}
+			public void keyPressed(KeyEvent ke) {}
 		});
 		okButton.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				BoardController.userInput = tf.getText();
 				BoardController.this.board.clearInputPanel();
 				latch.countDown();
@@ -234,12 +234,12 @@ public final class BoardController {
 				return null;
 			}
 		}
-		final JComboBox dropdown = new JComboBox(options);
+		final JComboBox<String> dropdown = new JComboBox<String>(options);
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(@SuppressWarnings("unused") ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				BoardController.userInput = dropdown.getSelectedItem().toString();
 				BoardController.this.board.clearInputPanel();
 				latch.countDown();
@@ -255,12 +255,7 @@ public final class BoardController {
 			return null;
 		}
 	}
-	/**
-	 * Closes the GUI, so you can start a new one.
-	 */
-	public void closeGUI() {
-		Board.destroy();
-	}
+	
 	/**
 	 * Sets the title of a field on the board.<br>
 	 * @param fieldNumber : int [1:40]
@@ -445,8 +440,9 @@ public final class BoardController {
 	public void setCar(int fieldNumber, String name) {
 		// removeCar(name);
 		Field f = FieldFactory.fields.get(fieldNumber - 1);
-		if(this.board.getPlayer(name) != null) {
-			f.setCar(name, true);
+		Player p = this.board.getPlayer(name);
+		if(p != null) {
+			f.setCar(p, true);
 		}
 	}
 	/**
@@ -457,7 +453,8 @@ public final class BoardController {
 	 */
 	public void removeCar(int fieldNumber, String name) {
 		Field f = FieldFactory.fields.get(fieldNumber - 1);
-		f.setCar(name, false);
+		Player p = this.board.getPlayer(name);
+		f.setCar(p, false);
 		Center.getInstance().displayDefault();
 	}
 	/**
@@ -466,8 +463,9 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void removeAllCars(String name) {
+	    Player p = this.board.getPlayer(name);
 		for(Field f : FieldFactory.fields) {
-			f.setCar(name, false);
+			f.setCar(p, false);
 		}
 		Center.getInstance().displayDefault();
 	}

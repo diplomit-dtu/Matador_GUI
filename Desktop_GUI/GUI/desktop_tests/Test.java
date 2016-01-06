@@ -9,29 +9,40 @@ public class Test {
 	
 	public static void main(String[] args) {
 		Test test = new Test();
-		test.setDiceAngleAndCoordinates();
-		// gui.create("C:\\Users\\Ronnie\\Desktop\\fields.txt");
-		test.testSetText();
-		test.testSetTexts();
-		test.testAddPlayer();
-		test.testSetBalance();
-		test.testSetDice();
-		test.testInput();
-		test.testSetNextChanceCardText();
-		test.testSetCar();
-		test.testSetOwner();
-		test.testSetDiceAngleAndCoordinatesMultipleTimes();
-		test.testSetDiceAllAngles();
-		test.testRemoveCar();
-		test.testRemoveOwner();
-		test.testSetHouses();
-		test.testRemoveHouses();
-		try {
-			Thread.sleep(2000);
-		} catch(InterruptedException ex) {
-			ex.printStackTrace();
-		}
-		// System.exit(0);
+		test.test();
+		test.test();
+	}
+	
+	private void test(){
+	    setDiceAngleAndCoordinates();
+	    // gui.create("C:\\Users\\Ronnie\\Desktop\\fields.txt");
+	    testSetText();
+	    testSetTexts();
+	    testAddPlayer();
+	    testSetBalance();
+	    testSetDice();
+	    testInput();
+	    testSetNextChanceCardText();
+	    testSetCar();
+	    testSetOwner();
+	    testSetDiceAngleAndCoordinatesMultipleTimes();
+	    testSetDiceAllAngles();
+	    testRemoveCar();
+	    testRemoveOwner();
+	    testSetHouses();
+	    testRemoveHouses();
+	    try {
+	        Thread.sleep(2000);
+	    } catch(InterruptedException ex) {
+	        ex.printStackTrace();
+	    }
+	    gui = new GUI();
+	    try {
+            Thread.sleep(2000);
+        } catch(InterruptedException ex) {
+            ex.printStackTrace();
+        }
+	    // System.exit(0);	    
 	}
 	
 	private void setDiceAngleAndCoordinates() {

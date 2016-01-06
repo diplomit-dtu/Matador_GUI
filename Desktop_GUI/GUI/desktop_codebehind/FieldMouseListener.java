@@ -19,26 +19,26 @@ public class FieldMouseListener implements MouseListener{
      * Called when the mouse is over a field
      */
     @Override
-    public void mouseEntered(@SuppressWarnings("unused") MouseEvent e) {
+    public void mouseEntered(MouseEvent e) {
     	this.field.displayOnCenter();
     }
     /**
      * Called when the mouse is no longer over a field
      */
     @Override
-    public void mouseExited(@SuppressWarnings("unused") MouseEvent e) {
+    public void mouseExited(MouseEvent e) {
     	Center.getInstance().displayDefault();
     }
     @Override
-    public void mouseClicked(@SuppressWarnings("unused") MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
         //Do nothing
     }
     @Override
-    public void mousePressed(@SuppressWarnings("unused") MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
        //Do nothing
     }
     @Override
-    public void mouseReleased(@SuppressWarnings("unused") MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {
        //Do nothing
     }
 }

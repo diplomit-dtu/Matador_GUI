@@ -106,13 +106,10 @@ public abstract class Field {
 		this.subTextLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		this.subTextLabel.setText(this.subText);
 	}
-	public boolean hasCar(String name) {
-		Player p = Board.getInstance().getPlayer(name);
+	public boolean hasCar(Player p) {
 		return this.hasCars[p.getNumber()];
 	}
-	public void setCar(String name, boolean hasCar) {
-		Board board = Board.getInstance();
-		Player p = board.getPlayer(name);
+	public void setCar(Player p, boolean hasCar) {
 		if(p != null) {
 			this.hasCars[p.getNumber()] = hasCar;
 			this.cars[p.getNumber()].setIcon(new ImageIcon(p.getImage()));
@@ -177,7 +174,7 @@ public abstract class Field {
 	protected void displayCarOnCenter() {
 		for(int i = 0; i < Board.MAX_PLAYER_COUNT; i++) {
 			Player p = Board.playerList[i];
-			if(p != null && hasCar(p.getName())) {
+			if(p != null && hasCar(p)) {
 				Center.cars[i].setIcon(new ImageIcon(p.getImage()));
 				Center.cars[i].setVisible(true);
 			} else {
