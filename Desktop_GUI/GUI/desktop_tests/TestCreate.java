@@ -26,13 +26,6 @@ public class TestCreate {
         Field[] fields = new Field[list.size()];
         for(int i = 0; i < fields.length; i++) fields[i] = list.get(i);
       
-        GUI.create(fields);
-        Car car = new Car.Builder()
-            .typeRacecar()
-            .primaryColor(Color.BLUE)
-            .secondaryColor(Color.RED)
-            .patternDiagonalDualColor()
-            .build();
-        GUI.addPlayer("Sebastian Vettel", 25000, car);
+        GUI gui = new GUI(fields);
     }
 }

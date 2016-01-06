@@ -1,6 +1,5 @@
 package desktop_tests;
 
-import java.awt.Color;
 import desktop_resources.GUI;
 
 
@@ -15,33 +14,34 @@ public class TestRunExampleGame{
 
 	private static void realExampleGame(){
 		// Setup game
+	    GUI gui = new GUI();
 		sleep();
-		GUI.addPlayer("Mads", 30000);
+		gui.addPlayer("Mads", 30000);
 		sleep();
-		GUI.addPlayer("Stig", 30000);
+		gui.addPlayer("Stig", 30000);
 		sleep();
-		GUI.setCar(1, "Mads");
+		gui.setCar(1, "Mads");
 		sleep();
-		GUI.setCar(1, "Stig");
+		gui.setCar(1, "Stig");
 		
 		// Move player 1
 		sleep();
-		GUI.setDice(1, 2);
+		gui.setDice(1, 2);
 		sleep();
-		GUI.removeAllCars("Mads");
-		GUI.setCar(2, "Mads");
+		gui.removeAllCars("Mads");
+		gui.setCar(2, "Mads");
 		sleep();
-		GUI.removeAllCars("Mads");
-		GUI.setCar(3, "Mads");
+		gui.removeAllCars("Mads");
+		gui.setCar(3, "Mads");
 		sleep();
-		GUI.removeAllCars("Mads");
-		GUI.setCar(4, "Mads");
+		gui.removeAllCars("Mads");
+		gui.setCar(4, "Mads");
 		sleep();
-		GUI.setBalance("Mads", 28000);
-		GUI.setOwner(4, "Mads");
+		gui.setBalance("Mads", 28000);
+		gui.setOwner(4, "Mads");
 		sleep();
-//        GUI.setNextChanceCardText("De har modtaget Bjørne Bandit - legatet og fængsles!");
-		GUI.displayChanceCard("De har vundet vild med dans og skifter navn til Allan!");
+//        gui.setNextChanceCardText("De har modtaget Bjørne Bandit - legatet og fængsles!");
+		gui.displayChanceCard("De har vundet vild med dans og skifter navn til Allan!");
 	}
 	public static void sleep(){
 		sleep(1200);

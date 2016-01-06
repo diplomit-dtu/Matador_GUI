@@ -14,21 +14,20 @@ import desktop_fields.Field;
  *         Rubin-Grøn (daniel@koru.dk)
  */
 public final class GUI {
-    public static final Color BASECOLOR = Board.BASECOLOR;
-    private static BoardController bc;
+    public final Color BASECOLOR = Board.BASECOLOR;
+    private BoardController bc;
     
-    private GUI() {}
-    
-    /**
-     * Retrieves the singleton instance.<br>
-     * @return the Board instance
-     */
-    private static BoardController getBC() {
-        if (bc == null) {
-            bc = new BoardController();
-        }
-        return bc;
+    public GUI(Field[] fields) {
+        ArrayList<Field> list = new ArrayList<Field>();
+        for(Field f : fields) list.add(f);
+        FieldFactory.fields = list;
+        bc = new BoardController(); 
     }
+    
+    public GUI(){
+        bc = new BoardController();        
+    }
+    
     
    /**
      * Initializes the board using an array of fields.<br>
@@ -49,34 +48,23 @@ public final class GUI {
      *      ... new Brewery.Builder().build();<br>
      *      ... new Empty.Builder().build();<br>
      */
-    public static void create(Field[] fields) {
-        ArrayList<Field> list = new ArrayList<Field>();
-        for(Field f : fields) list.add(f);
-        FieldFactory.fields = list;
-    }
-    /**
-     * Closes the GUI, so you can start a new one. 
-     */
-    public final static void close() {
-        getBC().closeGUI();
-        bc = null;
-        FieldFactory.path = null;
-    }
+
+
     /**
      * Displays a message to the user.<br>
      * Breaks the system untill "OK" is pressed.<br>
      * @param msg The message to print.
      */
-    public static void showMessage(String msg) {
-        getBC().showMessage(msg);
+    public void showMessage(String msg) {
+        bc.showMessage(msg);
     }
     /**
      * Displays a message to the user and awaits the response.<br>
      * @param msg The message that promts the user.
      * @return The string that the user has entered.
      */
-    public static String getUserString(String msg) {
-        return getBC().getUserString(msg);
+    public String getUserString(String msg) {
+        return bc.getUserString(msg);
     }
     /**
      * Displays a message to the user and awaits the integer response. Only
@@ -86,16 +74,16 @@ public final class GUI {
      * @param max The maximum value the user is allowed to enter.
      * @return The integer that the user selected.
      */
-    public static int getUserInteger(String msg, int min, int max) {
-        return getBC().getUserInteger(msg, min, max);
+    public int getUserInteger(String msg, int min, int max) {
+        return bc.getUserInteger(msg, min, max);
     }
     /**
      * Displays a message to the user and awaits the integer response.<br>
      * @param msg The message that promts the user.
      * @return The integer that the user selected.
      */
-    public static int getUserInteger(String msg) {
-        return getBC().getUserInteger(msg, 0, 999999999);
+    public int getUserInteger(String msg) {
+        return bc.getUserInteger(msg, 0, 999999999);
     }
     /**
      * Displays a message to the user and awaits the button pressed response.<br>
@@ -104,8 +92,8 @@ public final class GUI {
      *        the user can press.
      * @return The string from the button that the user pressed.
      */
-    public static String getUserButtonPressed(String msg, String... buttons) {
-        return getBC().getUserButtonPressed(msg, buttons).toString();
+    public String getUserButtonPressed(String msg, String... buttons) {
+        return bc.getUserButtonPressed(msg, buttons).toString();
     }
     /**
      * Displays a message to the user and awaits the drop-down response.<br>
@@ -114,8 +102,8 @@ public final class GUI {
      *        choose from.
      * @return The string that the user selected.
      */
-    public static String getUserSelection(String msg, String... options) {
-        return getBC().getUserSelection(msg, options).toString();
+    public String getUserSelection(String msg, String... options) {
+        return bc.getUserSelection(msg, options).toString();
     }
     /**
      * Displays a message to the user and awaits the boolean response.<br>
@@ -124,9 +112,9 @@ public final class GUI {
      * @param falseButton The text that should appear on the right button.
      * @return True if the left button is pressed by the user. False otherwise.
      */
-    public static boolean getUserLeftButtonPressed(String msg, 
+    public boolean getUserLeftButtonPressed(String msg, 
         String trueButton, String falseButton) {
-        return getBC().getUserButtonPressed(msg, trueButton, 
+        return bc.getUserButtonPressed(msg, trueButton, 
             falseButton).equals(trueButton);
     }
     /**
@@ -134,16 +122,16 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param title : String (Mind the length!)
      */
-    public static void setTitleText(int fieldNumber, String title) {
-        getBC().setTitleText(fieldNumber, title);
+    public void setTitleText(int fieldNumber, String title) {
+        bc.setTitleText(fieldNumber, title);
     }
     /**
      * Sets the subText of a field on the board.<br>
      * @param fieldNumber : int [1:40]
      * @param subText : String (Mind the length!)
      */
-    public static void setSubText(int fieldNumber, String subText) {
-        getBC().setSubText(fieldNumber, subText);
+    public void setSubText(int fieldNumber, String subText) {
+        bc.setSubText(fieldNumber, subText);
     }
     /**
      * Sets the Description (The text shown in the center when mouse hovers) of
@@ -151,8 +139,8 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param description : String (Mind the length!)
      */
-    public static void setDescriptionText(int fieldNumber, String description) {
-        getBC().setDescriptionText(fieldNumber, description);
+    public void setDescriptionText(int fieldNumber, String description) {
+        bc.setDescriptionText(fieldNumber, description);
     }
     /**
      * Adds a player to the board.<br>
@@ -168,8 +156,8 @@ public final class GUI {
      *     .patternDotted()<br>
      *     .Build();<br>
      */
-    public static void addPlayer(String name, int balance, Car car) {
-        getBC().addPlayer(name, balance, car);
+    public void addPlayer(String name, int balance, Car car) {
+        bc.addPlayer(name, balance, car);
     }
     /**
      * Adds a player to the board.<br>
@@ -177,16 +165,16 @@ public final class GUI {
      * @param name : String (Mind the length!) (Unique identifier of the player - no duplicates)
      * @param balance : int
      */
-    public static void addPlayer(String name, int balance) {
-        getBC().addPlayer(name, balance);
+    public void addPlayer(String name, int balance) {
+        bc.addPlayer(name, balance);
     }
     /**
      * Sets the balance of a player if the player has been added.
      * @param name The name of the player
      * @param newBalance : int
      */
-    public static void setBalance(String name, int newBalance) {
-        getBC().setBalance(name, newBalance);
+    public void setBalance(String name, int newBalance) {
+        bc.setBalance(name, newBalance);
     }
     /**
      * Shows two dice on the board. The dice will have the specified values, but
@@ -201,9 +189,9 @@ public final class GUI {
      * @param y2 : int [0:11]<br>
      *        (If a parameter is out of bounds nothing will happen!)
      */
-    public static void setDice(int faceValue1, int rotation1, int x1, int y1,
+    public void setDice(int faceValue1, int rotation1, int x1, int y1,
         int faceValue2, int rotation2, int x2, int y2) {
-        getBC().setDice(faceValue1, rotation1, x1, y1, faceValue2, rotation2,
+        bc.setDice(faceValue1, rotation1, x1, y1, faceValue2, rotation2,
             x2, y2);
     }
     /**
@@ -217,9 +205,9 @@ public final class GUI {
      * @param y2 : int [0:11]<br>
      *        (If a parameter is out of bounds nothing will happen!)
      */
-    public static void setDice(int faceValue1, int x1, int y1, int faceValue2,
+    public void setDice(int faceValue1, int x1, int y1, int faceValue2,
         int x2, int y2) {
-        getBC().setDice(faceValue1, x1, y1, faceValue2, x2, y2);
+        bc.setDice(faceValue1, x1, y1, faceValue2, x2, y2);
     }
     /**
      * Shows two dice on the board. The dice will have the specified values, but
@@ -230,9 +218,9 @@ public final class GUI {
      * @param rotation2 : int [0:360[<br>
      *        (If a parameter is out of bounds nothing will happen!)
      */
-    public static void setDice(int faceValue1, int rotation1, int faceValue2,
+    public void setDice(int faceValue1, int rotation1, int faceValue2,
         int rotation2) {
-        getBC().setDice(faceValue1, rotation1, faceValue2, rotation2);
+        bc.setDice(faceValue1, rotation1, faceValue2, rotation2);
     }
     /**
      * Shows two dice on the board. The dice will have the specified values, but
@@ -242,28 +230,28 @@ public final class GUI {
      *        (If a parameter is out of bounds nothing will happen!) Uses random
      *        rotation.
      */
-    public static void setDice(int faceValue1, int faceValue2) {
-        getBC().setDice(faceValue1, faceValue2);
+    public void setDice(int faceValue1, int faceValue2) {
+        bc.setDice(faceValue1, faceValue2);
     }
     /**
      * Sets the text to appear in the center and displays it.
      * @param txt : String (Mind the length!)<br>
      */
-    public static void displayChanceCard(String txt) {
-        getBC().displayChanceCard(txt);
+    public void displayChanceCard(String txt) {
+        bc.displayChanceCard(txt);
     }
     /**
      * Sets the text to appear in the center when calling displayChanceCard() and when the deck is pressed.
      * @param txt : String (Mind the length!)<br>
      */
-    public static void setChanceCard(String txt) {
-        getBC().setChanceCard(txt);
+    public void setChanceCard(String txt) {
+        bc.setChanceCard(txt);
     }
     /**
      * Displays the current chance card text in the center.
      */
-    public static void displayChanceCard() {
-        getBC().displayChanceCard();
+    public void displayChanceCard() {
+        bc.displayChanceCard();
     }
     /**
      * Places a car on the field.<br>
@@ -275,8 +263,8 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param name The name of the player
      */
-    public static void setCar(int fieldNumber, String name) {
-        getBC().setCar(fieldNumber, name);
+    public void setCar(int fieldNumber, String name) {
+        bc.setCar(fieldNumber, name);
     }
     /**
      * Removes a car from the board.<br>
@@ -284,15 +272,15 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param name The name of the player
      */
-    public static void removeCar(int fieldNumber, String name) {
-        getBC().removeCar(fieldNumber, name);
+    public void removeCar(int fieldNumber, String name) {
+        bc.removeCar(fieldNumber, name);
     }
     /**
      * Removes all cars belonging to this player.
      * @param name The name of the player.
      */
-    public static void removeAllCars(String name) {
-        getBC().removeAllCars(name);
+    public void removeAllCars(String name) {
+        bc.removeAllCars(name);
     }
     /**
      * Sets an owner of a field.<br>
@@ -303,16 +291,16 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param name The name of the player
      */
-    public static void setOwner(int fieldNumber, String name) {
-        getBC().setOwner(fieldNumber, name);
+    public void setOwner(int fieldNumber, String name) {
+        bc.setOwner(fieldNumber, name);
     }
     /**
      * Removes an owner from the field.<br>
      * If the field has no owner, nothing happens.
      * @param fieldNumber : int [1:40]
      */
-    public static void removeOwner(int fieldNumber) {
-        getBC().removeOwner(fieldNumber);
+    public void removeOwner(int fieldNumber) {
+        bc.removeOwner(fieldNumber);
     }
     /**
      * Sets houses from the street, and removes the hotel if one is present.<br>
@@ -321,8 +309,8 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param houseCount : int [0:4]
      */
-    public static void setHouses(int fieldNumber, int houseCount) {
-        getBC().setHouses(fieldNumber, houseCount);
+    public void setHouses(int fieldNumber, int houseCount) {
+        bc.setHouses(fieldNumber, houseCount);
     }
     /**
      * Sets whether or not a hotel should be on the street and removes all
@@ -330,7 +318,7 @@ public final class GUI {
      * @param fieldNumber : int [1:40]
      * @param hasHotel : boolean
      */
-    public static void setHotel(int fieldNumber, boolean hasHotel) {
-        getBC().setHotel(fieldNumber, hasHotel);
+    public void setHotel(int fieldNumber, boolean hasHotel) {
+        bc.setHotel(fieldNumber, hasHotel);
     }
 }
