@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import desktop_board.Center;
 import desktop_codebehind.SwingComponentFactory;
 
-public final class Jail extends Field{
+public final class GUI_Jail extends GUI_Field{
 	private static final int TOPHEIGHT = 47;
 	private static final int SUBTEXTHEIGHT = 14;
 	private ImageIcon icon;
@@ -14,10 +14,10 @@ public final class Jail extends Field{
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
 
-	public Jail(){
-	    this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, new Color(125, 125, 125), Color.BLACK);
+	public GUI_Jail(){
+	    this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, new Color(125, 125, 125), Color.BLACK);
 	}
-	public Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
+	public GUI_Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
 		super(bgColor, fgColor, title, subText, description);
 
 		if("default".equalsIgnoreCase(picture)){

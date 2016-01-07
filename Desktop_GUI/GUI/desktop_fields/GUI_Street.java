@@ -8,36 +8,37 @@ import javax.swing.SwingConstants;
 import desktop_board.Center;
 import desktop_codebehind.SwingComponentFactory;
 
-public final class Street extends Ownable {
+public final class GUI_Street extends GUI_Ownable {
     private static final int TITLEHEIGHT = 24;
     private static final int SUBTEXTHEIGHT = 10;
     private JLabel houseLabel;
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public Street(){
-        this(Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.RENT, Field.BG_COLOR, Field.FG_COLOR);
+    public GUI_Street(){
+        this(TITLE, SUBTEXT, DESCRIPTION, RENT, BG_COLOR, FG_COLOR);
     }
-    public Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
+    public GUI_Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
         super.subTextLabel = makeSubTextLabel();
         this.houseLabel = makeHouseLabel();
         
-        super.layered.add(super.titleLabel,
-            this.factory.createGridBagConstraints(0, 0));
-        super.layered.add(this.houseLabel,
-            this.factory.createGridBagConstraints(0, 1));
-        super.layered.add(super.subTextLabel,
-            this.factory.createGridBagConstraints(0, 2));
-        super.layered.setLayer(super.titleLabel, 1);
+        this.titleLabel = makeLabel(24);
+        this.titleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        this.titleLabel.setText(this.title);
+        
+        super.layered.add(this.titleLabel, this.factory.createGridBagConstraints(0, 0));
+        super.layered.add(this.houseLabel, this.factory.createGridBagConstraints(0, 1));
+        super.layered.add(super.subTextLabel, this.factory.createGridBagConstraints(0, 2));
+        super.layered.setLayer(this.titleLabel, 1);
         super.layered.setLayer(super.subTextLabel, 1);
         super.layered.setLayer(this.houseLabel, 0);
     }
-    public Street setTextColor(Color textColor) {
+    public GUI_Street setTextColor(Color textColor) {
         this.titleLabel.setForeground(textColor);
         this.subTextLabel.setForeground(textColor);
         return this;
     }
-    private JLabel makeSubTextLabel(/* String subTextStreet */) {
+    private JLabel makeSubTextLabel() {
         JLabel l = makeLabel(SUBTEXTHEIGHT);
         l.setHorizontalTextPosition(SwingConstants.CENTER);
         l.setText(super.subText);

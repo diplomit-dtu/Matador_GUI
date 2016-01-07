@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Calendar;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -20,7 +21,7 @@ import desktop_codebehind.FieldFactory;
 import desktop_codebehind.JLabelRotatable;
 import desktop_codebehind.Player;
 import desktop_codebehind.SwingComponentFactory;
-import desktop_fields.Field;
+import desktop_fields.GUI_Field;
 
 /**
  * The board
@@ -66,6 +67,9 @@ public final class Board extends javax.swing.JFrame {
 	
 	public Board() {
 	    nextPoint = 0;
+	    
+	    int year = Calendar.getInstance().get(Calendar.YEAR);
+	    this.setTitle("DTU 02312E"+(year%100));
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		
 		makeDice();
@@ -105,7 +109,7 @@ public final class Board extends javax.swing.JFrame {
 	 */
 	private void makeFieldPanels() {
 		for(int i = 0; i < FieldFactory.fields.size(); i++) {
-			Field f = FieldFactory.fields.get(i);
+			GUI_Field f = FieldFactory.fields.get(i);
 			JLayeredPane panel = f.getPanel();
 			this.base.add(panel, this.factory.createGridBagConstraints(f.getX(), f.getY()));
 		}
@@ -157,12 +161,12 @@ public final class Board extends javax.swing.JFrame {
 	 * Makes the components on which cars can be placed
 	 */
 	private void makeCarPanes() {
-		for(Field f : FieldFactory.fields) {
+		for(GUI_Field f : FieldFactory.fields) {
 			int x = f.getX();
 			int y = f.getY();
 			
 			JLayeredPane layered = new JLayeredPane();
-			this.factory.setSize(layered, Field.FIELDWIDTH, Field.FIELDHEIGHT);
+			this.factory.setSize(layered, GUI_Field.FIELDWIDTH, GUI_Field.FIELDHEIGHT);
 			this.carPanes[x][y] = layered;
 			layered.setOpaque(false);
 			
@@ -171,7 +175,7 @@ public final class Board extends javax.swing.JFrame {
 				JLabel label = new JLabel();
 				cars[i] = label;
 				label.setOpaque(false);
-				this.factory.setSize(label, Field.FIELDWIDTH, Field.FIELDHEIGHT);
+				this.factory.setSize(label, GUI_Field.FIELDWIDTH, GUI_Field.FIELDHEIGHT);
 				label.setBounds(3 * i + 3, 6 * i + 1, Player.ICON_WIDTH, Player.ICON_HEIGHT);
 				layered.setLayer(label, i + 5);
 				label.setVisible(false);
@@ -198,7 +202,7 @@ public final class Board extends javax.swing.JFrame {
 	 */
 	private void makeBase() {
 		this.base = new javax.swing.JLayeredPane();
-		this.factory.setSize(this.base, 11 * Field.FIELDWIDTH, 11 * Field.FIELDWIDTH);
+		this.factory.setSize(this.base, 11 * GUI_Field.FIELDWIDTH, 11 * GUI_Field.FIELDWIDTH);
 		this.base.setLayout(new GridBagLayout());
 		this.base.setBackground(BASECOLOR);
         this.base.setOpaque(true);
@@ -211,7 +215,7 @@ public final class Board extends javax.swing.JFrame {
 			for(int y = 1; y < 10; y++) {
 				JPanel panel = new javax.swing.JPanel();
 				panel.setBackground(Board.BASECOLOR);
-				this.factory.setSize(panel, Field.FIELDWIDTH, Field.FIELDHEIGHT);
+				this.factory.setSize(panel, GUI_Field.FIELDWIDTH, GUI_Field.FIELDHEIGHT);
 				this.base.setLayer(panel, 0);
 				this.base.add(panel, this.factory.createGridBagConstraints(x, y));
 			}
@@ -226,7 +230,7 @@ public final class Board extends javax.swing.JFrame {
 				JLabelRotatable label = new JLabelRotatable();
 				this.diceLabels[x][y] = label;
 				label.setOpaque(false);
-				this.factory.setSize(label, Field.FIELDWIDTH, Field.FIELDHEIGHT);
+				this.factory.setSize(label, GUI_Field.FIELDWIDTH, GUI_Field.FIELDHEIGHT);
 				this.base.setLayer(label, 3);
 				this.base.add(label, this.factory.createGridBagConstraints(x, y), 0);
 			}
@@ -241,13 +245,13 @@ public final class Board extends javax.swing.JFrame {
 			int y = 9 - i;
 			
 			JLabel iconLabel = new JLabel();
-			this.factory.setSize(iconLabel, 1 * Field.FIELDWIDTH, 1 * Field.FIELDWIDTH);
+			this.factory.setSize(iconLabel, 1 * GUI_Field.FIELDWIDTH, 1 * GUI_Field.FIELDWIDTH);
 			this.base.setLayer(iconLabel, 1);
 			this.base.add(iconLabel, this.factory.createGridBagConstraints(x, y));
 			this.iconLabels[i] = iconLabel;
 			
 			JLabel playerLabel = new JLabel();
-			this.factory.setSize(playerLabel, 2 * Field.FIELDWIDTH, 1 * Field.FIELDWIDTH);
+			this.factory.setSize(playerLabel, 2 * GUI_Field.FIELDWIDTH, 1 * GUI_Field.FIELDWIDTH);
 			this.base.setLayer(playerLabel, 1);
 			this.base.add(playerLabel, this.factory.createGridBagConstraints(x + 1, y, 2, 1));
 			this.playerLabels[i] = playerLabel;

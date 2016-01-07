@@ -6,23 +6,21 @@ import javax.swing.JLabel;
 import desktop_board.Center;
 import desktop_codebehind.SwingComponentFactory;
 
-public final class Start extends Field {
+public final class GUI_Start extends GUI_Field {
     private static final int TITLEHEIGHT = 47;
     private static final int SUBTEXTHEIGHT = 14;
     
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public Start(){
-        this(Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.BG_COLOR, Field.FG_COLOR);
+    public GUI_Start(){
+        this(TITLE, SUBTEXT, DESCRIPTION, BG_COLOR, FG_COLOR);
     }
-    public Start(String title, String subText, String description, Color bgColor, Color fgColor){
+    public GUI_Start(String title, String subText, String description, Color bgColor, Color fgColor){
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeTitleLabel(this.title);
         this.subTextLabel = makeSubTextLabel(this.subText);
-        this.layered.add(this.titleLabel,
-            this.factory.createGridBagConstraints(0, 0));
-        this.layered.add(this.subTextLabel,
-            this.factory.createGridBagConstraints(0, 1));
+        this.layered.add(this.titleLabel, this.factory.createGridBagConstraints(0, 0));
+        this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 1));
     }
     private JLabel makeTitleLabel(String titleStart) {
         JLabel l = makeLabel(TITLEHEIGHT);

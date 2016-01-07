@@ -7,13 +7,12 @@ import desktop_board.Center;
 import desktop_codebehind.Player;
 import desktop_codebehind.SwingComponentFactory;
 
-public abstract class Ownable extends Field{
+public abstract class GUI_Ownable extends GUI_Field{
 	public static final String OWNABLELABEL = "Ejes af: ";
 	protected Player owner;
 	private String leje;
 	
-	public Ownable(Color bgColor, Color fgColor, String title,
-		String subText, String description, String leje){
+	public GUI_Ownable(Color bgColor, Color fgColor, String title, String subText, String description, String leje){
 		super(bgColor, fgColor, title, subText, description);
 		this.leje = leje;
 	}

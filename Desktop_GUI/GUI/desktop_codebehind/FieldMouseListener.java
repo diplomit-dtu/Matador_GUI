@@ -3,16 +3,16 @@ package desktop_codebehind;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import desktop_board.Center;
-import desktop_fields.Field;
+import desktop_fields.GUI_Field;
 
 /**
  * Listens to mouse action on fields
  * @author Ronnie
  */
 public class FieldMouseListener implements MouseListener{
-	private Field field;
+	private GUI_Field field;
     
-    public FieldMouseListener(Field field){
+    public FieldMouseListener(GUI_Field field){
         this.field = field;
     }
     /**

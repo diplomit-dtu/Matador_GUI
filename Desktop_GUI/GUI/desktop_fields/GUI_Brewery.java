@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import desktop_board.Center;
 import desktop_codebehind.SwingComponentFactory;
 
-public final class Brewery extends Ownable {
+public final class GUI_Brewery extends GUI_Ownable {
     private static final int TOPHEIGHT = 31;
     private static final int TITLEHEIGHT = 16;
     private static final int SUBTEXTHEIGHT = 14;
@@ -15,10 +15,10 @@ public final class Brewery extends Ownable {
     private SwingComponentFactory factory = new SwingComponentFactory();
     private static int picCounter = 0;
     
-    public Brewery(){
-        this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.RENT, Field.BG_COLOR, Field.FG_COLOR);
+    public GUI_Brewery(){
+        this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, RENT, BG_COLOR, FG_COLOR);
     }
-    public Brewery(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
+    public GUI_Brewery(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
         
         if ("default".equalsIgnoreCase(picture)) {
@@ -36,12 +36,9 @@ public final class Brewery extends Ownable {
         this.topLabel = makeTopLabel();
         this.titleLabel = makeRoadNameLabel(this.title);
         this.subTextLabel = makeBottomLabel(this.subText);
-        this.layered.add(this.topLabel,
-            this.factory.createGridBagConstraints(0, 0));
-        this.layered.add(this.titleLabel,
-            this.factory.createGridBagConstraints(0, 1));
-        this.layered.add(this.subTextLabel,
-            this.factory.createGridBagConstraints(0, 2));
+        this.layered.add(this.topLabel, this.factory.createGridBagConstraints(0, 0));
+        this.layered.add(this.titleLabel, this.factory.createGridBagConstraints(0, 1));
+        this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 2));
     }
     
     private JLabel makeTopLabel() {

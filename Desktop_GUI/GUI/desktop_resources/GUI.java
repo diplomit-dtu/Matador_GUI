@@ -6,7 +6,7 @@ import desktop_board.Board;
 import desktop_board.BoardController;
 import desktop_codebehind.Car;
 import desktop_codebehind.FieldFactory;
-import desktop_fields.Field;
+import desktop_fields.GUI_Field;
 
 /**
  * Provides easy access to the GUI features.
@@ -17,9 +17,9 @@ public final class GUI {
     public final Color BASECOLOR = Board.BASECOLOR;
     private BoardController bc;
     
-    public GUI(Field[] fields) {
-        ArrayList<Field> list = new ArrayList<Field>();
-        for(Field f : fields) list.add(f);
+    public GUI(GUI_Field[] fields) {
+        ArrayList<GUI_Field> list = new ArrayList<GUI_Field>();
+        for(GUI_Field f : fields) list.add(f);
         FieldFactory.fields = list;
         bc = new BoardController(); 
     }

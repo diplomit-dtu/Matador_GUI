@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import desktop_board.Center;
 import desktop_codebehind.SwingComponentFactory;
 
-public final class Shipping extends Ownable {
+public final class GUI_Shipping extends GUI_Ownable {
 	private static final int TOPHEIGHT = 31;
 	private static final int TITLEHEIGHT = 16;
 	private static final int SUBTEXTHEIGHT = 14;
@@ -15,10 +15,10 @@ public final class Shipping extends Ownable {
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
 	
-	public Shipping(){
-	    this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.RENT, Field.BG_COLOR, Field.FG_COLOR);
+	public GUI_Shipping(){
+	    this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, RENT, BG_COLOR, FG_COLOR);
 	}
-	public Shipping(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
+	public GUI_Shipping(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
 		super(bgColor, fgColor, title, subText, description, rent);
 		
 		if("default".equalsIgnoreCase(picture)) {

@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import desktop_codebehind.CenterMouseListener;
 import desktop_codebehind.Player;
 import desktop_codebehind.SwingComponentFactory;
-import desktop_fields.Field;
+import desktop_fields.GUI_Field;
 
 public final class Center{
 	private static Center center;
@@ -26,7 +26,7 @@ public final class Center{
 
 	private Center(){
 		centerPanel = new javax.swing.JPanel();
-		this.factory.setSize(centerPanel, 3*Field.FIELDWIDTH, 3*Field.FIELDHEIGHT);
+		this.factory.setSize(centerPanel, 3*GUI_Field.FIELDWIDTH, 3*GUI_Field.FIELDHEIGHT);
 		centerPanel.addMouseListener(new CenterMouseListener(this));
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		 

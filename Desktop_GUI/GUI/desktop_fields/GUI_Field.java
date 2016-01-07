@@ -14,8 +14,9 @@ import desktop_board.Center;
 import desktop_codebehind.FieldMouseListener;
 import desktop_codebehind.Player;
 import desktop_codebehind.SwingComponentFactory;
+import desktop_resources.GUI;
 
-public abstract class Field {
+public abstract class GUI_Field {
 	public static final int FIELDWIDTH = 63;
 	public static final int FIELDHEIGHT = 63;
 	private static int nextNumber = 0;
@@ -43,34 +44,15 @@ public abstract class Field {
     public static final Color BG_COLOR = Color.LIGHT_GRAY;
     public static final Color FG_COLOR = Color.BLACK;
     
-    
-    
-    public static class Builder<E> {
-        protected String title = "Title";
-        protected String subText = "subText";
-        protected String description = "description";
-        protected String picture = "default";
-        protected String rent = "Rent";
-        protected Color bgColor = Color.LIGHT_GRAY;
-        protected Color fgColor = Color.BLACK;
-        
-        @SuppressWarnings("unchecked")
-        public E setFgColor(Color fgColor) {
-            this.fgColor = fgColor;
-            return (E)this;
-        }
-        @SuppressWarnings("unchecked")
-        public E setBgColor(Color bgColor) {
-            this.bgColor = bgColor;
-            return (E)this;
-        }
+    public static void main(String[] args) {
+        new GUI();
     }
     
 	//TODO add number to parameters - just for display
-    protected Field(Color bgColor, Color fgColor, String title, String subText, String description) {
+    protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description) {
         this(bgColor, fgColor, title, subText, description, BorderFactory.createLineBorder(Color.BLACK));
     }
-	protected Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
+	protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
 		nextNumber = (nextNumber % 40) + 1;
 		this.number = nextNumber;
 		Point p = Board.points[Board.nextPoint];

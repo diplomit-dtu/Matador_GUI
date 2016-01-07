@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import desktop_board.Center;
 import desktop_codebehind.SwingComponentFactory;
 
-public final class Refuge extends Field {
+public final class GUI_Refuge extends GUI_Field {
     private static final int TOPHEIGHT = 47;
     private static final int SUBTEXTHEIGHT = 14;
     private ImageIcon icon;
@@ -14,10 +14,10 @@ public final class Refuge extends Field {
     
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public Refuge(){
-        this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.BG_COLOR, Field.FG_COLOR);
+    public GUI_Refuge(){
+        this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, BG_COLOR, FG_COLOR);
     }
-    public Refuge(String picture, String title, String subText, String description, Color bgColor, Color fgColor) {
+    public GUI_Refuge(String picture, String title, String subText, String description, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description);
         
         if ("default".equalsIgnoreCase(picture)) {
@@ -33,10 +33,8 @@ public final class Refuge extends Field {
         
         this.topLabel = makeTopLabel();
         this.subTextLabel = makeBottomLabel(this.subText);
-        this.layered.add(this.topLabel,
-            this.factory.createGridBagConstraints(0, 0));
-        this.layered.add(this.subTextLabel,
-            this.factory.createGridBagConstraints(0, 1));
+        this.layered.add(this.topLabel, this.factory.createGridBagConstraints(0, 0));
+        this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 1));
     }
     private JLabel makeTopLabel() {
         JLabel l = makeLabel(TOPHEIGHT);
