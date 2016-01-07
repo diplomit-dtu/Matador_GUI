@@ -14,7 +14,6 @@ import desktop_board.Center;
 import desktop_codebehind.FieldMouseListener;
 import desktop_codebehind.Player;
 import desktop_codebehind.SwingComponentFactory;
-import desktop_resources.GUI;
 
 public abstract class GUI_Field {
 	public static final int FIELDWIDTH = 63;
@@ -43,10 +42,6 @@ public abstract class GUI_Field {
     public static final String RENT = "Rent";
     public static final Color BG_COLOR = Color.LIGHT_GRAY;
     public static final Color FG_COLOR = Color.BLACK;
-    
-    public static void main(String[] args) {
-        new GUI();
-    }
     
 	//TODO add number to parameters - just for display
     protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description) {

@@ -29,7 +29,6 @@ public final class BoardController {
 	static String userInput = null;
 	Board board;
 	private static volatile Random rand = null;
-	// private BufferedImage[] diceImages = new BufferedImage[6];
 	
 	public static Random rand() {
 		if(rand == null) {
@@ -87,6 +86,20 @@ public final class BoardController {
 				latch.countDown();
 			}
 		});
+		tf.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) { }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    BoardController.userInput = tf.getText();
+                    BoardController.this.board.clearInputPanel();
+                    latch.countDown();
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) { }
+        });
 		this.board.getUserInput(msg, tf, okButton);
 		
 		try {
@@ -120,11 +133,15 @@ public final class BoardController {
 		final JTextField tf = new JTextField(20);
 		tf.setHorizontalAlignment(SwingConstants.RIGHT);
 		tf.addKeyListener(new KeyListener() {
-			
 			@Override
 			public void keyTyped(KeyEvent ke) {}
 			@Override
 			public void keyReleased(KeyEvent ke) {
+			    if(ke.getKeyCode() == KeyEvent.VK_ENTER){
+                    BoardController.userInput = tf.getText();
+                    BoardController.this.board.clearInputPanel();
+                    latch.countDown();
+                }
 				String input = tf.getText() + ke.getKeyChar();
 				String output = "";
 				for(int i = 0; i < input.toCharArray().length - 1; i++) {
@@ -143,7 +160,6 @@ public final class BoardController {
 						tf.setForeground(Color.RED);
 					}
 				} catch(Exception ex) {
-					ex.printStackTrace();
 					tf.setForeground(Color.RED);
 				}
 				

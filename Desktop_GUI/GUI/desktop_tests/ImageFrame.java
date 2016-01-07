@@ -69,8 +69,7 @@ public class ImageFrame {
 			JButton saveButton = new JButton("Save");
 			saveButton.addActionListener(new ActionListener() {
 				@Override
-				public void actionPerformed(
-						@SuppressWarnings("unused") ActionEvent evt) {
+				public void actionPerformed(ActionEvent evt) {
 					savePic();
 				}
 			});

@@ -17,6 +17,10 @@ public final class GUI {
     public final Color BASECOLOR = Board.BASECOLOR;
     private BoardController bc;
     
+    public static void main(String[] args) {
+        new GUI();
+    }
+    
     public GUI(GUI_Field[] fields) {
         ArrayList<GUI_Field> list = new ArrayList<GUI_Field>();
         for(GUI_Field f : fields) list.add(f);
