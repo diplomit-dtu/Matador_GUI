@@ -1,13 +1,6 @@
 package desktop_codebehind;
 
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import desktop_fields.Brewery;
 import desktop_fields.Chance;
@@ -18,16 +11,13 @@ import desktop_fields.Shipping;
 import desktop_fields.Start;
 import desktop_fields.Street;
 import desktop_fields.Tax;
+import desktop_resources.GUI;
 
 /**
  * Creates all the fields
  * @author Ronnie
  */
 public final class FieldFactory {
-    public static String path = null;
-    private enum Type {
-        BREWERY, CHANCE, JAIL, REFUGE, SHIPPING, START, STREET, TAX
-    }
     public static ArrayList<Field> fields = null;
     
     private FieldFactory() {
@@ -35,204 +25,47 @@ public final class FieldFactory {
     }
     
     public static void makeFields() {
-        FieldFactory fact = new FieldFactory();
         fields = new ArrayList<Field>(40);
         
-        try {
-            fact.parse();
-        } catch (NumberFormatException e) {
-            System.out.println("NumberFormatException");
-        }
-    }
-    
-    private boolean parse() {
-        String str = readFile();
-        
-        if (str == null) {
-            return false;
-        }
-        
-        
-        for (String field : str.split("\\|\\|")) {
-            String[] attributes = field.split(";;");
-            // determine type
-            String type = valueOf("type", attributes);
-            // Verify type
-            Type T = validType(type);
-            if (T == null) {
-                return false;
-            }
-            switch(T) {
-                case BREWERY: createBrewery(attributes); break;
-                case CHANCE: createChance(); break;
-                case JAIL: createJail(attributes); break;
-                case REFUGE: createRefuge(attributes); break;
-                case SHIPPING: createShipping(attributes); break;
-                case START: createStart(attributes); break;
-                case STREET: createStreet(attributes); break;
-                case TAX: createTax(attributes); break;
-                default:
-            }
-        }
-        return true;
-    }
-    
-    private String readFile() {
-        BufferedReader in = null;
-        String str = "";
-        File file;
-        try {
-            if (path == null) {
-                InputStream is = getClass().getResourceAsStream("/fields.txt");
-                in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            } else {
-                file = new File(path);
-                in = new BufferedReader(new FileReader(file));
-            }
-            
-            String line;
-            while ((line = in.readLine()) != null) {
-                str += line.trim() + "\n";
-            }
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return str;
-    }
-    private void createBrewery(String[] attributes) {
-        String picture = valueOf("picture", attributes);
-        String title = valueOf("title", attributes);
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        String leje = valueOf("leje", attributes);
-        Field f = new Brewery.Builder()
-            .setPicture(picture)
-            .setTitle(title)
-            .setSubText(subText)
-            .setDescription(description)
-            .setRent(leje)
-            .build();
-        fields.add(f);
-    }
-    private void createChance() {
-        Field f = new Chance.Builder().build();
-        fields.add(f);
-    }
-    private void createJail(String[] attributes) {
-        String picture = valueOf("picture", attributes);
-        String title = valueOf("title", attributes);
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        Field f = new Jail.Builder()
-            .setPicture(picture)
-            .setTitle(title)
-            .setSubText(subText)
-            .setDescription(description)
-            .build();
-        fields.add(f);
-    }
-    private void createRefuge(String[] attributes) {
-        String picture = valueOf("picture", attributes);
-        String title = valueOf("title", attributes);
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        Field f = new Refuge.Builder()
-            .setPicture(picture)
-            .setTitle(title)
-            .setSubText(subText)
-            .setDescription(description)
-            .build();
-        fields.add(f);
-    }
-    private void createShipping(String[] attributes) {
-        String picture = valueOf("picture", attributes);
-        String title = valueOf("title", attributes);
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        String leje = valueOf("leje", attributes);
-        Field f = new Shipping.Builder()
-            .setPicture(picture)
-            .setTitle(title)
-            .setSubText(subText)
-            .setDescription(description)
-            .setRent(leje)
-            .build();
-        fields.add(f);
-    }
-    private void createStart(String[] attributes) {
-        Color bgColor = toColor(valueOf("backgroundColor", attributes));
-        Color fgColor = toColor(valueOf("foregroundColor", attributes));
-        String title = valueOf("title", attributes);
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        Field f = new Start.Builder()
-            .setBgColor(bgColor)
-            .setFgColor(fgColor)
-            .setTitle(title)
-            .setSubText(subText)
-            .setDescription(description)
-            .build();
-        fields.add(f);
-    }
-    private void createStreet(String[] attributes) {
-        String title = valueOf("title", attributes);
-        Color bgColor = toColor(valueOf("backgroundColor", attributes));
-        Color fgColor = toColor(valueOf("foregroundColor", attributes));
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        String leje = valueOf("leje", attributes);
-        Field f = new Street.Builder()
-            .setTitle(title)
-            .setBgColor(bgColor)
-            .setFgColor(fgColor) 
-            .setSubText(subText)
-            .setDescription(description)
-            .setRent(leje)
-            .build();
-        fields.add(f);
-    }
-    private void createTax(String[] attributes) {
-        String title = valueOf("title", attributes);
-        String subText = valueOf("subText", attributes);
-        String description = valueOf("description", attributes);
-        Field f = new Tax.Builder()
-            .setTitle(title)
-            .setSubText(subText)
-            .setDescription(description)
-            .build();
-        fields.add(f);
-    }
-    private Type validType(String type) {
-        for (Type t : Type.values()) {
-            if (t.toString().equalsIgnoreCase(type)) {
-                return t;
-            }
-        }
-        return null;
-    }
-    private String valueOf(String label, String[] attributes) {
-        for (String a : attributes) {
-            if (a.split("::")[0].trim().equalsIgnoreCase(label)) {
-                return a.split("::")[1];
-            }
-        }
-        System.err.println("GUI - Missing attribute: " + label);
-        return null;
-    }
-    private Color toColor(String str) {
-        int r = Integer.parseInt(str.split(",,")[0]);
-        int g = Integer.parseInt(str.split(",,")[1]);
-        int b = Integer.parseInt(str.split(",,")[2]);
-        return new Color(r, g, b);
+        fields.add(new Start("Start", "Modtag: 200", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK));
+        fields.add(new Street("Rødovrevej", "Pris:  60", "Rødovrevej", "Leje:  20", new Color(75, 155, 225), Color.BLACK));
+        fields.add(new Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK));
+        fields.add(new Street("Hvidovrevej", "Pris:  60", "Hvidovrevej", "Leje:  20", new Color(75, 155, 225), Color.BLACK));
+        fields.add(new Tax("Betal\nindkomst-\nskat", "10% el. 200", "Betal indkomstskat\n10% eller kr. 200,-", Color.GRAY, Color.BLACK));
+        fields.add(new Shipping("default", "Øresund", "Pris:  200", "Øresundsredderiet", "Leje:  75", Color.WHITE, Color.BLACK));
+        fields.add(new Street("Roskildevej", "Pris:  100", "Roskildevej", "Leje:  40", new Color(255, 135, 120), Color.BLACK));
+        fields.add(new Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK));
+        fields.add(new Street("Valby\nLanggade", "Pris:  100", "Valby Langgade", "Leje:  40", new Color(255, 135, 120), Color.BLACK));
+        fields.add(new Street("Allégade", "Pris:  120", "Allégade", "Leje:  45", new Color(255, 135, 120), Color.BLACK));
+        fields.add(new Jail("default", "Fængsel", "Fængsel", "På besøg i fængslet", new Color(125, 125, 125), Color.BLACK));
+        fields.add(new Street("Frederiks-\nberg Allé", "Pris:  140", "Frederiksberg Allé", "Leje:  50", new Color(102, 204, 0), Color.BLACK));
+        fields.add(new Brewery("default", "Tuborg", "Pris:  150", "Tuborg bryggeri", "10 x [Terningslag]", Color.BLACK, Color.WHITE));
+        fields.add(new Street("Bülowsvej", "Pris:  140", "Bülowsvej", "Leje:  50", new Color(102, 204, 0), Color.BLACK));
+        fields.add(new Street("Gammel Kongevej", "Pris:  140", "Gammel Kongevej", "Leje:  50", new Color(102, 204, 0), Color.BLACK));
+        fields.add(new Shipping("default", "D.F.D.S.", "Pris:  200", "D.F.D.S.", "Leje:  75", Color.WHITE, Color.BLACK));
+        fields.add(new Street("Bernstorffsvej", "Pris:  180", "Bernstorffsvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK));
+        fields.add(new Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK));
+        fields.add(new Street("Hellerupvej", "Pris:  180", "Hellerupvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK));
+        fields.add(new Street("Strandvejen", "Pris:  180", "Strandvejen", "Leje:  60", new Color(153, 153, 153), Color.BLACK));
+        fields.add(new Refuge("default", "Helle", "Helle", "Ta' en pause", Color.WHITE, Color.BLACK));
+        fields.add(new Street("Trianglen", "Pris:  220", "Trianglen", "Leje:  70", Color.RED, Color.BLACK));
+        fields.add(new Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK));
+        fields.add(new Street("Østerbro-\ngade", "Pris:  220", "Østerbrogade", "Leje:  70", Color.RED, Color.BLACK));
+        fields.add(new Street("Grønningen", "Pris:  240", "Grønningen", "Leje:  80", Color.RED, Color.BLACK));
+        fields.add(new Shipping("default", "Ø.S.", "Pris:  200", "Ø.S. redderiet", "Leje:  75", Color.WHITE, Color.BLACK));
+        fields.add(new Street("Bredgade", "Pris:  260", "Bredgade", "Leje:  80", Color.WHITE, Color.BLACK));
+        fields.add(new Street("Kgs. Nytorv", "Pris:  260", "Kongens Nytorv", "Leje:  80", Color.WHITE, Color.BLACK));
+        fields.add(new Brewery("default", "Carlsberg", "Pris:  150", "Carlsberg bryggeri", "10 x [Terningslag]", Color.BLACK, Color.WHITE));
+        fields.add(new Street("Østergade", "Pris:  280", "Østergade", "Leje:  85", Color.WHITE, Color.BLACK));
+        fields.add(new Jail("default", "Gå i fængsel", "Gå i fængsel", "De fængsles\nSlå to ens for at komme ud", new Color(125, 125, 125), Color.BLACK));
+        fields.add(new Street("Amagertorv", "Pris:  300", "Amagertorv", "Leje:  95", new Color(255, 255, 50), Color.BLACK));
+        fields.add(new Street("Vimmel-\nskaftet", "Pris:  300", "Vimmelskaftet", "Leje:  95", new Color(255, 255, 50), Color.BLACK));
+        fields.add(new Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK));
+        fields.add(new Street("Nygade", "Pris:  320", "Nygade", "Leje:  100", new Color(255, 255, 50), Color.BLACK));
+        fields.add(new Shipping("default", "Bornholm", "Pris:  200", "Bornholms redderi", "Leje:  75", Color.WHITE, Color.BLACK));
+        fields.add(new Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK));
+        fields.add(new Street("Frederiks-\nberggade", "Pris:  350", "Frederiksberggade", "Leje:  120", new Color(150, 60, 150), Color.WHITE));
+        fields.add(new Tax("Ekstra-\nordinær\nstatsskat", "Betal 100", "Betal ekstraordinær\nstatsskat: kr. 100,-", Color.GRAY, Color.BLACK));
+        fields.add(new Street("Rådhuspladsen", "Pris:  400", "Rådhuspladsen", "Leje:  150", new Color(150, 60, 150), Color.WHITE));
     }
 }

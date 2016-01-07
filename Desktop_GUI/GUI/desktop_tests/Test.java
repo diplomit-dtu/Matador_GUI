@@ -15,7 +15,6 @@ public class Test {
 	
 	private void test(){
 	    setDiceAngleAndCoordinates();
-	    // gui.create("C:\\Users\\Ronnie\\Desktop\\fields.txt");
 	    testSetText();
 	    testSetTexts();
 	    testAddPlayer();

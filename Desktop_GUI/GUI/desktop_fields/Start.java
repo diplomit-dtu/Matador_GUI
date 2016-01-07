@@ -12,35 +12,10 @@ public final class Start extends Field {
     
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public static class Builder extends Field.Builder<Start.Builder> implements
-        iBuilder {
-        public Builder() {
-            this.title = "Start";
-            this.bgColor = Color.RED;
-        }
-        
-        @Override
-        @SuppressWarnings("synthetic-access")
-        public Start build() {
-            return new Start(this.bgColor, this.fgColor, this.title,
-                this.subText, this.description);
-        }
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-        public Builder setSubText(String subText) {
-            this.subText = subText;
-            return this;
-        }
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
+    public Start(){
+        this(Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.BG_COLOR, Field.FG_COLOR);
     }
-    
-    private Start(Color bgColor, Color fgColor, String title,
-        String subText, String description) {
+    public Start(String title, String subText, String description, Color bgColor, Color fgColor){
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeTitleLabel(this.title);
         this.subTextLabel = makeSubTextLabel(this.subText);

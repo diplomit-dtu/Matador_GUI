@@ -33,24 +33,17 @@ public abstract class Field {
 	private boolean[] hasCars = new boolean[Board.MAX_PLAYER_COUNT];
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private JLabel[] cars;
-	private static Point[] points = new Point[40];
-    private static int nextPoint = 0;
     
-    static{
-        int i = 0;
-        for(int x=10; x > 0; x--){
-            Field.points[i++] = new Point(x, 10);
-        }
-        for(int y=10; y > 0; y--){
-            Field.points[i++] = new Point(0, y);
-        }
-        for(int x=0; x < 10; x++){
-            Field.points[i++] = new Point(x, 0);
-        }
-        for(int y=0; y < 10; y++){
-            Field.points[i++] = new Point(10, y);
-        }
-    }
+    //Default values
+    public static final String TITLE = "Title";
+    public static final String SUBTEXT = "subText";
+    public static final String DESCRIPTION = "description";
+    public static final String PICTURE = "default";
+    public static final String RENT = "Rent";
+    public static final Color BG_COLOR = Color.LIGHT_GRAY;
+    public static final Color FG_COLOR = Color.BLACK;
+    
+    
     
     public static class Builder<E> {
         protected String title = "Title";
@@ -80,8 +73,8 @@ public abstract class Field {
 	protected Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
 		nextNumber = (nextNumber % 40) + 1;
 		this.number = nextNumber;
-		Point p = Field.points[nextPoint];
-        nextPoint = ++nextPoint % 40;
+		Point p = Board.points[Board.nextPoint];
+        Board.nextPoint = ++Board.nextPoint % 40;
         this.x = p.x;
         this.y = p.y;
 		this.bgColor = bgColor;

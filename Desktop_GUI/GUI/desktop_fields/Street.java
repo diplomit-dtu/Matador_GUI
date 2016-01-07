@@ -14,38 +14,10 @@ public final class Street extends Ownable {
     private JLabel houseLabel;
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public static class Builder extends Field.Builder<Street.Builder> implements
-        iBuilder {
-        public Builder() {
-            this.title = "Street";
-        }
-        
-        @Override
-        @SuppressWarnings("synthetic-access")
-        public Street build() {
-            return new Street(this.title, this.bgColor, this.fgColor,
-                this.subText, this.description, this.rent);
-        }
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-        public Builder setSubText(String subText) {
-            this.subText = subText;
-            return this;
-        }
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
-        public Builder setRent(String rent) {
-            this.rent = rent;
-            return this;
-        }
+    public Street(){
+        this(Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.RENT, Field.BG_COLOR, Field.FG_COLOR);
     }
-    
-    private Street(String title, Color bgColor, Color fgColor,
-        String subText, String description, String rent) {
+    public Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
         super.subTextLabel = makeSubTextLabel();
         this.houseLabel = makeHouseLabel();

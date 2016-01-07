@@ -13,39 +13,11 @@ public final class Jail extends Field{
 	private JLabel topLabel;
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
-	
-	public static class Builder extends Field.Builder<Jail.Builder> implements iBuilder{
-        public Builder() {
-            this.bgColor = new Color(125, 125, 125);
-            this.description = "You are jailed";
-        }
-        
-        @Override
-        @SuppressWarnings("synthetic-access")
-        public Jail build() {
-            return new Jail(this.picture, this.title,
-                this.subText, this.description, this.bgColor, this.fgColor);
-        }
-        
-        public Builder setPicture(String picture) {
-            this.picture = picture;
-            return this;
-        }
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-        public Builder setSubText(String subText) {
-            this.subText = subText;
-            return this;
-        }
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
-    }
 
-	private Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
+	public Jail(){
+	    this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, new Color(125, 125, 125), Color.BLACK);
+	}
+	public Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
 		super(bgColor, fgColor, title, subText, description);
 
 		if("default".equalsIgnoreCase(picture)){

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -45,7 +46,26 @@ public final class Board extends javax.swing.JFrame {
 	private JPanel inputPanel = new JPanel();
 	private ImageIcon[] diceIcons = new ImageIcon[6];
 	
+	public static Point[] points = new Point[40];
+    public static int nextPoint = 0;
+	static{
+        int i = 0;
+        for(int x=10; x > 0; x--){
+            Board.points[i++] = new Point(x, 10);
+        }
+        for(int y=10; y > 0; y--){
+            Board.points[i++] = new Point(0, y);
+        }
+        for(int x=0; x < 10; x++){
+            Board.points[i++] = new Point(x, 0);
+        }
+        for(int y=0; y < 10; y++){
+            Board.points[i++] = new Point(10, y);
+        }
+    }
+	
 	public Board() {
+	    nextPoint = 0;
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		
 		makeDice();

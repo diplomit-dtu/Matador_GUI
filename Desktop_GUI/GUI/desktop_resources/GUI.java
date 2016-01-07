@@ -27,28 +27,6 @@ public final class GUI {
     public GUI(){
         bc = new BoardController();        
     }
-    
-    
-   /**
-     * Initializes the board using an array of fields.<br>
-     * Doesn't show the GUI.<br>
-     * If this method isn't the first method to be called it will
-     * have no result.<br>
-     * @param fields : Field[]<br>
-     * Fields are created this way:<br>
-     *   Field f = new Start.Builder().setTitle("Title").setBgColor(Color.RED).build()<br>
-     *   Depending on the type of field, various attributes can be set.<br>
-     *   The field types are as follows:<br>
-     *      ... new Tax.Builder().build();<br>
-     *      ... new Street.Builder().build();<br>
-     *      ... new Shipping.Builder().build();<br>
-     *      ... new Refuge.Builder().build();<br>
-     *      ... new Jail.Builder().build();<br>
-     *      ... new Chance.Builder().build();<br>
-     *      ... new Brewery.Builder().build();<br>
-     *      ... new Empty.Builder().build();<br>
-     */
-
 
     /**
      * Displays a message to the user.<br>

@@ -14,40 +14,10 @@ public final class Refuge extends Field {
     
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public static class Builder extends Field.Builder<Refuge.Builder> implements
-        iBuilder {
-        public Builder() {
-            this.title = "Refuge";
-            this.bgColor = Color.WHITE;
-        }
-        
-        @Override
-        @SuppressWarnings("synthetic-access")
-        public Refuge build() {
-            return new Refuge(this.picture, this.title,
-                this.subText, this.description, this.bgColor, this.fgColor);
-        }
-        
-        public Builder setPicture(String picture) {
-            this.picture = picture;
-            return this;
-        }
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-        public Builder setSubText(String subText) {
-            this.subText = subText;
-            return this;
-        }
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
+    public Refuge(){
+        this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.BG_COLOR, Field.FG_COLOR);
     }
-    
-    private Refuge(String picture, String title, String subText,
-        String description, Color bgColor, Color fgColor) {
+    public Refuge(String picture, String title, String subText, String description, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description);
         
         if ("default".equalsIgnoreCase(picture)) {

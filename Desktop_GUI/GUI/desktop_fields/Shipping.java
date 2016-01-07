@@ -15,45 +15,11 @@ public final class Shipping extends Ownable {
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
 	
-	public static class Builder extends Field.Builder<Shipping.Builder> implements iBuilder{
-        public Builder() {
-            this.title = "Shipping";
-            this.bgColor = Color.WHITE;
-        }
-        
-        @Override
-        @SuppressWarnings("synthetic-access")
-        public Shipping build() {
-            return new Shipping(this.picture, this.title,
-                this.subText, this.description, this.rent, this.bgColor, this.fgColor);
-        }
-        
-        public Builder setPicture(String picture) {
-            this.picture = picture;
-            return this;
-        }
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-        public Builder setSubText(String subText) {
-            this.subText = subText;
-            return this;
-        }
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
-        public Builder setRent(String rent) {
-            this.rent = rent;
-            return this;
-        }
-    }
-	
-	private Shipping(String picture, String title, String subText,
-		String description, String rent, Color bgColor, Color fgColor) {
-		super(bgColor, fgColor, title,
-			subText, description, rent);
+	public Shipping(){
+	    this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.RENT, Field.BG_COLOR, Field.FG_COLOR);
+	}
+	public Shipping(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
+		super(bgColor, fgColor, title, subText, description, rent);
 		
 		if("default".equalsIgnoreCase(picture)) {
 			int p = (picCounter++ % 4) + 1;

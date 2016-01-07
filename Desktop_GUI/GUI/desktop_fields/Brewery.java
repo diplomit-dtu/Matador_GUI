@@ -15,44 +15,10 @@ public final class Brewery extends Ownable {
     private SwingComponentFactory factory = new SwingComponentFactory();
     private static int picCounter = 0;
     
-    public static class Builder extends Field.Builder<Brewery.Builder>
-        implements iBuilder {
-        public Builder() {
-            this.bgColor = Color.BLACK;
-            this.fgColor = Color.WHITE;
-        }
-        
-        @Override
-        @SuppressWarnings("synthetic-access")
-        public Brewery build() {
-            return new Brewery(this.picture, this.title,
-                this.subText, this.description, this.rent, this.bgColor, this.fgColor);
-        }
-        
-        public Builder setPicture(String picture) {
-            this.picture = picture;
-            return this;
-        }
-        public Builder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-        public Builder setSubText(String subText) {
-            this.subText = subText;
-            return this;
-        }
-        public Builder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
-        public Builder setRent(String rent) {
-            this.rent = rent;
-            return this;
-        }
+    public Brewery(){
+        this(Field.PICTURE, Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.RENT, Field.BG_COLOR, Field.FG_COLOR);
     }
-    
-    private Brewery(String picture, String title, String subText,
-        String description, String rent, Color bgColor, Color fgColor) {
+    public Brewery(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
         
         if ("default".equalsIgnoreCase(picture)) {

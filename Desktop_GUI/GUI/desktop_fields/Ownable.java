@@ -11,6 +11,7 @@ public abstract class Ownable extends Field{
 	public static final String OWNABLELABEL = "Ejes af: ";
 	protected Player owner;
 	private String leje;
+	
 	public Ownable(Color bgColor, Color fgColor, String title,
 		String subText, String description, String leje){
 		super(bgColor, fgColor, title, subText, description);

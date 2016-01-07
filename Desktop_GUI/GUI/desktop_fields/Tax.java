@@ -37,8 +37,10 @@ public final class Tax extends Field {
         }
     }
     
-    private Tax(String title, String subText, String description,
-        Color bgColor, Color fgColor) {
+    public Tax(){
+        this(Field.TITLE, Field.SUBTEXT, Field.DESCRIPTION, Field.BG_COLOR, Field.FG_COLOR);
+    }
+    public Tax(String title, String subText, String description, Color bgColor, Color fgColor){
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeTitleLabel(this.title);
         this.subTextLabel = makeSubTextLabel(this.subText);
