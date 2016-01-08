@@ -2,7 +2,7 @@ package desktop_fields;
 
 import java.awt.Color;
 import javax.swing.JLabel;
-import desktop_board.Center;
+import desktop_codebehind.GUI_Center;
 import desktop_codebehind.SwingComponentFactory;
 
 public final class GUI_Tax extends GUI_Field {
@@ -33,8 +33,8 @@ public final class GUI_Tax extends GUI_Field {
     @Override
     public void displayOnCenter() {
         super.displayOnCenter();
-        Center.label[1].setText("__________________________");
-        Center.label[2].setText(this.description);
+        GUI_Center.label[1].setText("__________________________");
+        GUI_Center.label[2].setText(this.description);
         super.displayCarOnCenter();
     }
 }

@@ -1,7 +1,7 @@
 package desktop_fields;
 
+import static desktop_fields.GUI_Board.BASECOLOR;
 import java.awt.Color;
-import static desktop_board.Board.BASECOLOR;
 
 public class GUI_Empty extends GUI_Field {
     

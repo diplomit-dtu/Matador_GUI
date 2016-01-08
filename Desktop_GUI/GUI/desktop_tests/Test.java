@@ -1,7 +1,7 @@
 package desktop_tests;
 
 import java.awt.Color;
-import desktop_codebehind.Car;
+import desktop_codebehind.GUI_Car;
 import desktop_resources.GUI;
 
 public class Test {
@@ -122,9 +122,9 @@ public class Test {
 	private void testAddPlayer() {
 		gui.addPlayer("Arthur Dent", 1000);
 		
-		Car car;
+		GUI_Car car;
 		
-		car = new Car.Builder()
+		car = new GUI_Car.Builder()
 			.primaryColor(Color.MAGENTA)
 			.secondaryColor(Color.BLUE)
 			.typeTractor()
@@ -132,7 +132,7 @@ public class Test {
 			.build();
 		gui.addPlayer("Ford Prefect", 1000, car);
 		
-		car = new Car.Builder()
+		car = new GUI_Car.Builder()
 			.primaryColor(Color.BLACK)
 			.secondaryColor(Color.RED)
 			.typeUfo()
@@ -140,7 +140,7 @@ public class Test {
 			.build();
 		gui.addPlayer("Zaphod Beeblebrox", 100000, car);
 		
-		car = new Car.Builder()
+		car = new GUI_Car.Builder()
 			.primaryColor(Color.DARK_GRAY)
 			.secondaryColor(Color.CYAN)
 			.typeRacecar()
@@ -148,14 +148,14 @@ public class Test {
 			.build();
 		gui.addPlayer("Tricia McMillan", 100000, car);
 		
-		car = new Car.Builder()
+		car = new GUI_Car.Builder()
 			.primaryColor(new Color(160, 32, 240))
 			.secondaryColor(Color.YELLOW)
 			.patternHorizontalGradiant()
 			.build();
 		gui.addPlayer("Marvin", 1000, car);
 		
-		car = new Car.Builder()
+		car = new GUI_Car.Builder()
 			.primaryColor(Color.BLACK)
 			.secondaryColor(Color.WHITE)
 			.patternCheckered()

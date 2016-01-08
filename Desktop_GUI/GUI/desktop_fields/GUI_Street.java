@@ -5,7 +5,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import desktop_board.Center;
+import desktop_codebehind.GUI_Center;
 import desktop_codebehind.SwingComponentFactory;
 
 public final class GUI_Street extends GUI_Ownable {
@@ -19,6 +19,8 @@ public final class GUI_Street extends GUI_Ownable {
     }
     public GUI_Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
+        title = title.replace("\n", "<BR>");
+        
         super.subTextLabel = makeSubTextLabel();
         this.houseLabel = makeHouseLabel();
         
@@ -67,15 +69,15 @@ public final class GUI_Street extends GUI_Ownable {
     @Override
     public void displayOnCenter() {
         super.displayOnCenter();
-        Center.label[1].setText("__________________________");
-        Center.label[2].setText(this.description);
-        Center.label[3].setText(this.subText);
+        GUI_Center.label[1].setText("__________________________");
+        GUI_Center.label[2].setText(this.description);
+        GUI_Center.label[3].setText(this.subText);
         
         if (this.owner != null) {
-            Center.label[4].setText(OWNABLELABEL + this.owner.getName());
-            Center.label[5].setText(getLeje());
+            GUI_Center.label[4].setText(OWNABLELABEL + this.owner.getName());
+            GUI_Center.label[5].setText(getLeje());
         }
-        Center.label[6].setIcon(this.houseLabel.getIcon());
+        GUI_Center.label[6].setIcon(this.houseLabel.getIcon());
         
         super.displayCarOnCenter();
     }

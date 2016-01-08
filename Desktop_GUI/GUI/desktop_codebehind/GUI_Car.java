@@ -15,11 +15,11 @@ import java.util.Map;
  *   .patternDotted() 
  *   .Build();
  */
-public final class Car {
+public final class GUI_Car {
     private final BufferedImage image;
     private final Color primaryColor, secondaryColor;
 
-    private Car(Builder builder) {
+    private GUI_Car(Builder builder) {
         this.image = builder.image;
         this.primaryColor = builder.color1;
         this.secondaryColor = builder.color2;
@@ -49,7 +49,7 @@ public final class Car {
         }
         
         @SuppressWarnings("synthetic-access")
-        public Car build() {
+        public GUI_Car build() {
             final int X = this.type.x();
             final int Y = 0;
             
@@ -104,7 +104,7 @@ public final class Car {
                         "Engine failure! - Car doesn't work.");
             }
             
-            return new Car(this);
+            return new GUI_Car(this);
         }
         
         // Setters
@@ -293,7 +293,7 @@ public final class Car {
         private enum Type {
             CAR(0, 15), TRACTOR(1, 11), RACECAR(2, 13), UFO(3, 10);
             private final int x, h;
-            private final int width = Car.WIDTH + 1;
+            private final int width = GUI_Car.WIDTH + 1;
             Type(int no, int h) {
                 this.x = no * this.width;
                 this.h = h;

@@ -7,16 +7,16 @@ import java.awt.image.BufferedImage;
  * Player entity
  * @author Ronnie
  */
-public class Player{
+public class GUI_Player{
 	private int number;
 	private String name;
 	private int balance;
 	
-	private Car car;
+	private GUI_Car car;
 	public static final int ICON_WIDTH = 41;
 	public static final int ICON_HEIGHT = 22;
 
-	public Player(int number, String name, int balance, Car car){
+	public GUI_Player(int number, String name, int balance, GUI_Car car){
 		this.number = number;
 		this.name = name;
 		this.balance = balance;
@@ -57,10 +57,10 @@ public class Player{
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Player)) {
+		if (!(obj instanceof GUI_Player)) {
 			return false;
 		}
-		Player other = (Player) obj;
+		GUI_Player other = (GUI_Player) obj;
 		if (this.name == null) {
 			if(other.name != null) {
 				return false;

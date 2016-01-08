@@ -3,7 +3,7 @@ package desktop_fields;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import desktop_board.Center;
+import desktop_codebehind.GUI_Center;
 import desktop_codebehind.SwingComponentFactory;
 
 public final class GUI_Shipping extends GUI_Ownable {
@@ -64,13 +64,13 @@ public final class GUI_Shipping extends GUI_Ownable {
 	@Override
 	public void displayOnCenter() {
 		super.displayOnCenter();
-		Center.label[1].setIcon(this.icon);
-		Center.label[2].setText("__________________________");
-		Center.label[3].setText(this.description);
-		Center.label[4].setText(this.subText);
+		GUI_Center.label[1].setIcon(this.icon);
+		GUI_Center.label[2].setText("__________________________");
+		GUI_Center.label[3].setText(this.description);
+		GUI_Center.label[4].setText(this.subText);
 		if(this.owner != null) {
-			Center.label[5].setText(OWNABLELABEL + this.owner.getName());
-			Center.label[6].setText(getLeje());
+			GUI_Center.label[5].setText(OWNABLELABEL + this.owner.getName());
+			GUI_Center.label[6].setText(getLeje());
 		}
 		super.displayCarOnCenter();
 	}

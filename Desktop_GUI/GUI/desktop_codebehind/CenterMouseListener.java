@@ -2,16 +2,15 @@ package desktop_codebehind;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import desktop_board.Center;
 
 /**
  * Listens to mouse action on centerField
  * @author Ronnie
  */
 public class CenterMouseListener implements MouseListener{
-	private Center center;
+	private GUI_Center center;
 	
-	public CenterMouseListener(Center center){
+	public CenterMouseListener(GUI_Center center){
 		this.center = center;
 	}
 	/**
@@ -19,7 +18,7 @@ public class CenterMouseListener implements MouseListener{
      */
 	@Override
 	public void mouseClicked(MouseEvent e){
-		Center.getInstance().displayChanceCard();
+		GUI_Center.getInstance().displayChanceCard();
 	}
 	/**
      * Called when the mouse is no longer over the centerField

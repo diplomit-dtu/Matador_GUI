@@ -1,35 +1,42 @@
 package desktop_resources;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import desktop_board.Board;
-import desktop_board.BoardController;
-import desktop_codebehind.Car;
-import desktop_codebehind.FieldFactory;
+import desktop_codebehind.GUI_BoardController;
+import desktop_codebehind.GUI_Car;
+import desktop_codebehind.GUI_FieldFactory;
+import desktop_fields.GUI_Board;
 import desktop_fields.GUI_Field;
 
 /**
  * Provides easy access to the GUI features.
- * @author Ronnie Dalsgaard (s093487) with input and adjustments by Daniel
- *         Rubin-Grøn (daniel@koru.dk)
+ * @author Ronnie Dalsgaard (s093487) with input and adjustments by
+ *         Daniel Rubin-Grøn (daniel@koru.dk)
  */
 public final class GUI {
-    public final Color BASECOLOR = Board.BASECOLOR;
-    private BoardController bc;
+    public final Color BASECOLOR = GUI_Board.BASECOLOR;
+    private GUI_BoardController bc;
     
     public static void main(String[] args) {
         new GUI();
     }
     
     public GUI(GUI_Field[] fields) {
-        ArrayList<GUI_Field> list = new ArrayList<GUI_Field>();
-        for(GUI_Field f : fields) list.add(f);
-        FieldFactory.fields = list;
-        bc = new BoardController(); 
+        GUI_Board.fields = new GUI_Field[fields.length];
+        for(int i = 0; i < fields.length; i++){
+            GUI_Board.fields[i] = fields[i];
+            //TODO consider defensive copy
+        }
+        bc = new GUI_BoardController(); 
     }
     
     public GUI(){
-        bc = new BoardController();        
+        GUI_Field[] fields = GUI_FieldFactory.makeFields();
+        GUI_Board.fields = new GUI_Field[fields.length];
+        for(int i = 0; i < fields.length; i++){
+            GUI_Board.fields[i] = fields[i];
+            //TODO consider defensive copy
+        }
+        bc = new GUI_BoardController();        
     }
 
     /**
@@ -38,6 +45,7 @@ public final class GUI {
      * @param msg The message to print.
      */
     public void showMessage(String msg) {
+        msg = msg.replace("\n", "<BR>");
         bc.showMessage(msg);
     }
     /**
@@ -46,6 +54,7 @@ public final class GUI {
      * @return The string that the user has entered.
      */
     public String getUserString(String msg) {
+        msg = msg.replace("\n", "<BR>");
         return bc.getUserString(msg);
     }
     /**
@@ -57,6 +66,7 @@ public final class GUI {
      * @return The integer that the user selected.
      */
     public int getUserInteger(String msg, int min, int max) {
+        msg = msg.replace("\n", "<BR>");
         return bc.getUserInteger(msg, min, max);
     }
     /**
@@ -65,6 +75,7 @@ public final class GUI {
      * @return The integer that the user selected.
      */
     public int getUserInteger(String msg) {
+        msg = msg.replace("\n", "<BR>");
         return bc.getUserInteger(msg, 0, 999999999);
     }
     /**
@@ -75,6 +86,10 @@ public final class GUI {
      * @return The string from the button that the user pressed.
      */
     public String getUserButtonPressed(String msg, String... buttons) {
+        msg = msg.replace("\n", "<BR>");
+        for(int i = 0; i < buttons.length; i++){
+            buttons[i] = buttons[i].replace("\n", "<BR>");
+        }
         return bc.getUserButtonPressed(msg, buttons).toString();
     }
     /**
@@ -85,6 +100,10 @@ public final class GUI {
      * @return The string that the user selected.
      */
     public String getUserSelection(String msg, String... options) {
+        msg = msg.replace("\n", "<BR>");
+        for(int i = 0; i < options.length; i++){
+            options[i] = options[i].replace("\n", "<BR>");
+        }
         return bc.getUserSelection(msg, options).toString();
     }
     /**
@@ -94,10 +113,11 @@ public final class GUI {
      * @param falseButton The text that should appear on the right button.
      * @return True if the left button is pressed by the user. False otherwise.
      */
-    public boolean getUserLeftButtonPressed(String msg, 
-        String trueButton, String falseButton) {
-        return bc.getUserButtonPressed(msg, trueButton, 
-            falseButton).equals(trueButton);
+    public boolean getUserLeftButtonPressed(String msg, String trueButton, String falseButton) {
+        msg = msg.replace("\n", "<BR>");
+        trueButton = trueButton.replace("\n", "<BR>");
+        falseButton = falseButton.replace("\n", "<BR>");
+        return bc.getUserButtonPressed(msg, trueButton, falseButton).equals(trueButton);
     }
     /**
      * Sets the title of a field on the board.<br>
@@ -105,6 +125,7 @@ public final class GUI {
      * @param title : String (Mind the length!)
      */
     public void setTitleText(int fieldNumber, String title) {
+        title = title.replace("\n", "<BR>");
         bc.setTitleText(fieldNumber, title);
     }
     /**
@@ -113,6 +134,7 @@ public final class GUI {
      * @param subText : String (Mind the length!)
      */
     public void setSubText(int fieldNumber, String subText) {
+        subText = subText.replace("\n", "<BR>");
         bc.setSubText(fieldNumber, subText);
     }
     /**
@@ -122,6 +144,7 @@ public final class GUI {
      * @param description : String (Mind the length!)
      */
     public void setDescriptionText(int fieldNumber, String description) {
+        description = description.replace("\n", "<BR>");
         bc.setDescriptionText(fieldNumber, description);
     }
     /**
@@ -138,7 +161,7 @@ public final class GUI {
      *     .patternDotted()<br>
      *     .Build();<br>
      */
-    public void addPlayer(String name, int balance, Car car) {
+    public void addPlayer(String name, int balance, GUI_Car car) {
         bc.addPlayer(name, balance, car);
     }
     /**
@@ -200,8 +223,7 @@ public final class GUI {
      * @param rotation2 : int [0:360[<br>
      *        (If a parameter is out of bounds nothing will happen!)
      */
-    public void setDice(int faceValue1, int rotation1, int faceValue2,
-        int rotation2) {
+    public void setDice(int faceValue1, int rotation1, int faceValue2, int rotation2) {
         bc.setDice(faceValue1, rotation1, faceValue2, rotation2);
     }
     /**
@@ -220,6 +242,7 @@ public final class GUI {
      * @param txt : String (Mind the length!)<br>
      */
     public void displayChanceCard(String txt) {
+        txt = txt.replace("\n", "<BR>");
         bc.displayChanceCard(txt);
     }
     /**
@@ -227,6 +250,7 @@ public final class GUI {
      * @param txt : String (Mind the length!)<br>
      */
     public void setChanceCard(String txt) {
+        txt = txt.replace("\n", "<BR>");
         bc.setChanceCard(txt);
     }
     /**

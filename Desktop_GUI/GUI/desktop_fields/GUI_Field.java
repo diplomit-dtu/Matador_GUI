@@ -9,10 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import desktop_board.Board;
-import desktop_board.Center;
 import desktop_codebehind.FieldMouseListener;
-import desktop_codebehind.Player;
+import desktop_codebehind.GUI_Center;
+import desktop_codebehind.GUI_Player;
 import desktop_codebehind.SwingComponentFactory;
 
 public abstract class GUI_Field {
@@ -30,7 +29,7 @@ public abstract class GUI_Field {
 	protected String title;
 	protected String subText;
 	protected String description;
-	private boolean[] hasCars = new boolean[Board.MAX_PLAYER_COUNT];
+	private boolean[] hasCars = new boolean[GUI_Board.MAX_PLAYER_COUNT];
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private JLabel[] cars;
     
@@ -48,10 +47,14 @@ public abstract class GUI_Field {
         this(bgColor, fgColor, title, subText, description, BorderFactory.createLineBorder(Color.BLACK));
     }
 	protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
+	    title = title.replace("\n", "<BR>");
+	    subText = subText.replace("\n", "<BR>");
+	    description = description.replace("\n", "<BR>");
+	    
 		nextNumber = (nextNumber % 40) + 1;
 		this.number = nextNumber;
-		Point p = Board.points[Board.nextPoint];
-        Board.nextPoint = ++Board.nextPoint % 40;
+		Point p = GUI_Board.points[GUI_Board.nextPoint];
+        GUI_Board.nextPoint = ++GUI_Board.nextPoint % 40;
         this.x = p.x;
         this.y = p.y;
 		this.bgColor = bgColor;
@@ -76,10 +79,10 @@ public abstract class GUI_Field {
 		this.subTextLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		this.subTextLabel.setText(this.subText);
 	}
-	public boolean hasCar(Player p) {
+	public boolean hasCar(GUI_Player p) {
 		return this.hasCars[p.getNumber()];
 	}
-	public void setCar(Player p, boolean hasCar) {
+	public void setCar(GUI_Player p, boolean hasCar) {
 		if(p != null) {
 			this.hasCars[p.getNumber()] = hasCar;
 			this.cars[p.getNumber()].setIcon(new ImageIcon(p.getImage()));
@@ -94,7 +97,7 @@ public abstract class GUI_Field {
 	public JLabel makeLabel(int height) {
 		JLabel label = new JLabel();
 		this.factory.setSize(label, 1 * FIELDWIDTH - 2, height);
-		label.setFont(new java.awt.Font(Board.FONT, 0, Board.FONTSIZE));
+		label.setFont(new java.awt.Font(GUI_Board.FONT, 0, GUI_Board.FONTSIZE));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBackground(this.bgColor);
 		label.setForeground(this.fgColor);
@@ -125,31 +128,31 @@ public abstract class GUI_Field {
 			this.description = description;
 		}
 	}
-	public void setCarIcons(JLabel[] cars) {
+	protected void setCarIcons(JLabel[] cars) {
 		this.cars = cars;
 	}
 	/**
 	 * Each type of field displays information on the center
 	 */
 	public void displayOnCenter(){
-		Center.getInstance().clearLabels();
-		Center.getInstance().setBGColor(this.bgColor);
-		Center.getInstance().setFGColor(this.fgColor);
-		for(JLabel l : Center.label){
+		GUI_Center.getInstance().clearLabels();
+		GUI_Center.getInstance().setBGColor(this.bgColor);
+		GUI_Center.getInstance().setFGColor(this.fgColor);
+		for(JLabel l : GUI_Center.label){
 			l.setBackground(this.bgColor);
 			l.setForeground(this.fgColor);
 		}
-		Center.label[0].setText(""+this.number);
+		GUI_Center.label[0].setText(""+this.number);
 	}
 	protected void displayCarOnCenter() {
-		for(int i = 0; i < Board.MAX_PLAYER_COUNT; i++) {
-			Player p = Board.playerList[i];
+		for(int i = 0; i < GUI_Board.MAX_PLAYER_COUNT; i++) {
+			GUI_Player p = GUI_Board.playerList[i];
 			if(p != null && hasCar(p)) {
-				Center.cars[i].setIcon(new ImageIcon(p.getImage()));
-				Center.cars[i].setVisible(true);
+				GUI_Center.cars[i].setIcon(new ImageIcon(p.getImage()));
+				GUI_Center.cars[i].setVisible(true);
 			} else {
-				Center.cars[i].setIcon(null);
-				Center.cars[i].setVisible(false);
+				GUI_Center.cars[i].setIcon(null);
+				GUI_Center.cars[i].setVisible(false);
 			}
 		}
 	}

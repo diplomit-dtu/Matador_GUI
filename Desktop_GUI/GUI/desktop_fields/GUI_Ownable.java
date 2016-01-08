@@ -3,13 +3,13 @@ package desktop_fields;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-import desktop_board.Center;
-import desktop_codebehind.Player;
+import desktop_codebehind.GUI_Center;
+import desktop_codebehind.GUI_Player;
 import desktop_codebehind.SwingComponentFactory;
 
 public abstract class GUI_Ownable extends GUI_Field{
 	public static final String OWNABLELABEL = "Ejes af: ";
-	protected Player owner;
+	protected GUI_Player owner;
 	private String leje;
 	
 	public GUI_Ownable(Color bgColor, Color fgColor, String title, String subText, String description, String leje){
@@ -17,8 +17,8 @@ public abstract class GUI_Ownable extends GUI_Field{
 		this.leje = leje;
 	}
 	
-	public Player getOwner(){return this.owner; }
-	public void setOwner(Player owner){
+	public GUI_Player getOwner(){return this.owner; }
+	public void setOwner(GUI_Player owner){
 		this.owner = owner;
 		Border border;
 		if(owner == null){
@@ -49,10 +49,10 @@ public abstract class GUI_Ownable extends GUI_Field{
 			Color c1 = this.owner.getPrimaryColor();
 			Color c2 = this.owner.getSecondaryColor();
 			border = factory.createDashedBorder(3, 10, c1, c2);
-			Center.getInstance().getCenterPanel().setBorder(border);
+			GUI_Center.getInstance().getCenterPanel().setBorder(border);
 		}else{
 			border = javax.swing.BorderFactory.createLineBorder(Color.BLACK, 3);
 		}
-		Center.getInstance().getCenterPanel().setBorder(border);
+		GUI_Center.getInstance().getCenterPanel().setBorder(border);
 	}
 }

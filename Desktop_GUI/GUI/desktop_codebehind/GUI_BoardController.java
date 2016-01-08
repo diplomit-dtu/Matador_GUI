@@ -1,4 +1,4 @@
-package desktop_board;
+package desktop_codebehind;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -14,9 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import desktop_codebehind.Car;
-import desktop_codebehind.FieldFactory;
-import desktop_codebehind.Player;
+import desktop_fields.GUI_Board;
 import desktop_fields.GUI_Field;
 import desktop_fields.GUI_Ownable;
 import desktop_fields.GUI_Street;
@@ -25,14 +23,14 @@ import desktop_fields.GUI_Street;
  * Provides access to GUI
  * @author Ronnie
  */
-public final class BoardController {
+public final class GUI_BoardController {
 	static String userInput = null;
-	Board board;
+	GUI_Board board;
 	private static volatile Random rand = null;
 	
 	public static Random rand() {
 		if(rand == null) {
-		    synchronized (BoardController.class) {
+		    synchronized (GUI_BoardController.class) {
 		        if(rand == null) rand = new Random();
             }
 		}
@@ -41,8 +39,8 @@ public final class BoardController {
 	/**
 	 * Contains service methods for board for controlling the board.
 	 */
-	public BoardController() {
-		this.board = new Board();
+	public GUI_BoardController() {
+		this.board = new GUI_Board();
 	}
 	/**
 	 * Displays a message for the user. The user presses OK when the message is read Is a breaking
@@ -56,7 +54,7 @@ public final class BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BoardController.this.board.clearInputPanel();
+				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
 		});
@@ -81,8 +79,8 @@ public final class BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BoardController.userInput = tf.getText();
-				BoardController.this.board.clearInputPanel();
+				GUI_BoardController.userInput = tf.getText();
+				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
 		});
@@ -92,8 +90,8 @@ public final class BoardController {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    BoardController.userInput = tf.getText();
-                    BoardController.this.board.clearInputPanel();
+                    GUI_BoardController.userInput = tf.getText();
+                    GUI_BoardController.this.board.clearInputPanel();
                     latch.countDown();
                 }
             }
@@ -104,7 +102,7 @@ public final class BoardController {
 		
 		try {
 			latch.await();
-			return BoardController.userInput;
+			return GUI_BoardController.userInput;
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return null;
@@ -138,8 +136,8 @@ public final class BoardController {
 			@Override
 			public void keyReleased(KeyEvent ke) {
 			    if(ke.getKeyCode() == KeyEvent.VK_ENTER){
-                    BoardController.userInput = tf.getText();
-                    BoardController.this.board.clearInputPanel();
+                    GUI_BoardController.userInput = tf.getText();
+                    GUI_BoardController.this.board.clearInputPanel();
                     latch.countDown();
                 }
 				String input = tf.getText() + ke.getKeyChar();
@@ -172,8 +170,8 @@ public final class BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BoardController.userInput = tf.getText();
-				BoardController.this.board.clearInputPanel();
+				GUI_BoardController.userInput = tf.getText();
+				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
 		});
@@ -181,7 +179,7 @@ public final class BoardController {
 		
 		try {
 			latch.await();
-			return Integer.parseInt(BoardController.userInput);
+			return Integer.parseInt(GUI_BoardController.userInput);
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return -1;
@@ -214,9 +212,9 @@ public final class BoardController {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					BoardController.userInput
+					GUI_BoardController.userInput
 					= ((JButton) e.getSource()).getName();
-					BoardController.this.board.clearInputPanel();
+					GUI_BoardController.this.board.clearInputPanel();
 					latch.countDown();
 				}
 			});
@@ -226,7 +224,7 @@ public final class BoardController {
 		
 		try {
 			latch.await();
-			return BoardController.userInput;
+			return GUI_BoardController.userInput;
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return null;
@@ -256,8 +254,8 @@ public final class BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BoardController.userInput = dropdown.getSelectedItem().toString();
-				BoardController.this.board.clearInputPanel();
+				GUI_BoardController.userInput = dropdown.getSelectedItem().toString();
+				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
 		});
@@ -265,7 +263,7 @@ public final class BoardController {
 		this.board.getUserInput(msg, dropdown, okButton);
 		try {
 			latch.await();
-			return BoardController.userInput;
+			return GUI_BoardController.userInput;
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return null;
@@ -278,7 +276,7 @@ public final class BoardController {
 	 * @param title : String (Mind the length!)
 	 */
 	public void setTitleText(int fieldNumber, String title) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
 		f.setTitle(title);
 	}
 	/**
@@ -287,7 +285,7 @@ public final class BoardController {
 	 * @param subText : String (Mind the length!)
 	 */
 	public void setSubText(int fieldNumber, String subText) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
 		f.setSubText(subText);
 	}
 	/**
@@ -297,10 +295,10 @@ public final class BoardController {
 	 * @param description : String (Mind the length!)
 	 */
 	public void setDescriptionText(int fieldNumber, String description) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
 		f.setDescription(description);
 	}
-	public void addPlayer(String name, int balance, Car car) {
+	public void addPlayer(String name, int balance, GUI_Car car) {
 		this.board.addPlayer(name, balance, car);
 	}
 	/**
@@ -320,7 +318,7 @@ public final class BoardController {
 	 * @param newBalance : int
 	 */
 	public void setBalance(String name, int newBalance) {
-		Player p = this.board.getPlayer(name);
+		GUI_Player p = this.board.getPlayer(name);
 		if(p != null) {
 			p.setBalance(newBalance);
 			this.board.updatePlayers();
@@ -435,14 +433,14 @@ public final class BoardController {
 			&& faceValue2 >= 1 && faceValue2 <= 6;
     }
     public void displayChanceCard(String txt) {
-        Center.getInstance().setChanceCard(txt);
-        Center.getInstance().displayChanceCard();
+        GUI_Center.getInstance().setChanceCard(txt);
+        GUI_Center.getInstance().displayChanceCard();
     }
     public void setChanceCard(String txt) {
-        Center.getInstance().setChanceCard(txt);
+        GUI_Center.getInstance().setChanceCard(txt);
     }
     public void displayChanceCard() {
-        Center.getInstance().displayChanceCard();
+        GUI_Center.getInstance().displayChanceCard();
     }
 	/**
 	 * Places a car on the field.<br>
@@ -455,8 +453,8 @@ public final class BoardController {
 	 */
 	public void setCar(int fieldNumber, String name) {
 		// removeCar(name);
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
-		Player p = this.board.getPlayer(name);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
+		GUI_Player p = this.board.getPlayer(name);
 		if(p != null) {
 			f.setCar(p, true);
 		}
@@ -468,10 +466,10 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void removeCar(int fieldNumber, String name) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
-		Player p = this.board.getPlayer(name);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
+		GUI_Player p = this.board.getPlayer(name);
 		f.setCar(p, false);
-		Center.getInstance().displayDefault();
+		GUI_Center.getInstance().displayDefault();
 	}
 	/**
 	 * Removes all the players cars from the board.<br>
@@ -479,11 +477,11 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void removeAllCars(String name) {
-	    Player p = this.board.getPlayer(name);
-		for(GUI_Field f : FieldFactory.fields) {
+	    GUI_Player p = this.board.getPlayer(name);
+		for(GUI_Field f : GUI_Board.fields) {
 			f.setCar(p, false);
 		}
-		Center.getInstance().displayDefault();
+		GUI_Center.getInstance().displayDefault();
 	}
 	/**
 	 * Sets an owner of a field.<br>
@@ -494,8 +492,8 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void setOwner(int fieldNumber, String name) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
-		Player p = this.board.getPlayer(name);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
+		GUI_Player p = this.board.getPlayer(name);
 		if((f instanceof GUI_Ownable) && p != null) {
 			((GUI_Ownable) f).setOwner(p);
 		}
@@ -506,7 +504,7 @@ public final class BoardController {
 	 * @param fieldNumber : int [1:40]
 	 */
 	public void removeOwner(int fieldNumber) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
 		if(f instanceof GUI_Ownable) {
 			((GUI_Ownable) f).setOwner(null);
 		}
@@ -520,7 +518,7 @@ public final class BoardController {
 	 */
 	public void setHouses(int fieldNumber, int houseCount) {
 		if(houseCount >= 0 && houseCount < 5) {
-			GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
+			GUI_Field f = GUI_Board.fields[fieldNumber - 1];
 			if(f instanceof GUI_Street) {
 				GUI_Street s = ((GUI_Street) f);
 				s.setHouses(houseCount);
@@ -533,7 +531,7 @@ public final class BoardController {
 	 * @param hasHotel : boolean
 	 */
 	public void setHotel(int fieldNumber, boolean hasHotel) {
-		GUI_Field f = FieldFactory.fields.get(fieldNumber - 1);
+		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
 		if(f instanceof GUI_Street) {
 			GUI_Street s = ((GUI_Street) f);
 			s.setHotel(hasHotel);

@@ -2,7 +2,6 @@ package desktop_codebehind;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import desktop_board.Center;
 import desktop_fields.GUI_Field;
 
 /**
@@ -27,7 +26,7 @@ public class FieldMouseListener implements MouseListener{
      */
     @Override
     public void mouseExited(MouseEvent e) {
-    	Center.getInstance().displayDefault();
+    	GUI_Center.getInstance().displayDefault();
     }
     @Override
     public void mouseClicked(MouseEvent e) {

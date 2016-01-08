@@ -1,4 +1,4 @@
-package desktop_board;
+package desktop_codebehind;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,22 +9,20 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import desktop_codebehind.CenterMouseListener;
-import desktop_codebehind.Player;
-import desktop_codebehind.SwingComponentFactory;
+import desktop_fields.GUI_Board;
 import desktop_fields.GUI_Field;
 
-public final class Center{
-	private static Center center;
+public final class GUI_Center{
+	private static GUI_Center center;
 	private static JPanel centerPanel;
 	public static JLabel[] label = new JLabel[7];
-	public static JLabel[] cars = new JLabel[Board.MAX_PLAYER_COUNT];
+	public static JLabel[] cars = new JLabel[GUI_Board.MAX_PLAYER_COUNT];
 	public static String chanceCardText = "Prøv Lykken";
 	private JLayeredPane playersPane = new JLayeredPane();
 	
 	private SwingComponentFactory factory = new SwingComponentFactory();
 
-	private Center(){
+	private GUI_Center(){
 		centerPanel = new javax.swing.JPanel();
 		this.factory.setSize(centerPanel, 3*GUI_Field.FIELDWIDTH, 3*GUI_Field.FIELDHEIGHT);
 		centerPanel.addMouseListener(new CenterMouseListener(this));
@@ -41,7 +39,7 @@ public final class Center{
 			JLabel l = new JLabel();
 			cars[i] = l;
 			l.setOpaque(false);
-			l.setBounds(25*i+3, 0, Player.ICON_WIDTH, Player.ICON_HEIGHT);
+			l.setBounds(25*i+3, 0, GUI_Player.ICON_WIDTH, GUI_Player.ICON_HEIGHT);
 			this.playersPane.setLayer(l, i+6);
 			l.setVisible(false);
 			this.playersPane.add(l);
@@ -53,9 +51,9 @@ public final class Center{
 	 * Retrieves the singleton instance
 	 * @return the Center instance
 	 */
-	public static Center getInstance(){
+	public static GUI_Center getInstance(){
 		if(center == null){
-			center = new Center();
+			center = new GUI_Center();
 		}
 		return center;
 	}
@@ -94,13 +92,13 @@ public final class Center{
 		label[0].setFont(new Font(label[1].getFont().getName(), Font.BOLD, 20));
 		label[0].setVerticalTextPosition(SwingConstants.TOP);
 		label[0].setHorizontalTextPosition(SwingConstants.CENTER);
-		centerPanel.setBackground(Board.BASECOLOR);
-		for(JLabel l : Center.label){
-			l.setBackground(Board.BASECOLOR);
+		centerPanel.setBackground(GUI_Board.BASECOLOR);
+		for(JLabel l : GUI_Center.label){
+			l.setBackground(GUI_Board.BASECOLOR);
 			l.setForeground(Color.BLACK);
 		}
-		for(int i=0; i<Board.MAX_PLAYER_COUNT; i++){
-			Center.cars[i].setVisible(false);
+		for(int i=0; i<GUI_Board.MAX_PLAYER_COUNT; i++){
+			GUI_Center.cars[i].setVisible(false);
 		}
 	}
     /**
@@ -116,7 +114,7 @@ public final class Center{
      * @param txt the text to display on the center.
      */
     public void setChanceCard(String txt) {
-        Center.chanceCardText = txt;
+        GUI_Center.chanceCardText = txt;
     }
 	public JPanel getCenterPanel(){
 		return centerPanel;

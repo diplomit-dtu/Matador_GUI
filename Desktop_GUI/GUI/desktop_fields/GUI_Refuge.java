@@ -3,7 +3,7 @@ package desktop_fields;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import desktop_board.Center;
+import desktop_codebehind.GUI_Center;
 import desktop_codebehind.SwingComponentFactory;
 
 public final class GUI_Refuge extends GUI_Field {
@@ -49,10 +49,10 @@ public final class GUI_Refuge extends GUI_Field {
     @Override
     public void displayOnCenter() {
         super.displayOnCenter();
-        Center.label[1].setText(this.title.replace("<html><center>", ""));
-        Center.label[2].setIcon(this.icon);
-        Center.label[3].setText("__________________________");
-        Center.label[4].setText(this.description);
+        GUI_Center.label[1].setText(this.title.replace("<html><center>", ""));
+        GUI_Center.label[2].setIcon(this.icon);
+        GUI_Center.label[3].setText("__________________________");
+        GUI_Center.label[4].setText(this.description);
         super.displayCarOnCenter();
     }
 }
