@@ -28,6 +28,7 @@ public abstract class GUI_Field {
 	protected String title;
 	protected String subText;
 	protected String description;
+//	private HashMap<String, Boolean> hasCars = new HashMap();
 	private boolean[] hasCars = new boolean[GUI_Board.MAX_PLAYER_COUNT];
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private JLabel[] cars;
