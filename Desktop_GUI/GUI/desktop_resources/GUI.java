@@ -15,20 +15,22 @@ import desktop_fields.GUI_Field;
 public final class GUI {
     public final Color BASECOLOR = GUI_Board.BASECOLOR;
     private GUI_BoardController bc;
+    private static boolean null_fields_allowed = false;
     
     public static void main(String[] args) {
         new GUI();
     }
     
     public GUI(GUI_Field[] fields) {
+        if(!GUI.null_fields_allowed){
+            check_for_null_fields(fields);
+        }
         GUI_Board.fields = new GUI_Field[fields.length];
         for(int i = 0; i < fields.length; i++){
             GUI_Board.fields[i] = fields[i];
-            //TODO consider defensive copy
         }
         bc = new GUI_BoardController(); 
     }
-    
     public GUI(){
         GUI_Field[] fields = GUI_FieldFactory.makeFields();
         GUI_Board.fields = new GUI_Field[fields.length];
@@ -38,6 +40,21 @@ public final class GUI {
         }
         bc = new GUI_BoardController();        
     }
+
+    private void check_for_null_fields(GUI_Field[] fields) {
+        String msg = "Null fields!\nNull fields are not recommended! the following indecies are null: ";
+        String str = "{";
+        String howTo = "Disable this Exception by calling the static method GUI.setNull_fields_allowed(true);";
+        for(int i = 0; i < fields.length; i++){
+            GUI_Field f = fields[i];
+            if(f == null){
+                str += i+", ";
+            }
+        }
+        str += "}";
+        str = str.replace(", }", "}");
+        throw new NullPointerException(msg+str+"\n"+howTo);
+    }    
 
     /**
      * Displays a message to the user.<br>
@@ -326,5 +343,12 @@ public final class GUI {
      */
     public void setHotel(int fieldNumber, boolean hasHotel) {
         bc.setHotel(fieldNumber, hasHotel);
+    }
+
+    public static boolean isNull_fields_allowed() {
+        return null_fields_allowed;
+    }
+    public static void setNull_fields_allowed(boolean allowed) {
+        GUI.null_fields_allowed = allowed;
     }
 }

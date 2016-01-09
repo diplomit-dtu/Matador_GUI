@@ -24,7 +24,7 @@ public final class GUI_Car {
         this.primaryColor = builder.color1;
         this.secondaryColor = builder.color2;
     }
-    public BufferedImage getImage() {
+    protected BufferedImage getImage() {
         return this.image;
     }
     public Color getPrimaryColor() {
@@ -62,8 +62,7 @@ public final class GUI_Car {
             if (this.color2 == null) { this.color2 = this.color1; }
             
             BufferedImage template =
-                new SwingComponentFactory().createImage(PATH).getSubimage(X, Y,
-                    WIDTH, HEIGHT);
+                new SwingComponentFactory().createImage(PATH).getSubimage(X, Y, WIDTH, HEIGHT);
             switch(this.pattern) {
                 case FILL:
                     this.image = paintFill(template, this.color1);

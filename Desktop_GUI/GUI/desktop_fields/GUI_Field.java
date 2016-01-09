@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import desktop_codebehind.FieldMouseListener;
 import desktop_codebehind.GUI_Center;
 import desktop_codebehind.GUI_Player;
 import desktop_codebehind.SwingComponentFactory;
@@ -34,13 +33,13 @@ public abstract class GUI_Field {
 	private JLabel[] cars;
     
     //Default values
-    public static final String TITLE = "Title";
-    public static final String SUBTEXT = "subText";
-    public static final String DESCRIPTION = "description";
-    public static final String PICTURE = "default";
-    public static final String RENT = "Rent";
-    public static final Color BG_COLOR = Color.LIGHT_GRAY;
-    public static final Color FG_COLOR = Color.BLACK;
+    protected static final String TITLE = "Title";
+    protected static final String SUBTEXT = "subText";
+    protected static final String DESCRIPTION = "description";
+    protected static final String PICTURE = "default";
+    protected static final String RENT = "Rent";
+    protected static final Color BG_COLOR = Color.LIGHT_GRAY;
+    protected static final Color FG_COLOR = Color.BLACK;
     
 	//TODO add number to parameters - just for display
     protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description) {
@@ -94,7 +93,7 @@ public abstract class GUI_Field {
 	 * @param height - in px
 	 * @return a JLabel object
 	 */
-	public JLabel makeLabel(int height) {
+	protected JLabel makeLabel(int height) {
 		JLabel label = new JLabel();
 		this.factory.setSize(label, 1 * FIELDWIDTH - 2, height);
 		label.setFont(new java.awt.Font(GUI_Board.FONT, 0, GUI_Board.FONTSIZE));
@@ -109,7 +108,7 @@ public abstract class GUI_Field {
 	public int getY() {
 		return this.y;
 	}
-	public JLayeredPane getPanel() {
+	protected JLayeredPane getPanel() {
 		return this.layered;
 	}
 	public void setTitle(String title) {
@@ -128,13 +127,38 @@ public abstract class GUI_Field {
 			this.description = description;
 		}
 	}
+	public int getNumber() {
+        return number;
+    }
+    public void setNumber(int number) {
+        this.number = number;
+    }
+    public String getTitle() {
+        return title.replace("<html><center>", "").replace("<br>", "");
+    }
+    public String getSubText() {
+        return subText;
+    }
+    public String getDescription() {
+        return description.replace("<html><table><tr><td>", "").replace("<br>", "\n");
+    }
+    public void setBackGroundColor(Color color){
+	    this.bgColor = color;
+	    this.layered.setBackground(bgColor);
+	}
+	public void setForeGroundColor(Color color){
+	    this.fgColor = color;
+        this.layered.setForeground(fgColor);
+        titleLabel.setForeground(fgColor);
+        subTextLabel.setForeground(fgColor);
+	}
 	protected void setCarIcons(JLabel[] cars) {
 		this.cars = cars;
 	}
 	/**
 	 * Each type of field displays information on the center
 	 */
-	public void displayOnCenter(){
+	protected void displayOnCenter(){
 		GUI_Center.getInstance().clearLabels();
 		GUI_Center.getInstance().setBGColor(this.bgColor);
 		GUI_Center.getInstance().setFGColor(this.fgColor);

@@ -31,7 +31,7 @@ public final class GUI_Tax extends GUI_Field {
         return l;
     }
     @Override
-    public void displayOnCenter() {
+    protected void displayOnCenter() {
         super.displayOnCenter();
         GUI_Center.label[1].setText("__________________________");
         GUI_Center.label[2].setText(this.description);

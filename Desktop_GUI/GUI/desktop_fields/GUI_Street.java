@@ -67,7 +67,7 @@ public final class GUI_Street extends GUI_Ownable {
         this.houseLabel.setIcon(icon);
     }
     @Override
-    public void displayOnCenter() {
+    protected void displayOnCenter() {
         super.displayOnCenter();
         GUI_Center.label[1].setText("__________________________");
         GUI_Center.label[2].setText(this.description);
@@ -75,7 +75,7 @@ public final class GUI_Street extends GUI_Ownable {
         
         if (this.owner != null) {
             GUI_Center.label[4].setText(OWNABLELABEL + this.owner.getName());
-            GUI_Center.label[5].setText(getLeje());
+            GUI_Center.label[5].setText(getRent());
         }
         GUI_Center.label[6].setIcon(this.houseLabel.getIcon());
         

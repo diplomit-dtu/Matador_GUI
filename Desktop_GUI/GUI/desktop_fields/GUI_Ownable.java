@@ -10,11 +10,11 @@ import desktop_codebehind.SwingComponentFactory;
 public abstract class GUI_Ownable extends GUI_Field{
 	public static final String OWNABLELABEL = "Ejes af: ";
 	protected GUI_Player owner;
-	private String leje;
+	private String rent;
 	
 	public GUI_Ownable(Color bgColor, Color fgColor, String title, String subText, String description, String leje){
 		super(bgColor, fgColor, title, subText, description);
-		this.leje = leje;
+		this.rent = leje;
 	}
 	
 	public GUI_Player getOwner(){return this.owner; }
@@ -36,12 +36,15 @@ public abstract class GUI_Ownable extends GUI_Field{
 		this.layered.setBorder(border);
 		
 	}
-	public String getLeje(){
-		return this.leje;
+	public String getRent(){
+		return this.rent;
+	}
+	public void setRent(String rent){
+	    this.rent = rent;
 	}
 	
 	@Override
-	public void displayOnCenter(){
+	protected void displayOnCenter(){
 		super.displayOnCenter();
 		Border border;
 		if(this.owner != null){

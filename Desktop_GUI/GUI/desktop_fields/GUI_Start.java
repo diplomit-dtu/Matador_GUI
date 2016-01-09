@@ -34,7 +34,7 @@ public final class GUI_Start extends GUI_Field {
         return l;
     }
     @Override
-    public void displayOnCenter() {
+    protected void displayOnCenter() {
         super.displayOnCenter();
         GUI_Center.label[1].setText(this.title.replace("<html><center>", ""));
         GUI_Center.label[2].setText("__________________________");

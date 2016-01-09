@@ -1,8 +1,8 @@
-package desktop_codebehind;
+package desktop_fields;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import desktop_fields.GUI_Field;
+import desktop_codebehind.GUI_Center;
 
 /**
  * Listens to mouse action on fields

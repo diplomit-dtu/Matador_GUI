@@ -57,7 +57,7 @@ public final class GUI_Brewery extends GUI_Ownable {
         return bottomLabel;
     }
     @Override
-    public void displayOnCenter() {
+    protected void displayOnCenter() {
         super.displayOnCenter();
         GUI_Center.label[1].setIcon(this.icon);
         GUI_Center.label[3].setText("__________________________");
@@ -65,7 +65,7 @@ public final class GUI_Brewery extends GUI_Ownable {
         GUI_Center.label[4].setText(this.subText);
         if (this.owner != null) {
             GUI_Center.label[5].setText(OWNABLELABEL + this.owner.getName());
-            GUI_Center.label[6].setText(getLeje());
+            GUI_Center.label[6].setText(getRent());
         }
         super.displayCarOnCenter();
     }

@@ -108,6 +108,7 @@ public final class GUI_Board extends javax.swing.JFrame {
 	 */
 	private void makeFieldPanels() {
 	    for(GUI_Field f : GUI_Board.fields){
+	        if(f == null) continue;
 			JLayeredPane panel = f.getPanel();
 			this.base.add(panel, this.factory.createGridBagConstraints(f.getX(), f.getY()));
 		}
@@ -160,6 +161,7 @@ public final class GUI_Board extends javax.swing.JFrame {
 	 */
 	private void makeCarPanes() {
 		for(GUI_Field f : GUI_Board.fields) {
+		    if(f == null) continue;
 			int x = f.getX();
 			int y = f.getY();
 			

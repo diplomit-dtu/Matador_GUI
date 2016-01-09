@@ -31,7 +31,7 @@ public final class GUI_Chance extends GUI_Field {
         return bottomLabel;
     }
     @Override
-    public void displayOnCenter() {
+    protected void displayOnCenter() {
         super.displayOnCenter();
         GUI_Center.label[1].setIcon(this.factory.createIcon("/desktop_resources/pics/Prøv lykken small.png"));
         GUI_Center.label[2].setText("__________________________");

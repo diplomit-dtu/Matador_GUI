@@ -47,7 +47,7 @@ public final class GUI_Refuge extends GUI_Field {
         return bottomLabel;
     }
     @Override
-    public void displayOnCenter() {
+    protected void displayOnCenter() {
         super.displayOnCenter();
         GUI_Center.label[1].setText(this.title.replace("<html><center>", ""));
         GUI_Center.label[2].setIcon(this.icon);

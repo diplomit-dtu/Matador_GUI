@@ -52,7 +52,7 @@ public final class GUI_Jail extends GUI_Field{
 		return this.subText;
 	}
 	@Override
-	public void displayOnCenter(){
+	protected void displayOnCenter(){
 		super.displayOnCenter();
 		GUI_Center.label[1].setIcon(this.icon);
 		GUI_Center.label[2].setText("__________________________");

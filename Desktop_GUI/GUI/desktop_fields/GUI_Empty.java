@@ -12,5 +12,5 @@ public class GUI_Empty extends GUI_Field {
         super(bgColor, fgColor, subText, description, null);
     }
     @Override
-    public void displayOnCenter() { }
+    protected void displayOnCenter() { }
 }
