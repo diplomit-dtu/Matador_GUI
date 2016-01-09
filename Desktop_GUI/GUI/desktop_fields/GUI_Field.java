@@ -3,6 +3,7 @@ package desktop_fields;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.Point;
+import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -27,9 +28,9 @@ public abstract class GUI_Field {
 	protected String title;
 	protected String subText;
 	protected String description;
-	private boolean[] hasCars = new boolean[GUI_Board.MAX_PLAYER_COUNT];
 	private SwingComponentFactory factory = new SwingComponentFactory();
-	private JLabel[] cars;
+	private HashMap<Integer, JLabel> cars = new HashMap<Integer, JLabel>();
+	private JLabel[] carLabels;
     
     //Default values
     protected static final String TITLE = "Title";
@@ -77,20 +78,28 @@ public abstract class GUI_Field {
 		this.subTextLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		this.subTextLabel.setText(this.subText);
 	}
-	public boolean hasCar(GUI_Player p) {
-		return this.hasCars[p.getNumber()];
+	public boolean hasCar(GUI_Player player) {
+		return cars.get(player.getId()) != null;
 	}
 	public void setCar(GUI_Player p, boolean hasCar) {
-		if(p != null) {
-			this.hasCars[p.getNumber()] = hasCar;
-			this.cars[p.getNumber()].setIcon(new ImageIcon(p.getImage()));
-			this.cars[p.getNumber()].setVisible(hasCar);
-		}
+	    JLabel l = cars.get(p.getId()); 
+	    if(l != null){
+	        l.setIcon(hasCar ? new ImageIcon(p.getImage()) : null);
+	        l.setVisible(true);
+	    } else {
+	        for(JLabel lbl : carLabels){
+	            if(lbl.getIcon() == null){
+	                lbl.setIcon(hasCar ? new ImageIcon(p.getImage()) : null);
+	                lbl.setVisible(true);
+	                cars.put(p.getId(), lbl);
+	                return;
+	            }
+	        }
+	    }
 	}
 	public void removeAllCars(){
-	    for(int i = 0; i < hasCars.length; i++){
-	        hasCars[i] = false;
-	        cars[i].setVisible(false);
+	    for(Integer key : cars.keySet()){
+	        cars.get(key).setVisible(false);
 	    }
 	}
 	/**
@@ -139,10 +148,10 @@ public abstract class GUI_Field {
         this.number = number;
     }
     public String getTitle() {
-        return title.replace("<html><center>", "").replace("<br>", "");
+        return title.replace("<html><center>", "").replace("<br>", "").replace("<BR>", "");
     }
     public String getSubText() {
-        return subText;
+        return subText.replace("<br>", "").replace("<BR>", "");
     }
     public String getDescription() {
         return description.replace("<html><table><tr><td>", "").replace("<br>", "\n");
@@ -158,7 +167,7 @@ public abstract class GUI_Field {
         subTextLabel.setForeground(fgColor);
 	}
 	protected void setCarIcons(JLabel[] cars) {
-		this.cars = cars;
+		this.carLabels = cars;
 	}
 	/**
 	 * Each type of field displays information on the center

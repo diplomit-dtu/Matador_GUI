@@ -43,6 +43,7 @@ public final class GUI_Car extends Observable {
     private Pattern pattern;
     private BufferedImage image;
     
+    
     public GUI_Car(){
         this(null, null, Type.CAR, Pattern.FILL);
     }

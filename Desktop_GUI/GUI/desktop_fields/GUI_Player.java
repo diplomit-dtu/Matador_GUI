@@ -13,6 +13,8 @@ public class GUI_Player extends Observable{
 	private String name;
 	private int balance;
 	private GUI_Car car;
+	private static int nextId = 0;
+    private int id;
 	
 	public static final int ICON_WIDTH = 41;
 	public static final int ICON_HEIGHT = 22;
@@ -27,7 +29,7 @@ public class GUI_Player extends Observable{
 		this.name = name;
 		this.balance = balance;
 		this.car = car;
-		
+		this.id = nextId++;
 	}
 	//Getters
 	public int getNumber(){ return this.number; }
@@ -37,6 +39,7 @@ public class GUI_Player extends Observable{
 	public Color getSecondaryColor(){ return this.car.getSecondaryColor(); }
 	protected BufferedImage getImage() { return this.car.getImage(); }
     public GUI_Car getCar() { return car; }
+    protected int getId(){ return id; }
 	
 	//Setters
     protected void setNumber(int number) { this.number = number; }
