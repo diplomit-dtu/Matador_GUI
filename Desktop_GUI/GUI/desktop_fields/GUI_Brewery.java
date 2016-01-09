@@ -63,8 +63,8 @@ public final class GUI_Brewery extends GUI_Ownable {
         GUI_Center.label[3].setText("__________________________");
         GUI_Center.label[3].setText(this.description);
         GUI_Center.label[4].setText(this.subText);
-        if (this.owner != null) {
-            GUI_Center.label[5].setText(OWNABLELABEL + this.owner.getName());
+        if (this.ownerName != null) {
+            GUI_Center.label[5].setText(OWNABLELABEL + this.ownerName);
             GUI_Center.label[6].setText(getRent());
         }
         super.displayCarOnCenter();

@@ -1,22 +1,28 @@
 package desktop_tests;
 
 import java.awt.Color;
-import desktop_codebehind.GUI_Car;
+import desktop_fields.GUI_Car;
+import desktop_fields.GUI_Car.Pattern;
+import desktop_fields.GUI_Car.Type;
+import desktop_fields.GUI_Field;
+import desktop_fields.GUI_Ownable;
+import desktop_fields.GUI_Player;
+import desktop_fields.GUI_Street;
 import desktop_resources.GUI;
 
 public class Test {
     private GUI gui = new GUI();
+    private GUI_Player arthur, ford, zaphod, tricia, marvin, slart, dt;
 	
 	public static void main(String[] args) {
 		Test test = new Test();
-		test.test();
 		test.test();
 	}
 	
 	private void test(){
 	    setDiceAngleAndCoordinates();
-	    testSetText();
-	    testSetTexts();
+//	    testSetText();
+//	    testSetTexts();
 	    testAddPlayer();
 	    testSetBalance();
 	    testSetDice();
@@ -30,18 +36,7 @@ public class Test {
 	    testRemoveOwner();
 	    testSetHouses();
 	    testRemoveHouses();
-	    try {
-	        Thread.sleep(2000);
-	    } catch(InterruptedException ex) {
-	        ex.printStackTrace();
-	    }
-	    gui = new GUI();
-	    try {
-            Thread.sleep(2000);
-        } catch(InterruptedException ex) {
-            ex.printStackTrace();
-        }
-	    // System.exit(0);	    
+	    	    
 	}
 	
 	private void setDiceAngleAndCoordinates() {
@@ -61,111 +56,93 @@ public class Test {
 		// gui.showMessage("HEJ");
 	}
 	
-	private void testSetText() {
-		gui.setTitleText(3, "Ocean Blv.");
-		gui.setSubText(3, "Price: 1 mio.");
-		gui.setDescriptionText(
-			3,
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac libero lorem. Aliquam ligula mauris, luctus interdum malesuada non, adipiscing ut mauris.");
-		gui.setTitleText(34, "Start");
-		gui.setSubText(1, "Daniel2");
-		gui.setDescriptionText(
-			1,
-			"Daniel3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac libero lorem. Aliquam ligula mauris, luctus interdum malesuada non, adipiscing ut mauris.");
-	}
-	private void testSetTexts() {
-		int fieldNr = 0;
-		String desc = "description";
-		String sub = "subtext";
-		String title = "title";
-		// Start - 1
-		fieldNr = 34;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Brewery - 13
-		fieldNr = 13;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Chance - 3
-		fieldNr = 3;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Jail - 11
-		fieldNr = 11;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Refuge - 21
-		fieldNr = 21;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Shipping - 6
-		fieldNr = 6;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Street - 2
-		fieldNr = 2;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-		// Tax - 5
-		fieldNr = 5;
-		gui.setDescriptionText(fieldNr, desc + fieldNr);
-		gui.setSubText(fieldNr, sub + fieldNr);
-		gui.setTitleText(fieldNr, title + fieldNr);
-	}
+//	private void testSetText() {
+//		gui.setTitleText(3, "Ocean Blv.");
+//		gui.setSubText(3, "Price: 1 mio.");
+//		gui.setDescriptionText(
+//			3,
+//			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac libero lorem. Aliquam ligula mauris, luctus interdum malesuada non, adipiscing ut mauris.");
+//		gui.setTitleText(34, "Start");
+//		gui.setSubText(1, "Daniel2");
+//		gui.setDescriptionText(
+//			1,
+//			"Daniel3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac libero lorem. Aliquam ligula mauris, luctus interdum malesuada non, adipiscing ut mauris.");
+//	}
+//	private void testSetTexts() {
+//		int fieldNr = 0;
+//		String desc = "description";
+//		String sub = "subtext";
+//		String title = "title";
+//		// Start - 1
+//		fieldNr = 34;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Brewery - 13
+//		fieldNr = 13;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Chance - 3
+//		fieldNr = 3;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Jail - 11
+//		fieldNr = 11;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Refuge - 21
+//		fieldNr = 21;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Shipping - 6
+//		fieldNr = 6;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Street - 2
+//		fieldNr = 2;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//		// Tax - 5
+//		fieldNr = 5;
+//		gui.setDescriptionText(fieldNr, desc + fieldNr);
+//		gui.setSubText(fieldNr, sub + fieldNr);
+//		gui.setTitleText(fieldNr, title + fieldNr);
+//	}
 	private void testAddPlayer() {
-		gui.addPlayer("Arthur Dent", 1000);
+	    arthur = new GUI_Player("Arthur Dent", 1000);
+		gui.addPlayer(arthur);
 		
-		GUI_Car car;
+		GUI_Car car1 = new GUI_Car(Color.MAGENTA, Color.BLUE, Type.TRACTOR, Pattern.DOTTED);
+		ford = new GUI_Player("Ford Prefect", 1000, car1);
+		gui.addPlayer(ford);
 		
-		car = new GUI_Car.Builder()
-			.primaryColor(Color.MAGENTA)
-			.secondaryColor(Color.BLUE)
-			.typeTractor()
-			.patternDotted()
-			.build();
-		gui.addPlayer("Ford Prefect", 1000, car);
+		GUI_Car car2 = new GUI_Car(Color.BLACK, Color.RED, Type.UFO, Pattern.ZEBRA);
+		zaphod = new GUI_Player("Zaphod Beeblebrox", 100000, car2);
+		gui.addPlayer(zaphod);
 		
-		car = new GUI_Car.Builder()
-			.primaryColor(Color.BLACK)
-			.secondaryColor(Color.RED)
-			.typeUfo()
-			.patternZebra()
-			.build();
-		gui.addPlayer("Zaphod Beeblebrox", 100000, car);
+		GUI_Car car3 = new GUI_Car(Color.DARK_GRAY, Color.CYAN, Type.RACECAR, Pattern.HORIZONTAL_LINE);
+		tricia = new GUI_Player("Tricia McMillan", 100000, car3);
+		gui.addPlayer(tricia);
 		
-		car = new GUI_Car.Builder()
-			.primaryColor(Color.DARK_GRAY)
-			.secondaryColor(Color.CYAN)
-			.typeRacecar()
-			.patternHorizontalLine()
-			.build();
-		gui.addPlayer("Tricia McMillan", 100000, car);
+		GUI_Car car4 = new GUI_Car(new Color(160, 32, 240), Color.YELLOW, Type.CAR, Pattern.CHECKERED);
+		marvin = new GUI_Player("Marvin", 1000, car4); 
+		gui.addPlayer(marvin);
 		
-		car = new GUI_Car.Builder()
-			.primaryColor(new Color(160, 32, 240))
-			.secondaryColor(Color.YELLOW)
-			.patternHorizontalGradiant()
-			.build();
-		gui.addPlayer("Marvin", 1000, car);
+		GUI_Car car5 = new GUI_Car(Color.BLACK, Color.WHITE, Type.CAR, Pattern.DOTTED);
+		slart = new GUI_Player("Slartibartfast", 100000, car5);
+		gui.addPlayer(slart);
 		
-		car = new GUI_Car.Builder()
-			.primaryColor(Color.BLACK)
-			.secondaryColor(Color.WHITE)
-			.patternCheckered()
-			.build();
-		gui.addPlayer("Slartibartfast", 100000, car);
-		
-		gui.addPlayer("Deep Thought", 100000);
+		dt = new GUI_Player("Deep Thought", 100000);
+		gui.addPlayer(dt);
 	}
 	private void testSetBalance() {
-		gui.setBalance("Ford Prefect", 100);
+		ford.setBalance(100);
 	}
 	private void testSetDice() {
 		// int d1 = (int)(Math.random()*6+1);
@@ -203,85 +180,135 @@ public class Test {
 		gui.displayChanceCard("De har modtaget Bjørne Bandit - legatet og fængsles!");
 	}
 	private void testSetCar() {
-		for(int i = 1; i <= 10; i++) {
-			gui.setCar(i, "Zaphod Beeblebrox");
+		for(int i = 0; i < 10; i++) {
+			gui.getFields()[i].setCar(zaphod, true);
 		}
-		for(int i = 11; i <= 20; i++) {
-			gui.setCar(i, "Tricia McMillan");
-			gui.setCar(i, "Ford Prefect");
+		for(int i = 10; i < 20; i++) {
+		    gui.getFields()[i].setCar(tricia, true);
+		    gui.getFields()[i].setCar(ford, true);
 		}
-		for(int i = 21; i <= 30; i++) {
-			gui.setCar(i, "Arthur Dent");
-			gui.setCar(i, "Marvin");
-			gui.setCar(i, "Slartibartfast");
+		for(int i = 20; i < 30; i++) {
+		    gui.getFields()[i].setCar(arthur, true);
+		    gui.getFields()[i].setCar(marvin, true);
+		    gui.getFields()[i].setCar(slart, true);
 		}
-		for(int i = 31; i <= 40; i++) {
-			gui.setCar(i, "Tricia McMillan");
-			gui.setCar(i, "Zaphod Beeblebrox");
-			gui.setCar(i, "Arthur Dent");
-			gui.setCar(i, "Ford Prefect");
-			gui.setCar(i, "Marvin");
-			gui.setCar(i, "Slartibartfast");
+		for(int i = 30; i < 40; i++) {
+		    gui.getFields()[i].setCar(tricia, true);
+			gui.getFields()[i].setCar(zaphod, true);
+			gui.getFields()[i].setCar(arthur, true);
+			gui.getFields()[i].setCar(ford, true);
+			gui.getFields()[i].setCar(marvin, true);
+			gui.getFields()[i].setCar(slart, true);
 		}
 	}
 	private void testRemoveCar() {
-		gui.removeAllCars("Zaphod Beeblebrox");
-		gui.removeAllCars("Tricia McMillan");
-		gui.removeAllCars("Ford Prefect");
-		gui.removeAllCars("Arthur Dent");
-		gui.removeAllCars("Marvin");
-		gui.removeAllCars("Slartibartfast");
-		
-		gui.removeAllCars("Tricia McMillan");
-		gui.removeAllCars("Zaphod Beeblebrox");
-		gui.removeAllCars("Arthur Dent");
-		gui.removeAllCars("Ford Prefect");
-		gui.removeAllCars("Marvin");
-		gui.removeAllCars("Slartibartfast");
+	    for(GUI_Field f : gui.getFields()){
+	        f.removeAllCars();
+	    }
 	}
 	private void testSetOwner() {
 		for(int i = 1; i <= 10; i++) {
-			gui.setOwner(i, "Ford Prefect");
+		    GUI_Field f = gui.getFields()[i];
+		    if(f instanceof GUI_Ownable){
+		        GUI_Ownable o = (GUI_Ownable) f;
+		        o.setBorder(ford.getPrimaryColor(), ford.getSecondaryColor());
+		    }
 		}
 		for(int i = 11; i <= 20; i++) {
-			gui.setOwner(i, "Slartibartfast");
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(slart.getPrimaryColor(), slart.getSecondaryColor());
+            }
 		}
 		for(int i = 21; i <= 30; i++) {
-			gui.setOwner(i, "Arthur Dent");
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(arthur.getPrimaryColor(), arthur.getSecondaryColor());
+            }
 		}
 	}
 	private void testRemoveOwner() {
 		for(int i = 1; i <= 5; i++) {
-			gui.removeOwner(i);
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(null);
+            }
 		}
 		for(int i = 11; i <= 15; i++) {
-			gui.removeOwner(i);
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(null);
+            }
 		}
 		for(int i = 21; i <= 25; i++) {
-			gui.removeOwner(i);
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(null);
+            }
 		}
 	}
 	private void testSetHouses() {
-		for(int i = 1; i <= 10; i++) {
-			gui.setHouses(i, 1);
+		for(int i = 0; i < 10; i++) {
+		    GUI_Field f = gui.getFields()[i];
+		    if(f instanceof GUI_Street){
+		        GUI_Street s = (GUI_Street) f;
+		        s.setHouses(1);
+		    }
 		}
-		for(int i = 11; i <= 20; i++) {
-			gui.setHouses(i, 2);
+		for(int i = 10; i < 20; i++) {
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Street){
+                GUI_Street s = (GUI_Street) f;
+                s.setHouses(2);
+            }
 		}
-		for(int i = 21; i <= 30; i++) {
-			gui.setHouses(i, 3);
+		for(int i = 20; i < 30; i++) {
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Street){
+                GUI_Street s = (GUI_Street) f;
+                s.setHouses(3);
+            }
 		}
-		for(int i = 31; i <= 40; i++) {
-			gui.setHouses(i, 4);
+		for(int i = 30; i < 40; i++) {
+		    GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Street){
+                GUI_Street s = (GUI_Street) f;
+                s.setHouses(4);
+            }
 		}
-		gui.setHotel(38, true);
-		gui.setHotel(40, true);
+		GUI_Field f38 = gui.getFields()[37];
+		System.out.println(f38.getTitle());
+        if(f38 instanceof GUI_Street){
+            GUI_Street s = (GUI_Street) f38;
+            s.setHotel(true);
+        }
+        GUI_Field f40 = gui.getFields()[39];
+        System.out.println(f40.getTitle());
+        if(f40 instanceof GUI_Street){
+            GUI_Street s = (GUI_Street) f40;
+            s.setHotel(true);
+        }
 	}
 	private void testRemoveHouses() {
-		gui.setHouses(2, 0);
-		gui.setHouses(12, 0);
-		gui.setHouses(22, 0);
-		gui.setHouses(32, 0);
-		gui.setHotel(38, false);
+	    try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+	    for(GUI_Field f : gui.getFields()){
+            if(f.getNumber() < 38 && f.getNumber() % 3 == 0){
+                if(f instanceof GUI_Street){
+                    GUI_Street s = (GUI_Street) f;
+                    s.setHouses(0);
+                }
+            }
+        }
+	    GUI_Street s40 = (GUI_Street)gui.getFields()[39];
+	    s40.setHotel(false);
 	}
 }

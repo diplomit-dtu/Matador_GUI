@@ -10,7 +10,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import desktop_codebehind.GUI_Center;
-import desktop_codebehind.GUI_Player;
 import desktop_codebehind.SwingComponentFactory;
 
 public abstract class GUI_Field {
@@ -28,7 +27,6 @@ public abstract class GUI_Field {
 	protected String title;
 	protected String subText;
 	protected String description;
-//	private HashMap<String, Boolean> hasCars = new HashMap();
 	private boolean[] hasCars = new boolean[GUI_Board.MAX_PLAYER_COUNT];
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private JLabel[] cars;
@@ -88,6 +86,12 @@ public abstract class GUI_Field {
 			this.cars[p.getNumber()].setIcon(new ImageIcon(p.getImage()));
 			this.cars[p.getNumber()].setVisible(hasCar);
 		}
+	}
+	public void removeAllCars(){
+	    for(int i = 0; i < hasCars.length; i++){
+	        hasCars[i] = false;
+	        cars[i].setVisible(false);
+	    }
 	}
 	/**
 	 * Makes a standard label

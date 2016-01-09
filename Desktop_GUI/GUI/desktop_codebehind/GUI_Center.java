@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import desktop_fields.GUI_Board;
 import desktop_fields.GUI_Field;
+import desktop_fields.GUI_Player;
 
 public final class GUI_Center{
 	private static GUI_Center center;

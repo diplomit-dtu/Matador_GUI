@@ -16,16 +16,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import desktop_fields.GUI_Board;
 import desktop_fields.GUI_Field;
-import desktop_fields.GUI_Ownable;
-import desktop_fields.GUI_Street;
+import desktop_fields.GUI_Player;
 
 /**
  * Provides access to GUI
  * @author Ronnie
  */
 public final class GUI_BoardController {
-	static String userInput = null;
-	GUI_Board board;
+	private String userInput = null;
+	private GUI_Board board;
 	private static volatile Random rand = null;
 	
 	public static Random rand() {
@@ -38,9 +37,10 @@ public final class GUI_BoardController {
 	}
 	/**
 	 * Contains service methods for board for controlling the board.
+	 * @param fields 
 	 */
-	public GUI_BoardController() {
-		this.board = new GUI_Board();
+	public GUI_BoardController(GUI_Field[] fields) {
+		this.board = new GUI_Board(fields);
 	}
 	/**
 	 * Displays a message for the user. The user presses OK when the message is read Is a breaking
@@ -79,7 +79,7 @@ public final class GUI_BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUI_BoardController.userInput = tf.getText();
+				GUI_BoardController.this.userInput = tf.getText();
 				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
@@ -90,7 +90,7 @@ public final class GUI_BoardController {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.userInput = tf.getText();
+                    GUI_BoardController.this.userInput = tf.getText();
                     GUI_BoardController.this.board.clearInputPanel();
                     latch.countDown();
                 }
@@ -102,7 +102,7 @@ public final class GUI_BoardController {
 		
 		try {
 			latch.await();
-			return GUI_BoardController.userInput;
+			return this.userInput;
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return null;
@@ -136,7 +136,7 @@ public final class GUI_BoardController {
 			@Override
 			public void keyReleased(KeyEvent ke) {
 			    if(ke.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.userInput = tf.getText();
+			        GUI_BoardController.this.userInput = tf.getText();
                     GUI_BoardController.this.board.clearInputPanel();
                     latch.countDown();
                 }
@@ -170,7 +170,7 @@ public final class GUI_BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUI_BoardController.userInput = tf.getText();
+			    GUI_BoardController.this.userInput = tf.getText();
 				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
@@ -179,7 +179,7 @@ public final class GUI_BoardController {
 		
 		try {
 			latch.await();
-			return Integer.parseInt(GUI_BoardController.userInput);
+			return Integer.parseInt(this.userInput);
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return -1;
@@ -212,8 +212,7 @@ public final class GUI_BoardController {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GUI_BoardController.userInput
-					= ((JButton) e.getSource()).getName();
+				    GUI_BoardController.this.userInput = ((JButton) e.getSource()).getName();
 					GUI_BoardController.this.board.clearInputPanel();
 					latch.countDown();
 				}
@@ -224,7 +223,7 @@ public final class GUI_BoardController {
 		
 		try {
 			latch.await();
-			return GUI_BoardController.userInput;
+			return this.userInput;
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return null;
@@ -254,7 +253,7 @@ public final class GUI_BoardController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUI_BoardController.userInput = dropdown.getSelectedItem().toString();
+			    GUI_BoardController.this.userInput = dropdown.getSelectedItem().toString();
 				GUI_BoardController.this.board.clearInputPanel();
 				latch.countDown();
 			}
@@ -263,66 +262,21 @@ public final class GUI_BoardController {
 		this.board.getUserInput(msg, dropdown, okButton);
 		try {
 			latch.await();
-			return GUI_BoardController.userInput;
+			return this.userInput;
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
-	
-	/**
-	 * Sets the title of a field on the board.<br>
-	 * @param fieldNumber : int [1:40]
-	 * @param title : String (Mind the length!)
-	 */
-	public void setTitleText(int fieldNumber, String title) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		f.setTitle(title);
-	}
-	/**
-	 * Sets the subText of a field on the board.<br>
-	 * @param fieldNumber : int [1:40]
-	 * @param subText : String (Mind the length!)
-	 */
-	public void setSubText(int fieldNumber, String subText) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		f.setSubText(subText);
-	}
-	/**
-	 * Sets the Description (The text shown in the center when mouse hovers) of a field on the
-	 * board.<br>
-	 * @param fieldNumber : int [1:40]
-	 * @param description : String (Mind the length!)
-	 */
-	public void setDescriptionText(int fieldNumber, String description) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		f.setDescription(description);
-	}
-	public void addPlayer(String name, int balance, GUI_Car car) {
-		this.board.addPlayer(name, balance, car);
-	}
 	/**
 	 * Adds a player to the board.<br>
 	 * A new player with the same color will replace the old.<br>
 	 * Max. 6 players.<br>
-	 * @param name : String (Mind the length!)
-	 * @param balance : int<br>
-	 *        Automatic coloring
+	 * @param player : The player must be created beforehand
+	 * @return true if player is added, otherwise false
 	 */
-	public void addPlayer(String name, int balance) {
-		this.board.addPlayer(name, balance);
-	}
-	/**
-	 * Sets the balance of a player if the player has been added.<br>
-	 * @param name The name of the player
-	 * @param newBalance : int
-	 */
-	public void setBalance(String name, int newBalance) {
-		GUI_Player p = this.board.getPlayer(name);
-		if(p != null) {
-			p.setBalance(newBalance);
-			this.board.updatePlayers();
-		}
+	public boolean addPlayer(GUI_Player player) {
+	    return this.board.addPlayer(player);
 	}
 	/**
 	 * Shows two dice on the board. The dice will have the specified values, but the placement is
@@ -442,100 +396,7 @@ public final class GUI_BoardController {
     public void displayChanceCard() {
         GUI_Center.getInstance().displayChanceCard();
     }
-	/**
-	 * Places a car on the field.<br>
-	 * All cars can be placed on the same field.<br>
-	 * A car can only be placed if the corresponding player has been added.<br>
-	 * If a car is placed on the same field multiple times, nothing more happens.<br>
-	 * A car can not be placed on multiple fields simultaneously.
-	 * @param fieldNumber : int [1:40]
-	 * @param name The name of the player
-	 */
-	public void setCar(int fieldNumber, String name) {
-		// removeCar(name);
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		GUI_Player p = this.board.getPlayer(name);
-		if(p != null) {
-			f.setCar(p, true);
-		}
-	}
-	/**
-	 * Removes a car from the board.<br>
-	 * If the car is not on the board, nothing happens.<br>
-	 * @param fieldNumber : int [1:40]
-	 * @param name The name of the player
-	 */
-	public void removeCar(int fieldNumber, String name) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		GUI_Player p = this.board.getPlayer(name);
-		f.setCar(p, false);
-		GUI_Center.getInstance().displayDefault();
-	}
-	/**
-	 * Removes all the players cars from the board.<br>
-	 * If the car is not on the board, nothing happens.<br>
-	 * @param name The name of the player
-	 */
-	public void removeAllCars(String name) {
-	    GUI_Player p = this.board.getPlayer(name);
-		for(GUI_Field f : GUI_Board.fields) {
-			f.setCar(p, false);
-		}
-		GUI_Center.getInstance().displayDefault();
-	}
-	/**
-	 * Sets an owner of a field.<br>
-	 * The field border will have the same color as the player. The owners name will be printed in
-	 * the subText. If the field is not a street, shipping or a brewery nothing happens.<br>
-	 * If the owner hasn't been added to the board, nothing happens.
-	 * @param fieldNumber : int [1:40]
-	 * @param name The name of the player
-	 */
-	public void setOwner(int fieldNumber, String name) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		GUI_Player p = this.board.getPlayer(name);
-		if((f instanceof GUI_Ownable) && p != null) {
-			((GUI_Ownable) f).setOwner(p);
-		}
-	}
-	/**
-	 * Removes an owner from the field.<br>
-	 * If the field has no owner, nothing happens.
-	 * @param fieldNumber : int [1:40]
-	 */
-	public void removeOwner(int fieldNumber) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		if(f instanceof GUI_Ownable) {
-			((GUI_Ownable) f).setOwner(null);
-		}
-	}
-	/**
-	 * Sets houses from the street, and removes the hotel if one is present.<br>
-	 * If houseCount is out of bounds, nothing happens.<br>
-	 * If the field is not a street, nothing happens.<br>
-	 * @param fieldNumber : int [1:40]
-	 * @param houseCount : int [0:4]
-	 */
-	public void setHouses(int fieldNumber, int houseCount) {
-		if(houseCount >= 0 && houseCount < 5) {
-			GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-			if(f instanceof GUI_Street) {
-				GUI_Street s = ((GUI_Street) f);
-				s.setHouses(houseCount);
-			}
-		}
-	}
-	/**
-	 * Sets whether or not a hotel should be on the street and removes all houses if any is present.<br>
-	 * @param fieldNumber : int [1:40]
-	 * @param hasHotel : boolean
-	 */
-	public void setHotel(int fieldNumber, boolean hasHotel) {
-		GUI_Field f = GUI_Board.fields[fieldNumber - 1];
-		if(f instanceof GUI_Street) {
-			GUI_Street s = ((GUI_Street) f);
-			s.setHotel(hasHotel);
-		}
-	}
+	
+	public GUI_Field[] getFields() { return board.getFields(); }
 	
 }

@@ -52,18 +52,18 @@ public final class GUI_Street extends GUI_Ownable {
         return l;
     }
     public void setHouses(int houseCount) {
-        Icon icon = null;
+        String path = "/desktop_resources/buildings/";
+        Icon icon;
         if (houseCount != 0) {
-            icon =
-                new ImageIcon(getClass().getResource(
-                    "/desktop_resources/buildings/" + houseCount + "House.png"));
+            icon = new ImageIcon(getClass().getResource(path + houseCount + "House.png"));
+        } else {
+            icon = null;
         }
         this.houseLabel.setIcon(icon);
     }
     public void setHotel(boolean hasHotel) {
-        Icon icon =
-            hasHotel ? new ImageIcon(getClass().getResource(
-                "/desktop_resources/buildings/Hotel.png")) : null;
+        String path = "/desktop_resources/buildings/Hotel.png";
+        Icon icon = hasHotel ? new ImageIcon(getClass().getResource(path)) : null;
         this.houseLabel.setIcon(icon);
     }
     @Override
@@ -73,8 +73,8 @@ public final class GUI_Street extends GUI_Ownable {
         GUI_Center.label[2].setText(this.description);
         GUI_Center.label[3].setText(this.subText);
         
-        if (this.owner != null) {
-            GUI_Center.label[4].setText(OWNABLELABEL + this.owner.getName());
+        if (this.ownerName != null) {
+            GUI_Center.label[4].setText(OWNABLELABEL + this.ownerName);
             GUI_Center.label[5].setText(getRent());
         }
         GUI_Center.label[6].setIcon(this.houseLabel.getIcon());

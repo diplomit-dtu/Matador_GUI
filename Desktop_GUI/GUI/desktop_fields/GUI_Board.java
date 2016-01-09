@@ -16,17 +16,17 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import desktop_codebehind.GUI_Car;
 import desktop_codebehind.GUI_Center;
-import desktop_codebehind.GUI_Player;
 import desktop_codebehind.JLabelRotatable;
+import desktop_codebehind.Observer;
 import desktop_codebehind.SwingComponentFactory;
+import desktop_fields.GUI_Player.iPlayerValidator;
 
 /**
  * The board
  * @author Ronnie
  */
-public final class GUI_Board extends javax.swing.JFrame {
+public final class GUI_Board extends javax.swing.JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	public static final String FONT = "Tahoma";
 	public static final int FONTSIZE = 10;
@@ -45,7 +45,7 @@ public final class GUI_Board extends javax.swing.JFrame {
 	private JTextArea messageArea = new JTextArea();
 	private JPanel inputPanel = new JPanel();
 	private ImageIcon[] diceIcons = new ImageIcon[6];
-	public static GUI_Field[] fields = null;
+	private GUI_Field[] fields = null;
 	
 	public static Point[] points = new Point[40];
     public static int nextPoint = 0;
@@ -65,7 +65,8 @@ public final class GUI_Board extends javax.swing.JFrame {
         }
     }
 	
-	public GUI_Board() {
+	public GUI_Board(GUI_Field[] fields) {
+	    this.fields = fields;
 	    nextPoint = 0;
 	    
 	    int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -107,7 +108,7 @@ public final class GUI_Board extends javax.swing.JFrame {
 	 * Makes a graphical representation of all the fields
 	 */
 	private void makeFieldPanels() {
-	    for(GUI_Field f : GUI_Board.fields){
+	    for(GUI_Field f : fields){
 	        if(f == null) continue;
 			JLayeredPane panel = f.getPanel();
 			this.base.add(panel, this.factory.createGridBagConstraints(f.getX(), f.getY()));
@@ -160,7 +161,7 @@ public final class GUI_Board extends javax.swing.JFrame {
 	 * Makes the components on which cars can be placed
 	 */
 	private void makeCarPanes() {
-		for(GUI_Field f : GUI_Board.fields) {
+		for(GUI_Field f : fields) {
 		    if(f == null) continue;
 			int x = f.getX();
 			int y = f.getY();
@@ -258,6 +259,11 @@ public final class GUI_Board extends javax.swing.JFrame {
 		}
 	}
 	/**
+	 * Basic getter
+	 * @return fields ref
+	 */
+	public GUI_Field[] getFields() { return fields; }
+	/**
 	 * Places dice on the board
 	 * @param x1 x-coordinate for die 1
 	 * @param y1 y-coordinate for die 1
@@ -285,52 +291,43 @@ public final class GUI_Board extends javax.swing.JFrame {
 		this.diceLabels[x2][y2].setHorizontalAlignment(SwingConstants.CENTER);
 		this.diceLabels[x2][y2].setVerticalAlignment(SwingConstants.CENTER);
 		this.diceLabels[x2][y2].setIcon(this.diceIcons[facevalue2 - 1]);
-	}
+	}	
 	/**
 	 * Add a player to the board
-	 * @param name The name of the player
-	 * @param balance The initial balance
-	 * @param playerColor : Color
+	 * @param player The player must be created beforehand
+	 * @return true if player is added, otherwise false
 	 */
-	public void addPlayer(String name, int balance, Color playerColor) {
-		GUI_Car car = new GUI_Car.Builder().primaryColor(playerColor).build();
-		if(playerColor != null) {
-			addPlayer(name, balance, car);
-		}
-	}
-	/**
-	 * Add a player to the board
-	 * @param name The name of the player
-	 * @param balance The initial balance
-	 * @param car : Type Car
-	 */
-	public void addPlayer(String name, int balance, GUI_Car car) {
-		if(playerList[MAX_PLAYER_COUNT - 1] != null) {
-			return;
-		}
+	public boolean addPlayer(GUI_Player player) {
+	    //Check if out of room
+		if(playerList[MAX_PLAYER_COUNT - 1] != null) { return false; }
+		
 		int i = 0;
 		for(; i < MAX_PLAYER_COUNT; i++) {
 			if(playerList[i] != null) {
 				// No duplicate player names
-				if(playerList[i].getName().equals(name)) {
-					return;
+				if(playerList[i].getName().equals(player.getName())) {
+					return false;
 				}
 			} else {
 				break;
 			}
 		}
-		playerList[i] = new GUI_Player(i, name, balance, car);
+		player.setNumber(i);
+		player.addObserver(this);
+		player.setValidator(new iPlayerValidator() {
+            @Override
+            public boolean checkName(String name) {
+                if(name == null || name.isEmpty()) return false;
+                for(GUI_Player p : playerList){
+                    if(p != null && name.equals(p.getName())) return false;
+                }
+                return true;
+            }
+        });
+		player.getCar().addObserver(this);
+		playerList[i] = player;
 		updatePlayers();
-	}
-	/**
-	 * Add a player to the board
-	 * @param name The name of the player
-	 * @param balance The initial balance<br>
-	 *        Automatic playerColor
-	 */
-	public void addPlayer(String name, int balance) {
-		GUI_Car car = new GUI_Car.Builder().build();
-		addPlayer(name, balance, car);
+		return true;
 	}
 	/**
 	 * Updates the board in order to correct player balances
@@ -396,4 +393,14 @@ public final class GUI_Board extends javax.swing.JFrame {
 			javax.swing.GroupLayout.PREFERRED_SIZE));
 		pack();
 	}
+
+    
+	
+	@Override
+    public void onUpdate() {
+        updatePlayers();
+    }
+
+    
+	
 }

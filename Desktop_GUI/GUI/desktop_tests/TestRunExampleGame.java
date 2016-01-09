@@ -1,10 +1,13 @@
 package desktop_tests;
 
+import desktop_fields.GUI_Field;
+import desktop_fields.GUI_Ownable;
+import desktop_fields.GUI_Player;
 import desktop_resources.GUI;
 
 
 /**
- * @author Daniel Kolditz Rubin-Gr�n
+ * @author Daniel Kolditz Rubin-Grøn
  */
 public class TestRunExampleGame{
 
@@ -14,33 +17,38 @@ public class TestRunExampleGame{
 
 	private static void realExampleGame(){
 		// Setup game
+	    GUI_Player mn = new GUI_Player("Mads", 30000), sh = new GUI_Player("Stig", 30000);
+	    
 	    GUI gui = new GUI();
 		sleep();
-		gui.addPlayer("Mads", 30000);
+		gui.addPlayer(mn);
 		sleep();
-		gui.addPlayer("Stig", 30000);
+		gui.addPlayer(sh);
 		sleep();
-		gui.setCar(1, "Mads");
+		gui.getFields()[0].setCar(mn, true);
 		sleep();
-		gui.setCar(1, "Stig");
+		gui.getFields()[0].setCar(sh, true);
 		
 		// Move player 1
 		sleep();
 		gui.setDice(1, 2);
 		sleep();
-		gui.removeAllCars("Mads");
-		gui.setCar(2, "Mads");
+		for(GUI_Field f : gui.getFields()) f.setCar(mn, false);
+		gui.getFields()[1].setCar(mn, true);
 		sleep();
-		gui.removeAllCars("Mads");
-		gui.setCar(3, "Mads");
+		for(GUI_Field f : gui.getFields()) f.setCar(mn, false);
+        gui.getFields()[2].setCar(mn, true);
 		sleep();
-		gui.removeAllCars("Mads");
-		gui.setCar(4, "Mads");
+		for(GUI_Field f : gui.getFields()) f.setCar(mn, false);
+        gui.getFields()[3].setCar(mn, true);;
 		sleep();
-		gui.setBalance("Mads", 28000);
-		gui.setOwner(4, "Mads");
+		mn.setBalance(28000);
+		GUI_Field f = gui.getFields()[3];
+        if(f instanceof GUI_Ownable){
+            GUI_Ownable o = (GUI_Ownable) f;
+            o.setBorder(mn.getPrimaryColor(), mn.getSecondaryColor());
+        }
 		sleep();
-//        gui.setNextChanceCardText("De har modtaget Bjørne Bandit - legatet og fængsles!");
 		gui.displayChanceCard("De har vundet vild med dans og skifter navn til Allan!");
 	}
 	public static void sleep(){

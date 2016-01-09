@@ -2,10 +2,10 @@ package desktop_resources;
 
 import java.awt.Color;
 import desktop_codebehind.GUI_BoardController;
-import desktop_codebehind.GUI_Car;
 import desktop_codebehind.GUI_FieldFactory;
 import desktop_fields.GUI_Board;
 import desktop_fields.GUI_Field;
+import desktop_fields.GUI_Player;
 
 /**
  * Provides easy access to the GUI features.
@@ -25,20 +25,15 @@ public final class GUI {
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
         }
-        GUI_Board.fields = new GUI_Field[fields.length];
-        for(int i = 0; i < fields.length; i++){
-            GUI_Board.fields[i] = fields[i];
-        }
-        bc = new GUI_BoardController(); 
+        
+        bc = new GUI_BoardController(fields); 
     }
     public GUI(){
         GUI_Field[] fields = GUI_FieldFactory.makeFields();
-        GUI_Board.fields = new GUI_Field[fields.length];
         for(int i = 0; i < fields.length; i++){
-            GUI_Board.fields[i] = fields[i];
-            //TODO consider defensive copy
+            fields[i] = fields[i];
         }
-        bc = new GUI_BoardController();        
+        bc = new GUI_BoardController(fields);        
     }
 
     private void check_for_null_fields(GUI_Field[] fields) {
@@ -137,34 +132,6 @@ public final class GUI {
         return bc.getUserButtonPressed(msg, trueButton, falseButton).equals(trueButton);
     }
     /**
-     * Sets the title of a field on the board.<br>
-     * @param fieldNumber : int [1:40]
-     * @param title : String (Mind the length!)
-     */
-    public void setTitleText(int fieldNumber, String title) {
-        title = title.replace("\n", "<BR>");
-        bc.setTitleText(fieldNumber, title);
-    }
-    /**
-     * Sets the subText of a field on the board.<br>
-     * @param fieldNumber : int [1:40]
-     * @param subText : String (Mind the length!)
-     */
-    public void setSubText(int fieldNumber, String subText) {
-        subText = subText.replace("\n", "<BR>");
-        bc.setSubText(fieldNumber, subText);
-    }
-    /**
-     * Sets the Description (The text shown in the center when mouse hovers) of
-     * a field on the board.<br>
-     * @param fieldNumber : int [1:40]
-     * @param description : String (Mind the length!)
-     */
-    public void setDescriptionText(int fieldNumber, String description) {
-        description = description.replace("\n", "<BR>");
-        bc.setDescriptionText(fieldNumber, description);
-    }
-    /**
      * Adds a player to the board.<br>
      * Max. 6 players.<br>
      * @param name : String (Mind the length!) (Unique identifier of the player - no duplicates)
@@ -177,26 +144,10 @@ public final class GUI {
      *     .typeTractor()<br>
      *     .patternDotted()<br>
      *     .Build();<br>
+     * @return true if player is added, otherwise false
      */
-    public void addPlayer(String name, int balance, GUI_Car car) {
-        bc.addPlayer(name, balance, car);
-    }
-    /**
-     * Adds a player to the board.<br>
-     * Max. 6 players.<br>
-     * @param name : String (Mind the length!) (Unique identifier of the player - no duplicates)
-     * @param balance : int
-     */
-    public void addPlayer(String name, int balance) {
-        bc.addPlayer(name, balance);
-    }
-    /**
-     * Sets the balance of a player if the player has been added.
-     * @param name The name of the player
-     * @param newBalance : int
-     */
-    public void setBalance(String name, int newBalance) {
-        bc.setBalance(name, newBalance);
+    public boolean addPlayer(GUI_Player player) {
+        return bc.addPlayer(player);
     }
     /**
      * Shows two dice on the board. The dice will have the specified values, but
@@ -276,79 +227,15 @@ public final class GUI {
     public void displayChanceCard() {
         bc.displayChanceCard();
     }
-    /**
-     * Places a car on the field.<br>
-     * All cars can be placed on the same field.<br>
-     * A car can only be placed if the corresponding player has been added.<br>
-     * If a car is placed on the same field multiple times, nothing more
-     * happens.<br>
-     * A car can not be placed on multiple fields simultaneously.
-     * @param fieldNumber : int [1:40]
-     * @param name The name of the player
-     */
-    public void setCar(int fieldNumber, String name) {
-        bc.setCar(fieldNumber, name);
-    }
-    /**
-     * Removes a car from the board.<br>
-     * If the car is not on the board, nothing happens.
-     * @param fieldNumber : int [1:40]
-     * @param name The name of the player
-     */
-    public void removeCar(int fieldNumber, String name) {
-        bc.removeCar(fieldNumber, name);
-    }
-    /**
-     * Removes all cars belonging to this player.
-     * @param name The name of the player.
-     */
-    public void removeAllCars(String name) {
-        bc.removeAllCars(name);
-    }
-    /**
-     * Sets an owner of a field.<br>
-     * The field border will have the same color as the player. The owners name
-     * will be printed in the subText. If the field is not a street, shipping or
-     * a brewery nothing happens.<br>
-     * If the owner hasn't been added to the board, nothing happens.
-     * @param fieldNumber : int [1:40]
-     * @param name The name of the player
-     */
-    public void setOwner(int fieldNumber, String name) {
-        bc.setOwner(fieldNumber, name);
-    }
-    /**
-     * Removes an owner from the field.<br>
-     * If the field has no owner, nothing happens.
-     * @param fieldNumber : int [1:40]
-     */
-    public void removeOwner(int fieldNumber) {
-        bc.removeOwner(fieldNumber);
-    }
-    /**
-     * Sets houses from the street, and removes the hotel if one is present.<br>
-     * If houseCount is out of bounds, nothing happens.<br>
-     * If field is not a street, nothing happens.<br>
-     * @param fieldNumber : int [1:40]
-     * @param houseCount : int [0:4]
-     */
-    public void setHouses(int fieldNumber, int houseCount) {
-        bc.setHouses(fieldNumber, houseCount);
-    }
-    /**
-     * Sets whether or not a hotel should be on the street and removes all
-     * houses if any is present.<br>
-     * @param fieldNumber : int [1:40]
-     * @param hasHotel : boolean
-     */
-    public void setHotel(int fieldNumber, boolean hasHotel) {
-        bc.setHotel(fieldNumber, hasHotel);
-    }
 
+
+    public GUI_Field[] getFields(){ return bc.getFields(); }
+    
     public static boolean isNull_fields_allowed() {
         return null_fields_allowed;
     }
     public static void setNull_fields_allowed(boolean allowed) {
         GUI.null_fields_allowed = allowed;
     }
+
 }
