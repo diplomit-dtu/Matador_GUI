@@ -1,4 +1,12 @@
-/desktop_codebehind/
-/desktop_tests/
+/codebehind/
 /desktop_fields/
 /desktop_resources/
+/desktop_tests/
+/GUI_Fields/
+/gui_fields/
+/gui_main/
+/resources/
+/tests/
+/gui_codebehind/
+/gui_tests/
+/gui_resources/
