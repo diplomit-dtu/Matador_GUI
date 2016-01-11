@@ -48,7 +48,7 @@ public final class GUI {
         }
         str += "}";
         str = str.replace(", }", "}");
-        throw new NullPointerException(msg+str+"\n"+howTo);
+        if(str.length() > 2) throw new NullPointerException(msg+str+"\n"+howTo);
     }    
 
     /**
