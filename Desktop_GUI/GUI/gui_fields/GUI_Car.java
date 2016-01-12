@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import gui_codebehind.Observable;
 import gui_codebehind.SwingComponentFactory;
+import gui_fields.GUI_Car.Pattern;
 import gui_resources.Attrs;
 
 /**
@@ -16,6 +17,7 @@ public final class GUI_Car extends Observable {
         CAR(0, 15), TRACTOR(1, 11), RACECAR(2, 13), UFO(3, 10);
         private final int x, h;
         private final int width = GUI_Car.WIDTH + 1;
+        public final static int size = Type.values().length;
         Type(int no, int h) {
             this.x = no * this.width;
             this.h = h;
@@ -26,10 +28,26 @@ public final class GUI_Car extends Observable {
         public int h() {
             return this.h;
         }
+        public static Type getTypeFromString(String typeString){
+            for(Type type : Type.values()){
+                if (type.toString().equals(typeString)) return type;
+            }     
+            System.err.println("No such Type - choosing default : CAR");
+            return CAR;            
+        }
+
     }
     public enum Pattern {
         FILL, HORIZONTAL_GRADIANT, DIAGONAL_DUAL_COLOR,
-        HORIZONTAL_DUAL_COLOR, HORIZONTAL_LINE, CHECKERED, DOTTED, ZEBRA
+        HORIZONTAL_DUAL_COLOR, HORIZONTAL_LINE, CHECKERED, DOTTED, ZEBRA;
+
+        public static Pattern getPatternFromString(String patternString) {
+            for (Pattern pattern : Pattern.values()) {
+                if (pattern.toString().equals(patternString)) return pattern;
+            }
+            System.err.println("No such Pattern - choosing default: FILL");
+            return Pattern.FILL;
+        }
     }
     
     private Color primaryColor, secondaryColor;
