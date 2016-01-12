@@ -84,13 +84,13 @@ public abstract class GUI_Field {
 	public void setCar(GUI_Player p, boolean hasCar) {
 	    JLabel l = cars.get(p.getId()); 
 	    if(l != null){
-	        l.setIcon(hasCar ? new ImageIcon(p.getImage()) : null);
-	        l.setVisible(true);
+	        l.setIcon(new ImageIcon(p.getImage()));
+	        l.setVisible(hasCar);
 	    } else {
 	        for(JLabel lbl : carLabels){
 	            if(lbl.getIcon() == null){
-	                lbl.setIcon(hasCar ? new ImageIcon(p.getImage()) : null);
-	                lbl.setVisible(true);
+	                lbl.setIcon(new ImageIcon(p.getImage()));
+	                lbl.setVisible(hasCar);
 	                cars.put(p.getId(), lbl);
 	                return;
 	            }
