@@ -37,4 +37,13 @@ public final class GUI_Tax extends GUI_Field {
         GUI_Center.label[2].setText(this.description);
         super.displayCarOnCenter(playerList);
     }
+    @Override
+    public String toString() {
+        return "GUI_Tax [number=" + number + ", bgColor=" + bgColor
+            + ", fgColor=" + fgColor + ", title=" + title + ", subText="
+            + subText + ", description=" + description + "]";
+    }
+
+    
+    
 }

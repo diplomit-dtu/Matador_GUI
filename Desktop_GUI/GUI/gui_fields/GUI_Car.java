@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import gui_codebehind.Observable;
 import gui_codebehind.SwingComponentFactory;
-import gui_fields.GUI_Car.Pattern;
 import gui_resources.Attrs;
 
 /**
@@ -248,5 +247,12 @@ public final class GUI_Car extends Observable {
         }
         return img;
     }
-
+    @Override
+    public String toString() {
+        return "GUI_Car [primaryColor=" + primaryColor + ", secondaryColor="
+            + secondaryColor + ", type=" + type + ", pattern=" + pattern
+            + ", image=" + image + "]";
+    }
+    
+    
 }

@@ -65,9 +65,18 @@ public final class GUI_Shipping extends GUI_Ownable {
 		GUI_Center.label[3].setText(this.description);
 		GUI_Center.label[4].setText(this.subText);
 		if(this.ownerName != null) {
-			GUI_Center.label[5].setText(OWNABLELABEL + this.ownerName);
-			GUI_Center.label[6].setText(getRent());
+		    GUI_Center.label[5].setText(getOwnableLabel() + getOwnerName());
+            GUI_Center.label[6].setText(getRentLabel() + getRent());
 		}
 		super.displayCarOnCenter(playerList);
 	}
+    @Override
+    public String toString() {
+        return "GUI_Shipping [ownerName=" + ownerName + ", number=" + number
+            + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
+            + title + ", subText=" + subText + ", description=" + description
+            + "]";
+    }
+   
+	
 }

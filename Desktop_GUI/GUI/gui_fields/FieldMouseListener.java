@@ -37,6 +37,14 @@ public class FieldMouseListener implements MouseListener{
     }
     @Override
     public void mouseClicked(MouseEvent e) {
+        //Do nothing
+    }
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //Do nothing
+    }
+    @Override
+    public void mouseReleased(MouseEvent e) {
         if(show) {
             this.field.displayOnCenter(playerList);
             show = false;
@@ -81,13 +89,5 @@ public class FieldMouseListener implements MouseListener{
             if(counter != null) counter.cancel();
             if(timer != null) timer.cancel();
         }
-    }
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //Do nothing
-    }
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        //Do nothing
     }
 }

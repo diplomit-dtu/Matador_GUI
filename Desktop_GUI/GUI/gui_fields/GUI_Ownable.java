@@ -7,7 +7,7 @@ import gui_codebehind.SwingComponentFactory;
 import gui_resources.Attrs;
 
 public abstract class GUI_Ownable extends GUI_Field{
-	public static String OWNABLELABEL;
+	public String ownableLable, rentLable;
 	private Color color1, color2;
 	protected String ownerName;
 	private String rent;
@@ -15,15 +15,18 @@ public abstract class GUI_Ownable extends GUI_Field{
 	public GUI_Ownable(Color bgColor, Color fgColor, String title, String subText, String description, String leje){
 		super(bgColor, fgColor, title, subText, description);
 		this.rent = leje;
-		OWNABLELABEL = Attrs.getString("GUI_Field.Label.owns");
+		ownableLable = Attrs.getString("GUI_Field.Label.owns");
+		rentLable = Attrs.getString("GUI_Field.Label.rent");
+		if(color1 == null) color1 = Color.BLACK;
+        if(color2 == null) color2 = new Color(color1.getRed(), color1.getGreen(), color1.getBlue());
 	}
 	
 	public void setBorder(Color color){
 	    setBorder(color, color);
 	}
 	public void setBorder(Color color1, Color color2){
-        if(color1 == null) color1 = Color.BLACK;
-	    if(color2 == null) color2 = new Color(color1.getRed(), color1.getGreen(), color1.getBlue());
+//        if(color1 == null) color1 = Color.BLACK;
+//	    if(color2 == null) color2 = new Color(color1.getRed(), color1.getGreen(), color1.getBlue());
 	    this.color1 = color1;
 	    this.color2 = color2;
 	    SwingComponentFactory factory = new SwingComponentFactory();
@@ -37,6 +40,18 @@ public abstract class GUI_Ownable extends GUI_Field{
 	 * @param ownerName Mind the length
 	 */
 	public void setOwnerName(String ownerName){ this.ownerName = ownerName; }
+	public String getOwnableLabel(){ return this.ownableLable; }
+	/**
+	 * For display on center field - Prefix for owner name
+	 * @param text
+	 */
+	public void setOwnableLabel(String text){ this.ownableLable = text; }
+	public String getRentLabel(){ return this.rentLable; }
+    /**
+     * For display on center field - Prefix for rent
+     * @param text
+     */
+    public void setRentLabel(String text){ this.rentLable = text; }
 	public String getRent(){ return this.rent; }
 	public void setRent(String rent){ this.rent = rent; }
 	

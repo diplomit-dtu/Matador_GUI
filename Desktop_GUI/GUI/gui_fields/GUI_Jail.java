@@ -61,4 +61,13 @@ public final class GUI_Jail extends GUI_Field{
 		GUI_Center.label[3].setText(this.description);
 		super.displayCarOnCenter(playerList);
 	}
+    @Override
+    public String toString() {
+        return "GUI_Jail [number=" + number + ", bgColor=" + bgColor
+            + ", fgColor=" + fgColor + ", title=" + title + ", subText="
+            + subText + ", description=" + description + "]";
+    }
+ 
+	
+	
 }

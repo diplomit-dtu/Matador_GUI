@@ -95,4 +95,13 @@ public class GUI_Player extends Observable{
 	public interface iPlayerValidator{ public boolean checkName(String name); }
 	private iPlayerValidator validator = null;
 	protected void setValidator(iPlayerValidator validator){ this.validator = validator; }
+    
+	
+	@Override
+    public String toString() {
+        return "GUI_Player [number=" + number + ", name=" + name + ", balance="
+            + balance + ", car=" + car + "]";
+    }
+	
+	
 }
