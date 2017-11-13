@@ -1,0 +1,9 @@
+<settings>
+  <servers>
+    <server>
+      <id>github</id>
+      <username>DIT_GITHUB_BRUGERNAVN</username>
+      <password>DIN_GITHUB_KODE</password>
+    </server>
+  </servers>
+</settings>
