@@ -57,4 +57,12 @@ public final class GUI_Refuge extends GUI_Field {
         GUI_Center.label[4].setText(this.description);
         super.displayCarOnCenter(playerList);
     }
+    @Override
+    public String toString() {
+        return "GUI_Refuge [number=" + number + ", bgColor=" + bgColor
+            + ", fgColor=" + fgColor + ", title=" + title + ", subText="
+            + subText + ", description=" + description + "]";
+    }
+    
+    
 }

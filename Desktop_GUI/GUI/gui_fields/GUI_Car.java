@@ -247,5 +247,12 @@ public final class GUI_Car extends Observable {
         }
         return img;
     }
-
+    @Override
+    public String toString() {
+        return "GUI_Car [primaryColor=" + primaryColor + ", secondaryColor="
+            + secondaryColor + ", type=" + type + ", pattern=" + pattern
+            + ", image=" + image + "]";
+    }
+    
+    
 }

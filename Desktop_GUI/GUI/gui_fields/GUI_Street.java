@@ -81,11 +81,23 @@ public final class GUI_Street extends GUI_Ownable {
         GUI_Center.label[3].setText(this.subText);
         
         if (this.ownerName != null) {
-            GUI_Center.label[4].setText(OWNABLELABEL + this.ownerName);
-            GUI_Center.label[5].setText(getRent());
+            GUI_Center.label[4].setText(getOwnableLabel() + getOwnerName());
+            GUI_Center.label[5].setText(getRentLabel() + getRent());
         }
         GUI_Center.label[6].setIcon(this.houseLabel.getIcon());
         
         super.displayCarOnCenter(playerList);
     }
+    @Override
+    public String toString() {
+        return "GUI_Street [ownerName=" + ownerName + ", number=" + number
+            + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
+            + title + ", subText=" + subText + ", description=" + description
+            + "]";
+    }
+
+    
+    
+    
+    
 }
