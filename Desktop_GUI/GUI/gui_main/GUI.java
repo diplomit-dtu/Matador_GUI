@@ -11,6 +11,7 @@ import gui_fields.GUI_Player;
  * Provides easy access to the GUI features.
  * @author Ronnie Dalsgaard (s093487) with input and adjustments by
  *         Daniel Rubin-Grøn (daniel@koru.dk)
+ *         Version 3.1 updates by Christian Budtz (chbu@dtu.dk)
  */
 public final class GUI {
     public final Color BASECOLOR = GUI_Board.BASECOLOR;
@@ -20,7 +21,12 @@ public final class GUI {
     public static void main(String[] args) {
         new GUI();
     }
-    
+    /**
+     *  Constructor for GUI. Accepts an an array of GUI fields. Order of fields in array determine order of fields. 
+     *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields. 
+     *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
+     * @param fields
+     */
     public GUI(GUI_Field[] fields) {
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
@@ -28,6 +34,11 @@ public final class GUI {
         
         bc = new GUI_BoardController(fields); 
     }
+    /**
+     *  Constructor for GUI. Creates default Matador board
+     *  Call any function on gui to show gui (ie. gui.showMessage).
+     * @param fields
+     */
     public GUI(){
         GUI_Field[] fields = GUI_FieldFactory.makeFields();
         for(int i = 0; i < fields.length; i++){
