@@ -72,8 +72,7 @@ public final class GUI_Shipping extends GUI_Ownable {
 	}
     @Override
     public String toString() {
-        return "GUI_Shipping [ownerName=" + ownerName + ", number=" + number
-            + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
+        return "GUI_Shipping [ownerName=" + ownerName + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
             + title + ", subText=" + subText + ", description=" + description
             + "]";
     }

@@ -13,7 +13,7 @@ public final class GUI_Chance extends GUI_Field {
     
     public GUI_Chance(){
         this("<html><b><font size=\"7\">"+Attrs.getString("GUI_Field.Label.Chance.Format"),
-            SUBTEXT, DESCRIPTION, new Color(204, 204, 204), FG_COLOR);
+            Attrs.getString("GUI_Field.Label.Chance.Subtext"), DESCRIPTION, new Color(204, 204, 204), FG_COLOR);
     }
     public GUI_Chance(String title, String subText, String description, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description);
@@ -43,7 +43,7 @@ public final class GUI_Chance extends GUI_Field {
     }
     @Override
     public String toString() {
-        return "GUI_Chance [number=" + number + ", bgColor=" + bgColor
+        return "GUI_Chance [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

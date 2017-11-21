@@ -73,7 +73,7 @@ public final class GUI_Brewery extends GUI_Ownable {
     }
     @Override
     public String toString() {
-        return "GUI_Brewery [ownerName=" + ownerName + ", number=" + number
+        return "GUI_Brewery [ownerName=" + ownerName 
             + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
             + title + ", subText=" + subText + ", description=" + description
             + "]";

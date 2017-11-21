@@ -25,8 +25,8 @@ public abstract class GUI_Ownable extends GUI_Field{
 	    setBorder(color, color);
 	}
 	public void setBorder(Color color1, Color color2){
-//        if(color1 == null) color1 = Color.BLACK;
-//	    if(color2 == null) color2 = new Color(color1.getRed(), color1.getGreen(), color1.getBlue());
+        if(color1 == null) color1 = Color.BLACK;
+	    if(color2 == null) color2 = new Color(color1.getRed(), color1.getGreen(), color1.getBlue());
 	    this.color1 = color1;
 	    this.color2 = color2;
 	    SwingComponentFactory factory = new SwingComponentFactory();

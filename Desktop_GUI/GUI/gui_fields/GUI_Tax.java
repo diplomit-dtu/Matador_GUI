@@ -39,7 +39,7 @@ public final class GUI_Tax extends GUI_Field {
     }
     @Override
     public String toString() {
-        return "GUI_Tax [number=" + number + ", bgColor=" + bgColor
+        return "GUI_Tax [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

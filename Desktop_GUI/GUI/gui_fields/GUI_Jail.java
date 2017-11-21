@@ -63,7 +63,7 @@ public final class GUI_Jail extends GUI_Field{
 	}
     @Override
     public String toString() {
-        return "GUI_Jail [number=" + number + ", bgColor=" + bgColor
+        return "GUI_Jail [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

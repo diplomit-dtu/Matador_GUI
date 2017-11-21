@@ -300,13 +300,15 @@ public class Test {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+	    int i = 0;
 	    for(GUI_Field f : gui.getFields()){
-            if(f.getNumber() < 38 && f.getNumber() % 3 == 0){
+            if(i < 38 && i % 3 == 0){
                 if(f instanceof GUI_Street){
                     GUI_Street s = (GUI_Street) f;
                     s.setHouses(0);
                 }
             }
+            i++;
         }
 	    GUI_Street s40 = (GUI_Street)gui.getFields()[39];
 	    s40.setHotel(false);

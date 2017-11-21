@@ -58,7 +58,23 @@ public final class GUI_BoardController {
 				latch.countDown();
 			}
 		});
+		
+		okButton.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) { }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    GUI_BoardController.this.board.clearInputPanel();
+                    latch.countDown();
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) { }
+        });
+		
 		this.board.getUserInput(msg, okButton);
+		okButton.requestFocusInWindow();
 		try {
 			latch.await();
 		} catch(InterruptedException ex) {
@@ -74,6 +90,7 @@ public final class GUI_BoardController {
 	public String getUserString(String msg) {
 		final CountDownLatch latch = new CountDownLatch(1);
 		final JTextField tf = new JTextField(20);
+
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
 			
@@ -99,7 +116,7 @@ public final class GUI_BoardController {
             public void keyPressed(KeyEvent e) { }
         });
 		this.board.getUserInput(msg, tf, okButton);
-		
+	      tf.requestFocusInWindow();
 		try {
 			latch.await();
 			return this.userInput;

@@ -16,7 +16,7 @@ public class GUI_Empty extends GUI_Field {
     
     @Override
     public String toString() {
-        return "GUI_Empty [number=" + number + ", bgColor=" + bgColor
+        return "GUI_Empty [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

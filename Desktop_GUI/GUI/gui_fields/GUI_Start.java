@@ -43,7 +43,7 @@ public final class GUI_Start extends GUI_Field {
     }
     @Override
     public String toString() {
-        return "GUI_Start [number=" + number + ", bgColor=" + bgColor
+        return "GUI_Start [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

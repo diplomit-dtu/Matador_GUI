@@ -90,8 +90,7 @@ public final class GUI_Street extends GUI_Ownable {
     }
     @Override
     public String toString() {
-        return "GUI_Street [ownerName=" + ownerName + ", number=" + number
-            + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
+        return "GUI_Street [ownerName=" + ownerName + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
             + title + ", subText=" + subText + ", description=" + description
             + "]";
     }
