@@ -12,16 +12,18 @@ public class Field_Test {
     public static void main(String[] args) {
         GUI_Field[] fields = GUI_FieldFactory.makeFields();
         
-        fields[19] = null;
-        fields[20] = null;
-        fields[21] = null;  
-        GUI_Chance gui_Chance = new GUI_Chance();
-        fields[23] = gui_Chance;
 
-        GUI.setNull_fields_allowed(true);
-        GUI gui = new GUI(fields);
-        gui.showMessage("test");
+        GUI_Field[] fields2 = new GUI_Field[24];
+        for (int i = 0; i < fields2.length; i++) {
+            fields2[i] = fields[i];
+            
+        }
+        GUI gui = new GUI(fields2);
+        System.out.println(gui.getUserButtonPressed("test", "test1","test2"));
         gui.getUserString("test");
+        gui.showMessage("test");
+        
+        
         
         fields[23].setSubText("No Luck");
 

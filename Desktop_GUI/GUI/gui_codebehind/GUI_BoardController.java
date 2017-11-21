@@ -74,13 +74,21 @@ public final class GUI_BoardController {
         });
 		
 		this.board.getUserInput(msg, okButton);
-		okButton.requestFocusInWindow();
+		getFocus(okButton);
 		try {
 			latch.await();
 		} catch(InterruptedException ex) {
 			ex.printStackTrace();
 		}
 	}
+    private void getFocus(JButton okButton) {
+        try {
+            Thread.sleep(100);
+            okButton.requestFocusInWindow();
+        } catch (InterruptedException e1) {
+
+        }
+    }
 	/**
 	 * Displays a message for the user and a textfield for the user to fill out.<br>
 	 * Is a breaking call.<br>
@@ -102,6 +110,20 @@ public final class GUI_BoardController {
 			}
 		});
 		tf.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) { }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    GUI_BoardController.this.userInput = tf.getText();
+                    GUI_BoardController.this.board.clearInputPanel();
+                    latch.countDown();
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) { }
+        });
+		okButton.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) { }
             @Override
@@ -218,12 +240,14 @@ public final class GUI_BoardController {
 		}
 		final CountDownLatch latch = new CountDownLatch(1);
 		JButton[] buttons = new JButton[buttonTexts.length];
+		JButton primaryButton = null;
 		for(int i = 0; i < buttonTexts.length; i++) {
 			String string = buttonTexts[i];
 			if("".equals(string)) {
 				return null;
 			}
 			JButton btn = new JButton(string);
+			primaryButton = btn;
 			btn.setName(string);
 			btn.addActionListener(new ActionListener() {
 				
@@ -234,9 +258,25 @@ public final class GUI_BoardController {
 					latch.countDown();
 				}
 			});
+		     btn.addKeyListener(new KeyListener() {
+		            @Override
+		            public void keyTyped(KeyEvent e) { }
+		            @Override
+		            public void keyReleased(KeyEvent e) {
+		                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+		                    GUI_BoardController.this.userInput = ((JButton) e.getSource()).getName();
+		                    GUI_BoardController.this.board.clearInputPanel();
+		                    latch.countDown();
+		                }
+		            }
+		            @Override
+		            public void keyPressed(KeyEvent e) { }
+		        });
+			
 			buttons[i] = btn;
 		}
 		this.board.getUserInput(msg, buttons);
+		getFocus(primaryButton);
 		
 		try {
 			latch.await();
@@ -276,7 +316,24 @@ public final class GUI_BoardController {
 			}
 		});
 		
+		okButton.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) { }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    GUI_BoardController.this.userInput = dropdown.getSelectedItem().toString();
+                    GUI_BoardController.this.board.clearInputPanel();
+                    latch.countDown();
+                }
+            }
+            @Override
+            public void keyPressed(KeyEvent e) { }
+        });
+		
+		
 		this.board.getUserInput(msg, dropdown, okButton);
+		okButton.requestFocusInWindow();
 		try {
 			latch.await();
 			return this.userInput;
