@@ -31,6 +31,15 @@ public final class GUI {
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
         }
+        //Pad array to 16
+        if (fields.length<16){
+            GUI_Field[] tempFields = new GUI_Field[16];
+            for (int i = 0; i < fields.length; i++) {
+                tempFields[i] = fields[i];
+                
+            }
+            fields = tempFields;
+        }
         
         bc = new GUI_BoardController(fields); 
     }
