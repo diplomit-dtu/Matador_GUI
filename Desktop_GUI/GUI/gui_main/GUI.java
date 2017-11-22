@@ -227,6 +227,13 @@ public final class GUI {
         bc.setDice(faceValue1, faceValue2);
     }
     /**
+     * Method for showing one die at a random location
+     * @param faceValue
+     */
+    public void setDie(int faceValue) {
+        bc.setDie(faceValue);
+    }
+    /**
      * Sets the text to appear in the center and displays it.
      * @param txt : String (Mind the length!)<br>
      */

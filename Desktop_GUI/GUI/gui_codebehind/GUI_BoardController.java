@@ -472,5 +472,11 @@ public final class GUI_BoardController {
     }
 	
 	public GUI_Field[] getFields() { return board.getFields(); }
+    
+	public void setDie(int faceValue) {
+	    int rotation1 = rand().nextInt(360);
+        setDice(faceValue, rotation1, 1, 1, faceValue, rotation1, 1, 1);
+                
+    }
 	
 }
