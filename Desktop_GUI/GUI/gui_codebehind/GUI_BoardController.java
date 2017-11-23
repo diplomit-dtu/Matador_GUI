@@ -491,7 +491,8 @@ public final class GUI_BoardController {
     
     public void setDie(int faceValue) {
         int rotation1 = rand().nextInt(360);
-        setDice(faceValue, rotation1, 1, 1, faceValue, rotation1, 1, 1);
+        int x = rand().nextInt(9);
+        setDice(faceValue, rotation1, x, 9, faceValue, rotation1, x, 9);
         
     }
     

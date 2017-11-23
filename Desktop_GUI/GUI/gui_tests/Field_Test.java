@@ -29,7 +29,8 @@ public class Field_Test {
         fields[23].setSubText("No Luck");
         
         for(int i = 0;i<100;i++) {
-            gui.setDice(1, 2);
+            gui.setDie(2);
+            
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
