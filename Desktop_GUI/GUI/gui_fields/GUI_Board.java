@@ -272,19 +272,29 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
      */
     private void makePlayerAreas() {
         int x = 7;
+        int y = 9;
+        int nameLabelSize =2;
+        if (fields.length<=32) {
+            y = 8;
+            nameLabelSize = 1;
+        }
+        if (fields.length<=28) {
+            x=0;
+            nameLabelSize = 1;
+        }
         for(int i = 0; i < MAX_PLAYER_COUNT; i++) {
-            int y = 9 - i;
+            int ycalc = y - i;
             
             JLabel iconLabel = new JLabel();
             this.factory.setSize(iconLabel, 1 * GUI_Field.FIELDWIDTH, 1 * GUI_Field.FIELDWIDTH);
             this.base.setLayer(iconLabel, 1);
-            this.base.add(iconLabel, this.factory.createGridBagConstraints(x, y));
+            this.base.add(iconLabel, this.factory.createGridBagConstraints(x, ycalc));
             this.iconLabels[i] = iconLabel;
             
             JLabel playerLabel = new JLabel();
-            this.factory.setSize(playerLabel, 2 * GUI_Field.FIELDWIDTH, 1 * GUI_Field.FIELDWIDTH);
+            this.factory.setSize(playerLabel, nameLabelSize * GUI_Field.FIELDWIDTH, 1 * GUI_Field.FIELDWIDTH);
             this.base.setLayer(playerLabel, 1);
-            this.base.add(playerLabel, this.factory.createGridBagConstraints(x + 1, y, 2, 1));
+            this.base.add(playerLabel, this.factory.createGridBagConstraints(x + 1, ycalc, nameLabelSize, 1));
             this.playerLabels[i] = playerLabel;
         }
     }
