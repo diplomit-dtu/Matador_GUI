@@ -22,12 +22,16 @@ public class Field_Test {
         System.out.println(gui.getUserButtonPressed("test", "test1","test2"));
         gui.getUserString("test");
         gui.showMessage("test");
-        gui.addPlayer(new GUI_Player("Brian123456789012345667"));
+        GUI_Player gui_Player = new GUI_Player("Brian123456789012345667");
+        gui.addPlayer(gui_Player);
         gui.addPlayer(new GUI_Player("Brian123123213213213213"));
         gui.addPlayer(new GUI_Player("Brian2"));
         gui.addPlayer(new GUI_Player("Brian3"));
         fields[23].setSubText("No Luck");
-        
+        fields[0].setCar(gui_Player, true);
+        fields[0].setCar(gui_Player, false);
+        System.out.println(fields[0].hasCar(gui_Player));
+
         for(int i = 0;i<100;i++) {
             gui.setDie(2);
             

@@ -69,7 +69,7 @@ public abstract class GUI_Field {
         this.subTextLabel.setText(this.subText);
     }
     public boolean hasCar(GUI_Player player) {
-        return cars.get(player.getId()) != null;
+        return cars.get(player.getId()) != null && cars.get(player.getId()).isVisible();
     }
     public void setCar(GUI_Player p, boolean hasCar) {
         JLabel l = cars.get(p.getId()); 
