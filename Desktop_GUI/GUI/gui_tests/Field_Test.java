@@ -1,5 +1,6 @@
 package gui_tests;
 
+import java.awt.Color;
 import gui_codebehind.GUI_FieldFactory;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;

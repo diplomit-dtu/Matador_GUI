@@ -42,6 +42,9 @@ public final class GUI_BoardController {
     public GUI_BoardController(GUI_Field[] fields) {
         this.board = new GUI_Board(fields);
     }
+    public GUI_BoardController(GUI_Field[] fields, Color backGroundColor) {
+        this.board = new GUI_Board(fields, backGroundColor);
+    }
     /**
      * Displays a message for the user. The user presses OK when the message is read Is a breaking
      * call.<br>

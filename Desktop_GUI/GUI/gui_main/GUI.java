@@ -15,7 +15,7 @@ import gui_fields.GUI_Player;
  *         Version 3.1 updates by Christian Budtz (chbu@dtu.dk)
  */
 public final class GUI {
-    public final Color BASECOLOR = GUI_Board.BASECOLOR;
+    private final Color BASECOLOR = GUI_Board.BASECOLOR;
     private GUI_BoardController bc;
     private static boolean null_fields_allowed = false;
     
@@ -28,6 +28,23 @@ public final class GUI {
      *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
      * @param fields
      */
+    public GUI(GUI_Field[] fields, Color backGroundColor){
+        if(!GUI.null_fields_allowed){
+            check_for_null_fields(fields);
+        }
+        //Pad array to 16
+        if (fields.length<16){
+            GUI_Field[] tempFields = new GUI_Field[16];
+            for (int i = 0; i < fields.length; i++) {
+                tempFields[i] = fields[i];
+                
+            }
+            fields = tempFields;
+        }
+        this.bc= new GUI_BoardController(fields, backGroundColor);
+        
+    }
+    
     public GUI(GUI_Field[] fields) {
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);

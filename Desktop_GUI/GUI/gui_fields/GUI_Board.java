@@ -71,7 +71,11 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         }
     }
     
-    public GUI_Board(GUI_Field[] fields) {
+    public GUI_Board(GUI_Field[] fields){
+        this(fields, BASECOLOR);
+    }
+    
+    public GUI_Board(GUI_Field[] fields, Color backGroundColor) {
         int sideLength = fields.length/4;
         if (fields.length%4 != 0){
             sideLength++;
@@ -90,8 +94,8 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         }
         
         makeDice();
-        makeBase();
-        makeBackGroundPanels(sideLength);
+        makeBase(backGroundColor);
+        makeBackGroundPanels(sideLength,backGroundColor);
         makeDiceLabels();
         makePlayerAreas();
         makeCenter();
@@ -228,24 +232,25 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
     }
     /**
      * Makes the base
+     * @param backGroundColor 
      */
-    private void makeBase() {
+    private void makeBase(Color backGroundColor) {
         this.base = new javax.swing.JLayeredPane();
         this.factory.setSize(this.base, 11 * GUI_Field.FIELDWIDTH, 11 * GUI_Field.FIELDWIDTH);
         this.base.setLayout(new GridBagLayout());
-        this.base.setBackground(BASECOLOR);
+        this.base.setBackground(backGroundColor);
         this.base.setOpaque(true);
     }
     /**
      * Makes the background
      * @param length 
      */
-    private void makeBackGroundPanels(int sidelength) {
+    private void makeBackGroundPanels(int sidelength,Color backGroundColor) {
         int offSet = (10-sidelength)/2;
         for(int x = 1; x < sidelength; x++) {
             for(int y = 1; y < sidelength; y++) {
                 JPanel panel = new javax.swing.JPanel();
-                panel.setBackground(GUI_Board.BASECOLOR);
+                panel.setBackground(backGroundColor);
                 this.factory.setSize(panel, GUI_Field.FIELDWIDTH, GUI_Field.FIELDHEIGHT);
                 this.base.setLayer(panel, 0);
                 this.base.add(panel, this.factory.createGridBagConstraints(x+offSet, y+offSet));
