@@ -20,9 +20,9 @@ public class Field_Test {
             
         }
         GUI gui = new GUI(fields2);
-        System.out.println(gui.getUserButtonPressed("test", "test1","test2"));
-        gui.getUserString("test");
-        gui.showMessage("test");
+        System.out.println(gui.getUserButtonPressed("test\ntest", "test1","test2"));
+        gui.getUserString("test\ntest");
+        gui.showMessage("test\ntest");
         GUI_Player gui_Player = new GUI_Player("Brian123456789012345667");
         gui.addPlayer(gui_Player);
         gui.addPlayer(new GUI_Player("Brian123123213213213213"));

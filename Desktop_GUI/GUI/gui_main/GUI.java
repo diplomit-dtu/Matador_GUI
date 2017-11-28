@@ -95,7 +95,7 @@ public final class GUI {
      * @param msg The message to print.
      */
     public void showMessage(String msg) {
-        msg = msg.replace("\n", "<BR>");
+//        msg = msg.replace("\n", "<BR>");
         bc.showMessage(msg);
     }
     /**
@@ -104,7 +104,7 @@ public final class GUI {
      * @return The string that the user has entered.
      */
     public String getUserString(String msg) {
-        msg = msg.replace("\n", "<BR>");
+//        msg = msg.replace("\n", "<BR>");
         return bc.getUserString(msg);
     }
     /**
@@ -116,7 +116,7 @@ public final class GUI {
      * @return The integer that the user selected.
      */
     public int getUserInteger(String msg, int min, int max) {
-        msg = msg.replace("\n", "<BR>");
+//        msg = msg.replace("\n", "<BR>");
         return bc.getUserInteger(msg, min, max);
     }
     /**
@@ -125,7 +125,7 @@ public final class GUI {
      * @return The integer that the user selected.
      */
     public int getUserInteger(String msg) {
-        msg = msg.replace("\n", "<BR>");
+//        msg = msg.replace("\n", "<BR>");
         return bc.getUserInteger(msg, 0, 999999999);
     }
     /**
@@ -136,7 +136,7 @@ public final class GUI {
      * @return The string from the button that the user pressed.
      */
     public String getUserButtonPressed(String msg, String... buttons) {
-        msg = msg.replace("\n", "<BR>");
+//        msg = msg.replace("\n", "<BR>");
         for(int i = 0; i < buttons.length; i++){
             buttons[i] = buttons[i].replace("\n", "<BR>");
         }
