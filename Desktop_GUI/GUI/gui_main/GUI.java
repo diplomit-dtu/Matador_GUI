@@ -275,6 +275,10 @@ public final class GUI {
 
 
     public GUI_Field[] getFields(){ return bc.getFields(); }
+
+    /**
+     *  Closes gui.
+     */
     public void close(){
         this.bc.close();
     }
