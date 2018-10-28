@@ -42,10 +42,10 @@ public class Field_Test {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            
+
         }
 
-        
+        gui.close();
         
         
     }

@@ -275,6 +275,9 @@ public final class GUI {
 
 
     public GUI_Field[] getFields(){ return bc.getFields(); }
+    public void close(){
+        this.bc.close();
+    }
     
     public static boolean isNull_fields_allowed() {
         return null_fields_allowed;

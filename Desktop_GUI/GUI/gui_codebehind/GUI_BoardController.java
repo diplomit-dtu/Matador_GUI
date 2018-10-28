@@ -498,5 +498,8 @@ public final class GUI_BoardController {
         setDice(faceValue, rotation1, x, 9, faceValue, rotation1, x, 9);
         
     }
-    
+
+    public void close() {
+        this.board.dispose();
+    }
 }
