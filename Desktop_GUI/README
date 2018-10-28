@@ -1,5 +1,5 @@
 Deploy ny version af MatadorGUI
-1) Opdater versionsnummer i Pom!!!
+1) Opdater versionsnummer i pom.xml!!!
 
 2) Kopier 'settings.xml' til dit lokale maven repository (eks. C:\Users\DITNAVN\.m2)
 
@@ -7,8 +7,8 @@ Deploy ny version af MatadorGUI
 
 4) Sæt PATH variablen til: 'MAVEN_STI/bin'  (eks.: C:\apache-maven-3.5.2\bin)
 
-5) Gå til projektets rod (eks. C:\Users\DITNAVN\git\Matador_GUI)
+5) Gå til projektets rod (eks. C:\Users\DITNAVN\git\Matador_GUI\Desktop_GUI)
 
 6) Kør: 'mvn clean deploy'
 
-7) Koden compileres og og uploades til 'diplomit-dtu/Matador_GUI' på 'repository' brachen
+7) Koden compileres og og uploades til 'diplomit-dtu/Matador_GUI' på 'repository' branchen
