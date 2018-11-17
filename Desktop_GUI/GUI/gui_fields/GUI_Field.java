@@ -14,6 +14,9 @@ import gui_codebehind.GUI_Center;
 import gui_codebehind.SwingComponentFactory;
 import gui_resources.Attrs;
 
+/**
+ * Abstract base-class for GUI fields. Pass array of GUI_Fields to GUI to create your own board.
+ */
 public abstract class GUI_Field {
     public static final int FIELDWIDTH = 63;
     public static final int FIELDHEIGHT = 63;

@@ -26,9 +26,11 @@ public final class GUI {
      *  Constructor for GUI. Accepts an an array of GUI fields. Order of fields in array determine order of fields. 
      *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields. 
      *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
-     * @param fields
+     * @param fields The fields to display.
+     * @param backGroundColor Color for background.
      */
     public GUI(GUI_Field[] fields, Color backGroundColor){
+        checkNullArray(fields);
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
         }
@@ -44,8 +46,14 @@ public final class GUI {
         this.bc= new GUI_BoardController(fields, backGroundColor);
         
     }
-    
+    /**
+     *  Constructor for GUI. Accepts an an array of GUI fields. Order of fields in array determine order of fields.
+     *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields.
+     *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
+     * @param fields The fields to display.
+     */
     public GUI(GUI_Field[] fields) {
+        checkNullArray(fields);
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
         }
@@ -61,10 +69,15 @@ public final class GUI {
         
         bc = new GUI_BoardController(fields); 
     }
+
+    private void checkNullArray(GUI_Field[] fields) {
+        if (fields==null){
+            throw new NullPointerException("GUI_Field[] fields is null - pass array with fields or use default constructor");
+        }
+    }
+
     /**
-     *  Constructor for GUI. Creates default Matador board
-     *  Call any function on gui to show gui (ie. gui.showMessage).
-     * @param fields
+     *  Constructor for GUI. Creates default Matador board.
      */
     public GUI(){
         GUI_Field[] fields = GUI_FieldFactory.makeFields();
@@ -75,7 +88,7 @@ public final class GUI {
     }
 
     private void check_for_null_fields(GUI_Field[] fields) {
-        String msg = "Null fields!\nNull fields are not recommended! the following indecies are null: ";
+        String msg = "Null fields!\nNull fields are not recommended! the following indices are null: ";
         String str = "{";
         String howTo = "Disable this Exception by calling the static method GUI.setNull_fields_allowed(true);";
         for(int i = 0; i < fields.length; i++){
@@ -150,6 +163,9 @@ public final class GUI {
      * @return The string that the user selected.
      */
     public String getUserSelection(String msg, String... options) {
+        if (options==null || options.length==0){
+            throw new NullPointerException("You must supply at least one option!");
+        }
         msg = msg.replace("\n", "<BR>");
         for(int i = 0; i < options.length; i++){
             options[i] = options[i].replace("\n", "<BR>");
@@ -169,20 +185,11 @@ public final class GUI {
         falseButton = falseButton.replace("\n", "<BR>");
         return bc.getUserButtonPressed(msg, trueButton, falseButton).equals(trueButton);
     }
+
     /**
-     * Adds a player to the board.<br>
-     * Max. 6 players.<br>
-     * @param name : String (Mind the length!) (Unique identifier of the player - no duplicates)
-     * @param balance : int
-     * @param car : Car
-     * Cars are created this way:<br>
-     *   Car car = new Car.Builder()<br>
-     *     .primaryColor(Color.MAGENTA)<br>
-     *     .secondaryColor(Color.BLUE)<br>
-     *     .typeTractor()<br>
-     *     .patternDotted()<br>
-     *     .Build();<br>
-     * @return true if player is added, otherwise false
+     * Adds a player to the board.
+     * @param player
+     * @return
      */
     public boolean addPlayer(GUI_Player player) {
         return bc.addPlayer(player);
