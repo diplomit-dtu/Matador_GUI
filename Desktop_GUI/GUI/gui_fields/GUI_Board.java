@@ -77,6 +77,10 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
     
     public GUI_Board(GUI_Field[] fields, Color backGroundColor) {
         int sideLength = fields.length/4;
+        if (sideLength<4)
+        {
+            sideLength=4;
+        }
         if (fields.length%4 != 0){
             sideLength++;
         }
