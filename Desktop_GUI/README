@@ -3,7 +3,7 @@ Deploy ny version af MatadorGUI
 
 2) Generer ny JavaDoc (IntelliJ: Tools-> Generate javaDoc). Placér den i Desktop_GUI\doc.
 
-2) Kopier 'settings.xml' til dit lokale maven repository (eks. C:\Users\DITNAVN\.m2)3
+3) Kopier 'settings.xml' til dit lokale maven repository (eks. C:\Users\DITNAVN\.m2)
 
 4) Download og udpak maven: 'https://maven.apache.org/download.html'
 
@@ -11,8 +11,10 @@ Deploy ny version af MatadorGUI
 
 6) Gå til projektets rod (eks. C:\Users\DITNAVN\git\Matador_GUI\Desktop_GUI)
 
-7) Kør: 'mvn clean deploy'
+7) Du SKAL have sat dit Navn og email på din profil på GitHub - ellers får du en mystisk fejl (422)
 
-8) Koden compileres automatisk  og og uploades til 'diplomit-dtu/Matador_GUI' på 'repository' branchen med det nye versionsnummer
+8) Kør: 'mvn clean deploy'
 
-9) Zip og Kopier Javadoc til google drive mappen.
+9) Koden compileres automatisk  og og uploades til 'diplomit-dtu/Matador_GUI' på 'repository' branchen med det nye versionsnummer
+
+10) Zip og Kopier Javadoc til google drive mappen.
