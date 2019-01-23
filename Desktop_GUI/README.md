@@ -1,4 +1,4 @@
-## Deploy ny version af MatadorGUI
+# Deploy ny version af MatadorGUI
 
 1) Opdater versionsnummer i pom.xml!!!
 
