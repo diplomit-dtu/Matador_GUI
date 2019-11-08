@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>diplomitdtu</groupId>
   <artifactId>matadorgui</artifactId>
-  <version>3.1.6</version>
+  <version>3.1.7</version>
   <packaging>jar</packaging>
   
   <properties>
@@ -28,6 +28,47 @@
       </resource>
     </resources>
     <plugins>
+
+    <!-- Plugin to attach sources to the jar-->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>attach-sources</id>
+                <goals>
+                    <goal>jar</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+
+    <!-- PLugin to attach java documentation to the jar, such that you can see it from within the project-->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                    <goal>jar</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+
+    <!-- Problems when attaching javadoc without this-->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+    </plugin>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.0.0</version>
+    </plugin>
+
     <!-- plugin for maven artifact compilation -->
     <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
@@ -70,7 +111,7 @@
                     <phase>deploy</phase>
               </execution>
           </executions>
-</plugin>
+     </plugin>
     
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

@@ -8,8 +8,7 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 
 /**
- * Provides easy access to the GUI features. Se javadoc at: 
- * <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/diplomit-dtu/Matador_GUI/repository/Desktop_GUI/doc/index.html">github</>
+ * Provides easy access to the GUI features. Se javadoc at: <a href="https://raw.githubusercontent.com/diplomit-dtu/Matador_GUI/repository/Desktop_GUI/doc/index.html">github</a>
  * @author Ronnie Dalsgaard (s093487) with input and adjustments by
  *         Daniel Rubin-Grøn (daniel@koru.dk)
  *         Version 3.1 updates by Christian Budtz (chbu@dtu.dk)
@@ -171,8 +170,8 @@ public final class GUI {
 
     /**
      * Adds a player to the board.
-     * @param player
-     * @return
+     * @param player The player add
+     * @return ??
      */
     public boolean addPlayer(GUI_Player player) {
         return bc.addPlayer(player);
@@ -235,7 +234,7 @@ public final class GUI {
     }
     /**
      * Method for showing one die at a random location
-     * @param faceValue
+     * @param faceValue ??
      */
     public void setDie(int faceValue) {
         bc.setDie(faceValue);
