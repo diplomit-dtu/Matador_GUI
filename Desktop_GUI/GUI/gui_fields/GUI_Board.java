@@ -20,7 +20,7 @@ import gui_codebehind.GUI_Center;
 import gui_codebehind.JLabelRotatable;
 import gui_codebehind.Observer;
 import gui_codebehind.SwingComponentFactory;
-import gui_fields.GUI_Player.iPlayerValidator;
+import gui_fields.GUI_Player.IPlayerNameValidator;
 import gui_resources.Attrs;
 
 /**
@@ -340,7 +340,9 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.diceLabels[x2][y2].setHorizontalAlignment(SwingConstants.CENTER);
         this.diceLabels[x2][y2].setVerticalAlignment(SwingConstants.CENTER);
         this.diceLabels[x2][y2].setIcon(this.diceIcons[facevalue2 - 1]);
-    }	
+    }
+
+
     /**
      * Add a player to the board
      * @param player The player must be created beforehand
@@ -363,7 +365,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         }
         player.setNumber(i);
         player.addObserver(this);
-        player.setValidator(new iPlayerValidator() {
+        player.setValidator(new IPlayerNameValidator() {
             @Override
             public boolean checkName(String name) {
                 if(name == null || name.isEmpty()) return false;
