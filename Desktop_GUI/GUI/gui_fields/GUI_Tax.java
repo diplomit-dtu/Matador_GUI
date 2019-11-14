@@ -13,6 +13,7 @@ public final class GUI_Tax extends GUI_Field {
     public GUI_Tax(){
         this(TITLE, SUBTEXT, DESCRIPTION, BG_COLOR, FG_COLOR);
     }
+
     public GUI_Tax(String title, String subText, String description, Color bgColor, Color fgColor){
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeTitleLabel(this.title);

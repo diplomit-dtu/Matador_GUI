@@ -43,6 +43,9 @@ public final class GUI {
      *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
      *
      * @param fields The fields to display.
+     *
+     * @throws NullPointerException  If {@link GUI#null_fields_allowed} is false (hasn't be set to true using {@link GUI#setNull_fields_allowed(boolean)}
+     *                                  and the 'fields' param contains null values.
      */
     public GUI(GUI_Field[] fields) {
         checkNullArray(fields);
@@ -59,8 +62,12 @@ public final class GUI {
      *  Constructor for GUI. Accepts an an array of GUI fields. Order of fields in array determine order of fields. 
      *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields. 
      *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
+     *
      * @param fields The fields to display.
      * @param backGroundColor Color for background.
+     *
+     * @throws NullPointerException  If {@link GUI#null_fields_allowed} is false (hasn't be set to true using {@link GUI#setNull_fields_allowed(boolean)}
+     *                                  and the 'fields' param contains null values.
      */
     public GUI(GUI_Field[] fields, Color backGroundColor){
         checkNullArray(fields);
@@ -186,11 +193,13 @@ public final class GUI {
 
 
     /**
-     * Displays a message to the user and awaits the boolean response.<br>
+     * Displays a message to the user, along with two buttons. Awaits
+     * a press on either button.
+     *
      * @param msg The message that promts the user.
      * @param trueButton The text that should appear on the left button.
      * @param falseButton The text that should appear on the right button.
-     * @return True if the left button is pressed by the user. False otherwise.
+     * @return True if the left button is pressed by the user, false if right button
      */
     public boolean getUserLeftButtonPressed(String msg, String trueButton, String falseButton) {
         msg = msg.replace("\n", "<BR>");
@@ -343,11 +352,32 @@ public final class GUI {
     }
 
 
+    /**
+     * Checks wheter null fields are allowed, when creating
+     * a new GUI with custom fields.
+     *
+     * @return True if null fields allowed, otherwise falls
+     */
     public static boolean isNull_fields_allowed() {
         return null_fields_allowed;
     }
 
 
+    /**
+     * Toggle whether null fields should be allowed or not,
+     * when creating a new GUI with custom fields (the value
+     * null is allowed in the GUI_Field array passed to the
+     * GUI object). Null fields will be displayed as empty
+     * squares.<br>
+     * Note that this has to be called BEFORE creating a GUI with null
+     * fields.<br>
+     *
+     * However, it's NOT recommended to have null fields, since
+     * moving accessing the fields (including moving a car to
+     * a field will throw a null pointer exception.
+     *
+     * @param allowed True if null fields should be allowed, false if not
+     */
     public static void setNull_fields_allowed(boolean allowed) {
         GUI.null_fields_allowed = allowed;
     }
