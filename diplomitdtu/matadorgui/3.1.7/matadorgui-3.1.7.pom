@@ -63,6 +63,8 @@
         <artifactId>maven-site-plugin</artifactId>
         <version>3.7.1</version>
     </plugin>
+
+    <!-- Problems when attaching javadoc without this-->
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
