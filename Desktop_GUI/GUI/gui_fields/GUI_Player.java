@@ -61,7 +61,7 @@ public class GUI_Player extends Observable{
 
 
 	/**
-	 * Constructs a new GUI_Player with a given name, balanec and
+	 * Constructs a new GUI_Player with a given name, balance and
 	 * custom car object.
 	 *
 	 * @param name Name of the player to be displayed on the board

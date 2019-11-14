@@ -9,9 +9,18 @@ import gui_codebehind.SwingComponentFactory;
 import gui_resources.Attrs;
 
 /**
- * @author Ronnie 
+ *  Class representing the car images on the board. A car will automatically
+ *  be created for a {@link GUI_Player#GUI_Player(String)} on construction.<br><br>
+ *
+ *  Cars won't be placed on the board automatically, but has to be placed using
+ *  the {@link GUI_Field#setCar(GUI_Player, boolean)} method on a GUI_Field.
+ *  You may move the car around using this method as well.
+ *
+ *  @author Ronnie
  */
 public final class GUI_Car extends Observable {
+
+    // Enum representing different car types
     public enum Type {
         CAR(0, 15), TRACTOR(1, 11), RACECAR(2, 13), UFO(3, 10);
         private final int x, h;
@@ -36,6 +45,8 @@ public final class GUI_Car extends Observable {
         }
 
     }
+
+    // Enum representing different patterns for the cars
     public enum Pattern {
         FILL, HORIZONTAL_GRADIANT, DIAGONAL_DUAL_COLOR,
         HORIZONTAL_DUAL_COLOR, HORIZONTAL_LINE, CHECKERED, DOTTED, ZEBRA;
@@ -53,19 +64,34 @@ public final class GUI_Car extends Observable {
     private Type type;
     private Pattern pattern;
     private BufferedImage image;
-    
-    
+
+
+    /**
+     * Default constructor for GUI_Car. Constructs a regular car, with no pattern
+     * and a random color.
+     */
     public GUI_Car(){
         this(null, null, Type.CAR, Pattern.FILL);
     }
-    public GUI_Car(Color primaryColor, Color secondaryColor, Type type, Pattern pattern){
+
+
+    /**
+     * Constructs a car customized car, including custom colors, pattern and type.
+     *
+     * @param primaryColor  Primary color of the car
+     * @param patternColor  Color of the pattern. If pattern is {@link Pattern#FILL} then this color has no effect.
+     * @param type          Type of car. Either CAR, TRACTOR, UFO or RACECAR.
+     * @param pattern       Pattern of the car FILL, DOTTED, HORIZONTOL_GRADIENT etc.
+     */
+    public GUI_Car(Color primaryColor, Color patternColor, Type type, Pattern pattern){
         this.primaryColor = primaryColor;
-        this.secondaryColor = secondaryColor;
+        this.secondaryColor = patternColor;
         this.type = type;
         this.pattern = pattern;
         repaint();
     }
-    
+
+
     private void repaint(){
         final int X = this.type.x();
         final int Y = 0;

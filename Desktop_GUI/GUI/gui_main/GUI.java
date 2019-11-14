@@ -25,18 +25,15 @@ public final class GUI {
 
 
     /**
-     *  Constructor for GUI. Accepts an an array of GUI fields. Order of fields in array determine order of fields. 
-     *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields. 
-     *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
-     * @param fields The fields to display.
-     * @param backGroundColor Color for background.
+     *  Starts the GUI, opening a GUI window, with the default Monpoly fields.
+     *  Use {@link GUI#GUI(GUI_Field[])} constructor if you want to use custom fields.
      */
-    public GUI(GUI_Field[] fields, Color backGroundColor){
-        checkNullArray(fields);
-        if(!GUI.null_fields_allowed){
-            check_for_null_fields(fields);
+    public GUI(){
+        GUI_Field[] fields = GUI_FieldFactory.makeFields();
+        for(int i = 0; i < fields.length; i++){
+            fields[i] = fields[i];
         }
-        this.boardController = new GUI_BoardController(fields, backGroundColor);
+        boardController = new GUI_BoardController(fields);
     }
 
 
@@ -53,9 +50,28 @@ public final class GUI {
             check_for_null_fields(fields);
         }
 
-        
+
         boardController = new GUI_BoardController(fields);
     }
+
+
+    /**
+     *  Constructor for GUI. Accepts an an array of GUI fields. Order of fields in array determine order of fields. 
+     *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields. 
+     *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
+     * @param fields The fields to display.
+     * @param backGroundColor Color for background.
+     */
+    public GUI(GUI_Field[] fields, Color backGroundColor){
+        checkNullArray(fields);
+        if(!GUI.null_fields_allowed){
+            check_for_null_fields(fields);
+        }
+        this.boardController = new GUI_BoardController(fields, backGroundColor);
+    }
+
+
+
 
     private void checkNullArray(GUI_Field[] fields) {
         if (fields==null){
@@ -63,17 +79,7 @@ public final class GUI {
         }
     }
 
-    /**
-     *  Starts the GUI, opening a GUI window, with the default Monpoly fields.
-     *  Use {@link GUI#GUI(GUI_Field[])} constructor if you want to use custom fields.
-     */
-    public GUI(){
-        GUI_Field[] fields = GUI_FieldFactory.makeFields();
-        for(int i = 0; i < fields.length; i++){
-            fields[i] = fields[i];
-        }
-        boardController = new GUI_BoardController(fields);
-    }
+
 
 
     private void check_for_null_fields(GUI_Field[] fields) {
@@ -105,8 +111,10 @@ public final class GUI {
 
 
     /**
-     * Displays a message to the user and awaits the response.<br>
-     * @param msg The message that promts the user.
+     * Displays a message to the user, and prompt the user for a text input.
+     * Blocks/hangs until an input has been entered.
+     *
+     * @param msg The message that prompts the user.
      * @return The string that the user has entered.
      */
     public String getUserString(String msg) {
@@ -114,41 +122,50 @@ public final class GUI {
     }
 
 
+
     /**
      * Displays a message to the user and awaits the integer response. Only
-     * values between min and max are allowed.<br>
+     * values between min and max are allowed.
+     *
      * @param msg The message that promts the user.
      * @param min The minimum value the user is allowed to enter.
      * @param max The maximum value the user is allowed to enter.
      * @return The integer that the user selected.
      */
     public int getUserInteger(String msg, int min, int max) {
-//        msg = msg.replace("\n", "<BR>");
         return boardController.getUserInteger(msg, min, max);
     }
+
+
     /**
      * Displays a message to the user and awaits the integer response.<br>
+     *
      * @param msg The message that promts the user.
      * @return The integer that the user selected.
      */
     public int getUserInteger(String msg) {
-//        msg = msg.replace("\n", "<BR>");
         return boardController.getUserInteger(msg, 0, 999999999);
     }
+
+
     /**
-     * Displays a message to the user and awaits the button pressed response.<br>
-     * @param msg The message that promts the user.
+     * Displays a message and prompt the user for a button press of a series
+     * of buttons. The buttons are defined by the number of strings passed
+     * as the 'buttons' parameters.
+     *
+     * @param msg The message that prompts the user
      * @param buttons A number of strings that should be printed on the buttons
-     *        the user can press.
+     *        the user can press
      * @return The string from the button that the user pressed.
      */
     public String getUserButtonPressed(String msg, String... buttons) {
-//        msg = msg.replace("\n", "<BR>");
         for(int i = 0; i < buttons.length; i++){
             buttons[i] = buttons[i].replace("\n", "<BR>");
         }
-        return boardController.getUserButtonPressed(msg, buttons).toString();
+        return boardController.getUserButtonPressed(msg, buttons);
     }
+
+
     /**
      * Displays a message to the user and awaits the drop-down response.<br>
      * @param msg The message that promts the user.
@@ -166,6 +183,7 @@ public final class GUI {
         }
         return boardController.getUserSelection(msg, options).toString();
     }
+
 
     /**
      * Displays a message to the user and awaits the boolean response.<br>
@@ -318,15 +336,18 @@ public final class GUI {
 
 
     /**
-     *  Closes the GUI window.
+     *  Closes the GUI window, and the stops the thread it runs on.
      */
     public void close(){
         this.boardController.close();
     }
-    
+
+
     public static boolean isNull_fields_allowed() {
         return null_fields_allowed;
     }
+
+
     public static void setNull_fields_allowed(boolean allowed) {
         GUI.null_fields_allowed = allowed;
     }

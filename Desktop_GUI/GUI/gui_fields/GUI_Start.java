@@ -15,6 +15,7 @@ public final class GUI_Start extends GUI_Field {
     public GUI_Start(){
         this(TITLE, SUBTEXT, DESCRIPTION, BG_COLOR, FG_COLOR);
     }
+
     public GUI_Start(String title, String subText, String description, Color bgColor, Color fgColor){
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeTitleLabel(this.title);

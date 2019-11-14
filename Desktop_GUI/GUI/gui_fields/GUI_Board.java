@@ -129,6 +129,8 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
             ex.printStackTrace();
         }
     }
+
+
     /**
      * Makes a graphical representation of all the fields
      */
@@ -143,6 +145,8 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
             i++;
         }
     }
+
+
     /**
      * Makes room for input fields
      */
@@ -167,6 +171,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         }
         this.base.add(this.inputPanel, this.factory.createGridBagConstraints(labelOffset, labelOffset, 9, 3));
     }
+
     /**
      * Adds Input components to the board
      * @param message The message for the user
@@ -180,6 +185,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.inputPanel.validate();
         this.inputPanel.repaint();
     }
+
     /**
      * Resets input panel
      */
@@ -190,6 +196,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.inputPanel.validate();
         this.inputPanel.repaint();
     }
+
     /**
      * Makes the components on which cars can be placed
      */
@@ -234,6 +241,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.base.add(GUI_Center.getInstance().getCenterPanel(),
             this.factory.createGridBagConstraints(4, 4, 3, 3));
     }
+
     /**
      * Makes the base
      * @param backGroundColor 
@@ -245,9 +253,10 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.base.setBackground(backGroundColor);
         this.base.setOpaque(true);
     }
+
+
     /**
      * Makes the background
-     * @param length 
      */
     private void makeBackGroundPanels(int sidelength,Color backGroundColor) {
         int offSet = (10-sidelength)/2;

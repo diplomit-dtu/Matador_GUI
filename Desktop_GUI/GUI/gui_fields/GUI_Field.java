@@ -40,11 +40,14 @@ public abstract class GUI_Field {
     protected static final String RENT = Attrs.getString("GUI_Field.Default_Rent");
     protected static final Color BG_COLOR = Color.LIGHT_GRAY;
     protected static final Color FG_COLOR = Color.BLACK;
-    
+
+
     //TODO add number to parameters - just for display
     protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description) {
         this(bgColor, fgColor, title, subText, description, BorderFactory.createLineBorder(Color.BLACK));
     }
+
+
     protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
         title = title.replace("\n", "<BR>"); //$NON-NLS-1$ //$NON-NLS-2$
         subText = subText.replace("\n", "<BR>"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -63,6 +66,8 @@ public abstract class GUI_Field {
         this.factory.setSize(this.layered, 1 * FIELDWIDTH, 1 * FIELDHEIGHT);
         this.layered.setLayout(new GridBagLayout());
     }
+
+
     private void makeLabels() {
         this.titleLabel = makeLabel(24);
         this.titleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -71,30 +76,54 @@ public abstract class GUI_Field {
         this.subTextLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         this.subTextLabel.setText(this.subText);
     }
+
+
+    /**
+     * Checks whether or not a specific Player's car is currently
+     * positioned on this field.
+     *
+     * @param player    The GUI_Player whose car to check for
+     * @return  True if 'player's car is on the field.
+     */
     public boolean hasCar(GUI_Player player) {
         return cars.get(player.getId()) != null && cars.get(player.getId()).isVisible();
     }
-    public void setCar(GUI_Player p, boolean hasCar) {
-        JLabel l = cars.get(p.getId()); 
+
+
+    /**
+     * Places the car of a Player on this field.
+     *
+     * @param player The player, which car is to be placed on the field
+     * @param display Whether or not the car should be displayed.
+     */
+    public void setCar(GUI_Player player, boolean display) {
+        JLabel l = cars.get(player.getId());
         if(l != null){
-            l.setIcon(new ImageIcon(p.getImage()));
-            l.setVisible(hasCar);
+            l.setIcon(new ImageIcon(player.getImage()));
+            l.setVisible(display);
         } else {
             for(JLabel lbl : carLabels){
                 if(lbl.getIcon() == null){
-                    lbl.setIcon(new ImageIcon(p.getImage()));
-                    lbl.setVisible(hasCar);
-                    cars.put(p.getId(), lbl);
+                    lbl.setIcon(new ImageIcon(player.getImage()));
+                    lbl.setVisible(display);
+                    cars.put(player.getId(), lbl);
                     return;
                 }
             }
         }
     }
+
+
+    /**
+     * Hides all the cars on the field
+     */
     public void removeAllCars(){
         for(Integer key : cars.keySet()){
             cars.get(key).setVisible(false);
         }
     }
+
+
     /**
      * Makes a standard label
      * @param height - in px
@@ -109,17 +138,45 @@ public abstract class GUI_Field {
         label.setForeground(this.fgColor);
         return label;
     }
-    protected JLayeredPane getPanel() {
+
+    protected JLayeredPane getPanel()
+    {
         return this.layered;
     }
+
+
+    /**
+     * Sets the title of this field. The title is displayed on the field,
+     * and in the center square when the field is clicked.
+     *
+     * @param title The title (mind the length)
+     */
     public void setTitle(String title) {
         this.title = "<html><center>" + title.replace("\\n", "<br>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         this.titleLabel.setText(this.title);
     }
+
+
+    /**
+     * Sets the subtext of this field. The subtext is a small text displayed
+     * on the buttom of the field, and in the center square whe field is
+     * clicked.<br>
+     * It's used for displaying price on streets.
+     *
+     * @param subText The subtext (mind the length).
+     */
     public void setSubText(String subText) {
         this.subText = subText;
         this.subTextLabel.setText(subText);
     }
+
+
+    /**
+     * Sets the description of a field. The description is displayed in the center
+     * sqaure, when the field is clicked.
+     *
+     * @param description The description
+     */
     public void setDescription(String description) {
         if(description.length() > 20) {
             this.description = "<html><table><tr><td>" //$NON-NLS-1$
@@ -133,31 +190,41 @@ public abstract class GUI_Field {
     public String getTitle() {
         return title.replace("<html><center>", "").replace("<br>", "").replace("<BR>", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
     }
+
     public String getSubText() {
         return subText.replace("<br>", "").replace("<BR>", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
     }
+
     public String getDescription() {
         return description.replace("<html><table><tr><td>", "").replace("<br>", "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
     }
+
     public void setBackGroundColor(Color color){
         this.bgColor = color;
         this.layered.setBackground(bgColor);
     }
+
     public void setForeGroundColor(Color color){
         this.fgColor = color;
         this.layered.setForeground(fgColor);
         titleLabel.setForeground(fgColor);
         subTextLabel.setForeground(fgColor);
     }
+
+
     protected void setCarIcons(JLabel[] cars) {
         this.carLabels = cars;
     }
+
+
     /**
      * Each type of field displays information on the center
      */
     protected void addMouseListener(FieldMouseListener listener){
         this.layered.addMouseListener(listener);
     }
+
+
     protected void displayOnCenter(GUI_Player[] playerList){
         GUI_Center.getInstance().clearLabels();
         GUI_Center.getInstance().setBGColor(this.bgColor);
@@ -168,6 +235,8 @@ public abstract class GUI_Field {
         }
         GUI_Center.label[0].setText(""); 
     }
+
+
     protected void displayCarOnCenter(GUI_Player[] playerList) {
         for(int i = 0; i < GUI_Board.MAX_PLAYER_COUNT; i++) {
             GUI_Player p = playerList[i];
