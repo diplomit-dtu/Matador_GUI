@@ -172,6 +172,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.base.add(this.inputPanel, this.factory.createGridBagConstraints(labelOffset, labelOffset, 9, 3));
     }
 
+
     /**
      * Adds Input components to the board
      * @param message The message for the user
@@ -185,6 +186,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.inputPanel.validate();
         this.inputPanel.repaint();
     }
+
 
     /**
      * Resets input panel

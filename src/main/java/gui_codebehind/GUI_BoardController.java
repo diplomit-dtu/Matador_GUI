@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+
 import gui_fields.GUI_Board;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import gui_input.IntegerInput;
 
 /**
  * Provides access to GUI
@@ -45,12 +44,15 @@ public final class GUI_BoardController {
     public GUI_BoardController(GUI_Field[] fields, Color backGroundColor) {
         this.board = new GUI_Board(fields, backGroundColor);
     }
+
+
     /**
      * Displays a message for the user. The user presses OK when the message is read Is a breaking
      * call.<br>
      * @param msg The message for the user.
      */
     public void showMessage(String msg) {
+        board.clearInputPanel();
         final CountDownLatch latch = new CountDownLatch(1);
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new ActionListener() {
@@ -84,6 +86,7 @@ public final class GUI_BoardController {
             ex.printStackTrace();
         }
     }
+
     private void getFocus(JButton okButton) {
         try {
             Thread.sleep(100);
@@ -92,6 +95,8 @@ public final class GUI_BoardController {
             
         }
     }
+
+
     /**
      * Displays a message for the user and a textfield for the user to fill out.<br>
      * Is a breaking call.<br>
@@ -150,6 +155,8 @@ public final class GUI_BoardController {
             return null;
         }
     }
+
+
     /**
      * Displays a message for the user and a textfield for the user to fill out. Only numbers are
      * allowed if the number isn't in range the user can't press OK.<br>
@@ -159,77 +166,13 @@ public final class GUI_BoardController {
      * @param max The high end of the valid range (inclusive).
      * @return The number entered by the user.
      */
-    public int getUserInteger(String msg, final int min, final int max) {
-        if((min < 0) || (max < 1) || (max <= min)) {
-            return -1;
-        }
-        if("".equals(msg)) {
-            return -1;
-        }
-        final CountDownLatch latch = new CountDownLatch(1);
-        final JButton okButton = new JButton("OK");
-        okButton.setEnabled(false);
-        
-        final JTextField tf = new JTextField(20);
-        tf.setHorizontalAlignment(SwingConstants.RIGHT);
-        tf.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent ke) {}
-            @Override
-            public void keyReleased(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.userInput = tf.getText();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-                String input = tf.getText() + ke.getKeyChar();
-                String output = "";
-                for(int i = 0; i < input.toCharArray().length - 1; i++) {
-                    char c = input.toCharArray()[i];
-                    if(c >= '0' && c <= '9' && i < 9) {
-                        output += c;
-                    }
-                }
-                tf.setText(output);
-                int val = -1;
-                try {
-                    val = Integer.parseInt(output);
-                    if((min <= val) && (val <= max)) {
-                        tf.setForeground(Color.BLACK);
-                    } else {
-                        tf.setForeground(Color.RED);
-                    }
-                } catch(Exception ex) {
-                    tf.setForeground(Color.RED);
-                }
-                
-                okButton.setEnabled(tf.getForeground().equals(Color.BLACK));
-            }
-            @Override
-            public void keyPressed(KeyEvent ke) {}
-        });
-        okButton.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUI_BoardController.this.userInput = tf.getText();
-                GUI_BoardController.this.board.clearInputPanel();
-                latch.countDown();
-            }
-        });
-        this.board.getUserInput(msg, tf, okButton);
-        
-        try {
-            latch.await();
-            return Integer.parseInt(this.userInput);
-        } catch(InterruptedException ex) {
-            ex.printStackTrace();
-            return -1;
-        } catch(NumberFormatException ex) {
-            ex.printStackTrace();
-            return -1;
-        }
+    public int getUserInteger( String msg, final int min, final int max) {
+        board.clearInputPanel();
+        IntegerInput input = new IntegerInput(this.board, msg, min, max);
+        return input.getResult();
     }
+
+
     /**
      * Displays a message for the user along with a row of buttons.<br>
      * Is a breaking call.<br>

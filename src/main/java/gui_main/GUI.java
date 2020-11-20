@@ -131,27 +131,27 @@ public final class GUI {
 
 
     /**
-     * Displays a message to the user and awaits the integer response. Only
-     * values between min and max are allowed.
+     * Prompts the user to enter any integer value between minValue and maxValue (both inclusive).
      *
-     * @param msg The message that promts the user.
-     * @param min The minimum value the user is allowed to enter.
-     * @param max The maximum value the user is allowed to enter.
-     * @return The integer that the user selected.
+     * @param msg Message to display to the user
+     * @param minValue The minimum value the user is allowed to enter (inclusive)
+     * @param maxValue The maximum value the user is allowed to enter (inclusive)
+     * @return The integer that the user selected
+     * @throws IllegalArgumentException If the maximum value is less than the minimum value
      */
-    public int getUserInteger(String msg, int min, int max) {
-        return boardController.getUserInteger(msg, min, max);
+    public int getUserInteger(String msg, int minValue, int maxValue) {
+        return boardController.getUserInteger(msg, minValue, maxValue);
     }
 
 
     /**
-     * Displays a message to the user and awaits the integer response.<br>
+     * Prompts the user to enter any integer value.
      *
-     * @param msg The message that promts the user.
-     * @return The integer that the user selected.
+     * @param msg Message to display to the user
+     * @return The integer that the user selected (between Integer.MIN_VALUE and Integer.MAX_VALUE)
      */
     public int getUserInteger(String msg) {
-        return boardController.getUserInteger(msg, 0, 999999999);
+        return boardController.getUserInteger(msg, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
 
