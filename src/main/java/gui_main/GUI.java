@@ -5,6 +5,7 @@ import gui_codebehind.GUI_BoardController;
 import gui_codebehind.GUI_FieldFactory;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -119,13 +120,33 @@ public final class GUI {
 
     /**
      * Displays a message to the user, and prompt the user for a text input.
+     * The text input cannot be empty, but may contain whitespace.
+     *
      * Blocks/hangs until an input has been entered.
      *
      * @param msg The message that prompts the user.
-     * @return The string that the user has entered.
+     * @return The string that the user has entered
      */
-    public String getUserString(String msg) {
-        return boardController.getUserString(msg, 1, Integer.MAX_VALUE, false);
+    public @NotNull String getUserString(String msg) {
+        return boardController.getUserString(msg, 1, Integer.MAX_VALUE, true);
+    }
+
+
+    /**
+     * Displays a message to the user, and prompt the user for a text input with specific
+     * attributes (parameters). The method ensures that the returned string matches the
+     * given attributes.
+     *
+     * Blocks/hangs until an input has been entered.
+     *
+     * @param msg The message that prompts the user.
+     * @param minLength The minimum length of the user input. Must be at least 0 (which allows empty strings)
+     * @param maxLength The maximum length the user input. Must not be less than 'minLength' and larger than 0.
+     * @param allowWhitespace Whether or not to allow whitespace in input (spaces, tabs, newlines)
+     * @return String which matches the parameters, and is not null
+     */
+    public @NotNull String getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace) {
+        return boardController.getUserString(msg, minLength, maxLength, allowWhitespace);
     }
 
 

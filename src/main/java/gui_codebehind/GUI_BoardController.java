@@ -86,41 +86,6 @@ public final class GUI_BoardController {
     public String getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace) {
         StringInput input = new StringInput(board, msg, minLength, maxLength, allowWhitespace);
         return input.getResult();
-/*
-
-        final CountDownLatch latch = new CountDownLatch(1);
-        final JTextField tf = new JTextField(20);
-
-        EnterButton okButton = new EnterButton("OK", () -> {
-            GUI_BoardController.this.userInput = tf.getText();
-            GUI_BoardController.this.board.clearInputPanel();
-            latch.countDown();
-        });
-
-        tf.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) { }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.userInput = tf.getText();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) { }
-        });
-
-        this.board.getUserInput(msg, tf, okButton.getJButton());
-        tf.requestFocusInWindow();
-        try {
-            latch.await();
-            return this.userInput;
-        } catch(InterruptedException ex) {
-            ex.printStackTrace();
-            return null;
-        }*/
     }
 
 

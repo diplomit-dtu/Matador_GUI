@@ -31,7 +31,7 @@ public class StringInput {
     private final boolean allowWhiteSpace;
     private String input = "";
 
-    private boolean validInput = false;
+    private boolean validInput;
 
     private boolean inputActive;
 
@@ -41,6 +41,9 @@ public class StringInput {
         if( minLength < 0 )
             throw new IllegalArgumentException("Minimum input length must be zero or positive");
 
+        if( maxLength <= 0 )
+            throw new IllegalArgumentException("Maximum input length must be larger than 0");
+
         if( maxLength < minLength )
             throw new IllegalArgumentException("Maximum input length cannot be less than  minimum input length");
 
@@ -48,9 +51,12 @@ public class StringInput {
         this.minLength = minLength;
         this.maxLength = maxLength;
 
+        // Check if the empty string is valid input
+        validInput = minLength == 0;
+
         latch = new CountDownLatch(1);
         okButton = new EnterButton("OK", this::returnResult );
-        okButton.setEnabled(false);
+        okButton.setEnabled(validInput);
 
         inputField = new JTextField(20);
         inputField.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -79,7 +85,7 @@ public class StringInput {
         if( input.length() < minLength || input.length() > maxLength )
             return false;
 
-        if( !allowWhiteSpace && (
+        if( !allowWhiteSpace && input.length() > 0 && (
                 input.contains(" ") ||
                 input.contains("\t") ||
                 input.contains("\n") ||
