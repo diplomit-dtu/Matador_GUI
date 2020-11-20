@@ -387,10 +387,14 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
             }
         });
         player.getCar().addObserver(this);
+        player.getCar().addPositionChangedListener(this::carPositionChanged);
+
         playerList[i] = player;
         updatePlayers();
         return true;
     }
+
+
     /**
      * Updates the board in order to correct player balances
      */
@@ -460,4 +464,46 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
     public void onUpdate() {
         updatePlayers();
     }
+
+
+    /**
+     * Method which is called when the position of a Car has changed, and the display
+     * needs to be updated.
+     */
+    private void carPositionChanged(GUI_Car car, GUI_Field oldPosition, GUI_Field newPosition ){
+        if( !hasField(newPosition) )
+            throw new IllegalArgumentException("Car's old position is not a field added to the GUI");
+
+        GUI_Player player = getCarOwner(car);
+
+        if( oldPosition != null )
+            oldPosition.setCar(player, false);
+
+        if( newPosition != null )
+            newPosition.setCar(player, true);
+    }
+
+
+    /**
+     * Utility method to check if this Board contains the given GUI_Field
+     */
+    public boolean hasField(GUI_Field field){
+        for( GUI_Field match : fields ){
+            if( match.equals(field) ) return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @return  Returns the GUI_Player whose car is the given car, or null if no GUI_Player owns this car
+     */
+    public GUI_Player getCarOwner(GUI_Car car) {
+        for( GUI_Player player : playerList ) {
+            if( player.getCar().equals(car) ) return player;
+        }
+        return null;
+    }
+
+
 }

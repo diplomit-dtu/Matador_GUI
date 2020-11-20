@@ -2,11 +2,14 @@ package gui_fields;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import gui_codebehind.Observable;
 import gui_codebehind.SwingComponentFactory;
 import gui_resources.Attrs;
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  *  Class representing the car images on the board. A car will automatically
@@ -64,6 +67,9 @@ public final class GUI_Car extends Observable {
     private Type type;
     private Pattern pattern;
     private BufferedImage image;
+
+    private GUI_Field position = null;
+    private ArrayList<PositionChangedListener> positionChangedListeners = new ArrayList<>();
 
 
     /**
@@ -202,6 +208,8 @@ public final class GUI_Car extends Observable {
         }
         return img;
     }
+
+
     private BufferedImage paintDiagonalDualColor(BufferedImage img,
         Color c1, Color c2) {
         String path = patternImages.get(Pattern.DIAGONAL_DUAL_COLOR);
@@ -209,6 +217,8 @@ public final class GUI_Car extends Observable {
             new SwingComponentFactory().createImage(path);
         return paintPattern(patternImg, img, c1, c2);
     }
+
+
     private BufferedImage paintHorizontalDualColor(BufferedImage img, Color c1, Color c2,
             Type t) {
         for (int y = 0; y < img.getHeight(); y++) {
@@ -225,6 +235,8 @@ public final class GUI_Car extends Observable {
         }
         return img;
     }
+
+
     private BufferedImage paintHorizontalLine(BufferedImage img, Color c1,
         Color c2, Type t) {
         for (int y = 0; y < img.getHeight(); y++) {
@@ -273,11 +285,48 @@ public final class GUI_Car extends Observable {
         }
         return img;
     }
+
+
+    /**
+     * Sets the Car's position to some field, which has been added to the GUI.
+     * If the new position is null, then the Car will be removed from the board.
+     *
+     * If the new position is not the same as the existing, all listeners registered
+     * through {@link GUI_Car#addPositionChangedListener(PositionChangedListener)} will be notified.
+     *
+     * @param newPosition New position of the car. If not null, the field must be added to the GUI
+     */
+    public void setPosition(GUI_Field newPosition){
+        if( newPosition.equals(position) ) return;
+        GUI_Field oldPosition = position;
+        position = newPosition;
+        for( PositionChangedListener listener : positionChangedListeners) {
+            listener.positionChanged(this, oldPosition, newPosition);
+        }
+    }
+
+
+    /**
+     *  Adds a listener, which will be notified when the position of the Car changes.
+     */
+    public void addPositionChangedListener(@NotNull PositionChangedListener listener){
+        positionChangedListeners.add(listener);
+    }
+
+
     @Override
     public String toString() {
         return "GUI_Car [primaryColor=" + primaryColor + ", secondaryColor="
             + secondaryColor + ", type=" + type + ", pattern=" + pattern
             + ", image=" + image + "]";
+    }
+
+
+    /**
+     * Signature of listener to be called when a Car's field position has changed
+     */
+    public interface PositionChangedListener {
+        void positionChanged(GUI_Car car, GUI_Field oldPosition, GUI_Field newPosition);
     }
     
     
