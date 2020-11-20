@@ -22,7 +22,7 @@ import java.util.concurrent.CountDownLatch;
 public class IntegerInput {
 
     private final JTextField inputField;
-    private final JButton  okButton;
+    private final EnterButton  okButton;
     private final CountDownLatch latch;
 
     private final int minValue;
@@ -42,8 +42,7 @@ public class IntegerInput {
         this.maxValue = maxValue;
 
         latch = new CountDownLatch(1);
-        okButton = new JButton("OK");
-        okButton.addActionListener((e) -> this.returnResult());
+        okButton = new EnterButton("OK", this::returnResult );
         okButton.setEnabled(false);
 
         inputField = new JTextField(20);
@@ -53,7 +52,9 @@ public class IntegerInput {
 
         inputActive = true;
 
-        board.getUserInput(msg, inputField, okButton);
+        board.getUserInput(msg, inputField, okButton.getJButton());
+
+        inputField.requestFocusInWindow();
     }
 
 
