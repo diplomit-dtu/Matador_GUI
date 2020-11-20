@@ -2,8 +2,9 @@ package gui_fields;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
-import java.awt.Point;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -29,8 +30,11 @@ public abstract class GUI_Field {
     protected String subText;
     protected String description;
     private SwingComponentFactory factory = new SwingComponentFactory();
-    private HashMap<Integer, JLabel> cars = new HashMap<Integer, JLabel>();
+    private HashMap<Integer, JLabel> carLabelsMap = new HashMap<Integer, JLabel>();
     private JLabel[] carLabels;
+
+    /** List of cars that are being drawn by this view */
+    private ArrayList<GUI_Car> drawnCars = new ArrayList<>();
     
     //Default values
     protected static final String TITLE = Attrs.getString("GUI_Field.Default_title");
@@ -86,18 +90,32 @@ public abstract class GUI_Field {
      * @return  True if 'player's car is on the field.
      */
     public boolean hasCar(GUI_Player player) {
-        return cars.get(player.getId()) != null && cars.get(player.getId()).isVisible();
+        return Objects.equals(player.getCar().getPosition(), this);
     }
 
 
     /**
+     * @deprecated  Cars should be placed / moved around using the {@link GUI_Car#setPosition(GUI_Field)} instead.
+     *
      * Places the car of a Player on this field.
      *
      * @param player The player, which car is to be placed on the field
      * @param display Whether or not the car should be displayed.
      */
+    @Deprecated
     public void setCar(GUI_Player player, boolean display) {
-        JLabel l = cars.get(player.getId());
+        if( !display && !hasCar(player) ) return;
+
+        if( display && hasCar(player) ) return;
+
+        if( !display )
+            player.getCar().setPosition(null);
+        else
+            player.getCar().setPosition(this);
+
+
+
+        JLabel l = carLabelsMap.get(player.getId());
         if(l != null){
             l.setIcon(new ImageIcon(player.getImage()));
             l.setVisible(display);
@@ -106,7 +124,7 @@ public abstract class GUI_Field {
                 if(lbl.getIcon() == null){
                     lbl.setIcon(new ImageIcon(player.getImage()));
                     lbl.setVisible(display);
-                    cars.put(player.getId(), lbl);
+                    carLabelsMap.put(player.getId(), lbl);
                     return;
                 }
             }
@@ -115,11 +133,52 @@ public abstract class GUI_Field {
 
 
     /**
-     * Hides all the cars on the field
+     *  Adds the car as a car, which should be drawn on this field
+     *  This method should not be called by the user of the library.
      */
+    public void drawCar(GUI_Player player, boolean display){
+        /*  Note on this method:
+            It takes over the original code from the setCar method, as that method
+            should no longer update the drawing.
+            It's a temporary solution (until we move to 4.x), to have this method
+            as the end user shouldn't have access to it.
+         */
+
+        JLabel l = carLabelsMap.get(player.getId());
+        if(l != null){
+            l.setIcon(new ImageIcon(player.getImage()));
+            l.setVisible(display);
+        } else {
+            for(JLabel lbl : carLabels){
+                if(lbl.getIcon() == null){
+                    lbl.setIcon(new ImageIcon(player.getImage()));
+                    lbl.setVisible(display);
+                    carLabelsMap.put(player.getId(), lbl);
+                    return;
+                }
+            }
+        }
+
+        // Update list of cars which are drawn by this field
+        if( display && !drawnCars.contains(player.getCar()) )
+            drawnCars.add(player.getCar());
+        else if( !display && drawnCars.contains(player.getCar()))
+            drawnCars.remove(player.getCar());
+    }
+
+    /**
+     * @deprecated  Cars should no longer be placed using the GUI_Field class (or any inheriting classes), but the
+     *              the car class directly. This method will be removed in version 4.x
+     *
+     * Remove all the cars from this field
+     */
+    @Deprecated
     public void removeAllCars(){
-        for(Integer key : cars.keySet()){
-            cars.get(key).setVisible(false);
+        /*  We iterate backwards, since cars will be removed from the list
+            during iteration, when set their position to null, and their
+            position was this field (which we expect them to be). */
+        for(int i=drawnCars.size()-1; i >= 0; i-- ) {
+            drawnCars.get(i).setPosition(null);
         }
     }
 

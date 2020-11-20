@@ -5,10 +5,13 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
 import gui_codebehind.Observable;
 import gui_codebehind.SwingComponentFactory;
 import gui_resources.Attrs;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 /**
@@ -296,13 +299,22 @@ public final class GUI_Car extends Observable {
      *
      * @param newPosition New position of the car. If not null, the field must be added to the GUI
      */
-    public void setPosition(GUI_Field newPosition){
-        if( newPosition.equals(position) ) return;
+    public void setPosition(@Nullable GUI_Field newPosition){
+        if( Objects.equals(newPosition, position) ) return;
+
         GUI_Field oldPosition = position;
         position = newPosition;
         for( PositionChangedListener listener : positionChangedListeners) {
             listener.positionChanged(this, oldPosition, newPosition);
         }
+    }
+
+
+    /**
+     * @return  The position of this Car, or null of the car is not placed on any field
+     */
+    public GUI_Field getPosition(){
+        return position;
     }
 
 

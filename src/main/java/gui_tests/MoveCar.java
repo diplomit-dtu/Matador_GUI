@@ -19,14 +19,15 @@ public class MoveCar {
 
         // Construct fields
         ArrayList<String> fieldNames = new ArrayList<>();
-        GUI_Field[] fields = new GUI_Field[NUM_FIELDS];
+        ArrayList<GUI_Field> fields = new ArrayList<>();
         for( int i=0; i<NUM_FIELDS; i++){
-            fields[i] = new GUI_Street();
-            fields[i].setTitle("Field " + i);
+            GUI_Field field = new GUI_Street();
+            field.setTitle("Field " + i);
             fieldNames.add("Field " + i);
+            fields.add(field);
         }
 
-        GUI gui = new GUI(fields);
+        GUI gui = new GUI(fields.toArray(new GUI_Field[0]));
 
         // Setup player
         ArrayList<GUI_Player> players = new ArrayList<>();
@@ -47,11 +48,17 @@ public class MoveCar {
 
             GUI_Player playerToMove = players.get( playerNames.indexOf(button) );
 
-            String field = gui.getUserSelection("Choose field to move to",
+            String targetFieldName = gui.getUserSelection("Choose field to move to",
                     fieldNames.toArray(new String[0])
             );
 
-            playerToMove.getCar().setPosition(gui.getFields()[fieldNames.indexOf(field)]);
+            for( GUI_Field field : gui.getFields() )
+                field.setCar(playerToMove, false);
+
+            gui.getFields()[fieldNames.indexOf(targetFieldName)].setCar(playerToMove, true);
+
+
+            //playerToMove.getCar().setPosition(gui.getFields()[fieldNames.indexOf(field)]);
         }
 
     }

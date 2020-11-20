@@ -22,6 +22,7 @@ import gui_codebehind.Observer;
 import gui_codebehind.SwingComponentFactory;
 import gui_fields.GUI_Player.IPlayerNameValidator;
 import gui_resources.Attrs;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The board
@@ -471,23 +472,25 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
      * needs to be updated.
      */
     private void carPositionChanged(GUI_Car car, GUI_Field oldPosition, GUI_Field newPosition ){
-        if( !hasField(newPosition) )
+        if( newPosition != null && !hasField(newPosition) )
             throw new IllegalArgumentException("Car's old position is not a field added to the GUI");
 
         GUI_Player player = getCarOwner(car);
+        if( player == null )
+            throw new NullPointerException("Player was null and it was not expected - contact developers!");
 
         if( oldPosition != null )
-            oldPosition.setCar(player, false);
+            oldPosition.drawCar(player, false);
 
         if( newPosition != null )
-            newPosition.setCar(player, true);
+            newPosition.drawCar(player, true);
     }
 
 
     /**
      * Utility method to check if this Board contains the given GUI_Field
      */
-    public boolean hasField(GUI_Field field){
+    public boolean hasField(@NotNull GUI_Field field){
         for( GUI_Field match : fields ){
             if( match.equals(field) ) return true;
         }
