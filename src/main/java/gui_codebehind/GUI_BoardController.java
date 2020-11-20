@@ -17,6 +17,7 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_input.EnterButton;
 import gui_input.IntegerInput;
+import gui_input.StringInput;
 
 /**
  * Provides access to GUI
@@ -26,7 +27,8 @@ public final class GUI_BoardController {
     private String userInput = null;
     private GUI_Board board;
     private static volatile Random rand = null;
-    
+
+
     public static Random rand() {
         if(rand == null) {
             synchronized (GUI_BoardController.class) {
@@ -35,13 +37,16 @@ public final class GUI_BoardController {
         }
         return rand;
     }
+
+
     /**
      * Contains service methods for board for controlling the board.
-     * @param fields 
      */
     public GUI_BoardController(GUI_Field[] fields) {
         this.board = new GUI_Board(fields);
     }
+
+
     public GUI_BoardController(GUI_Field[] fields, Color backGroundColor) {
         this.board = new GUI_Board(fields, backGroundColor);
     }
@@ -78,7 +83,11 @@ public final class GUI_BoardController {
      * @param msg The message for the user.
      * @return The text entered by the user.
      */
-    public String getUserString(String msg) {
+    public String getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace) {
+        StringInput input = new StringInput(board, msg, minLength, maxLength, allowWhitespace);
+        return input.getResult();
+/*
+
         final CountDownLatch latch = new CountDownLatch(1);
         final JTextField tf = new JTextField(20);
 
@@ -111,7 +120,7 @@ public final class GUI_BoardController {
         } catch(InterruptedException ex) {
             ex.printStackTrace();
             return null;
-        }
+        }*/
     }
 
 

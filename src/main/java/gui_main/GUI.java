@@ -125,9 +125,8 @@ public final class GUI {
      * @return The string that the user has entered.
      */
     public String getUserString(String msg) {
-        return boardController.getUserString(msg);
+        return boardController.getUserString(msg, 1, Integer.MAX_VALUE, false);
     }
-
 
 
     /**
