@@ -52,13 +52,11 @@ public class MoveCar {
                     fieldNames.toArray(new String[0])
             );
 
-            for( GUI_Field field : gui.getFields() )
+            /*for( GUI_Field field : gui.getFields() )
                 field.setCar(playerToMove, false);
+            gui.getFields()[fieldNames.indexOf(targetFieldName)].setCar(playerToMove, true);*/
 
-            gui.getFields()[fieldNames.indexOf(targetFieldName)].setCar(playerToMove, true);
-
-
-            //playerToMove.getCar().setPosition(gui.getFields()[fieldNames.indexOf(field)]);
+            playerToMove.getCar().setPosition(gui.getFields()[fieldNames.indexOf(targetFieldName)]);
         }
 
     }

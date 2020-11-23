@@ -318,7 +318,9 @@ public final class GUI_Car extends Observable {
 
 
     /**
-     *  Adds a listener, which will be notified when the position of the Car changes.
+     * Adds a listener, which will be notified when the position of the Car changes.
+     *
+     * @param listener Listener to add
      */
     public void addPositionChangedListener(@NotNull PositionChangedListener listener){
         positionChangedListeners.add(listener);
