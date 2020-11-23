@@ -20,40 +20,59 @@ Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny ve
 
  2. __Lav dine ændringer i kildekoden__
 
- 2. __Sørg for at Maven-projektet er opdateret__  
+ 3. __Notér ændringer for ny version i [CHANGELOG.md](https://github.com/diplomit-dtu/Matador_GUI/blob/master/CHANGELOG.md)__ 
+
+ 4. __Sørg for at Maven-projektet er opdateret__  
     Højre klik på `pom.xml` og tryk på `Maven → Reload project`
 
- 3. __Opdatér versionsnummeret i pom.xml__  
+ 5. __Opdatér versionsnummeret i pom.xml__  
     Følg versioneringskonventionen beskrevet i [Versionspolitik](#versionspolitik)
 
- 4. __Opret GitHub credentials i Maven__  
-    Man skal angive sine GitHub-loginoplysninger til Maven, for at den kan offentliggøre den nye version til repoet
+ 6. __Opret en _Personal access token_ til GitHub__
+    For at Maven kan pushe til til repoet, skal bruge nogle credentials til din GitHub profil. I stedet for at _password_ skal der benyttes en _token_.
 
-    -   _Find dit "lokale Maven-repository"_  
-        Dette er en mappe, der ligger i din _Home_-mappe, der hedder `.m2`. Har man en bruger _Johnny_ i _Windows_  ligger den typisk i `C:/Users/Johnny/.m2`.
+    - Gå ind under [github.com/settings/tokens/](https://github.com/settings/tokens)
+    
+    - Tryk på `Generate new token`
 
-     -  _Opret / åben filen `setting.xml` i `.m2`-mappen_
+    - Angiv note så du kan genkende den i fremtiden
+
+    - Kryds følgende _scopes_ af for tokenen:
+      - `repo`
+      - `notifications`
+      - `user`
+
+    - Tryk på `Generate Token`
+
+    - Kopiér den lange tekst i den grønne boks (kunne se ud som `3f403ba70cad9613242d1d5582cf2vb5bbea2es87`). Dette er din _token_ vi skal bruge.  
+    _Bemærk:_ Du kan ikke fremskaffe den igen, hvis du smider den væk. I så fald opretter du bare en ny, og sletter den gamle.
+
+ 7. __Angiv GitHub credentials til Maven__  
+    Du skal angive sit brugernavn og din nye _token_ til Maven, for at den kan offentliggøre den nye version til repoet
+
+     -  _Åben din `setting.xml`-fil til Maven_  
+        Dette gør du ved at højreklikke på `pom.xml` og tryk på `Maven → Open 'settings.xml'`
      
      -  _Indsæt dine GitHub Credentials_  
         Kopíer følgende ind i `settings.xml`, og erstart `GITHUB-USERNAME` og `GITHUB-PASSWORD` med dit GitHub brugernavn/password:
 
         ```xml
-        <settings>
-        <servers>
-            <server>
-            <id>github</id>
-            <username>GITHUB-USERNAME</username>
-            <password>GITHUB-PASSWORD</password>
-            </server>
-        </servers>
-        </settings>
+         <settings>
+            <servers>
+               <server>
+                  <id>github</id>
+                  <username>DIT_GITHUB_BRUGERNAVN</username>
+                  <password>DIN_ACCESS_TOKEN</password>
+               </server>
+            </servers>
+         </settings>
         ```
 
-        __! ADVARSEL !:__  
-        _Dit password til GitHub vil ligge i _clear text_ i denne fil, og har man adgang til din computer kan man bare gå ind og læse det! Sørg derfor for at fjerne koden så snart du har deployet._
+        __!! ADVARSEL:__  
+        _Din token til GitHub vil ligge i _clear text_ i denne fil. Har man denne token kan den bruges til at tilgå nogle rettigheder i i dine repositories, så det anbefales at fjerne din token efter du har deployet_
 
 
- 5. __Byg og deploy projektet__  
+ 8. __Byg og deploy projektet__  
     
     - _Åben Maven-vinduet i IntelliJ_  
       I toolbaren trykkes `View → Tool Windows → Maven`, og i vinduet der åbnes gå ind under `matadorgui → Lifecycle`  
@@ -64,7 +83,7 @@ Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny ve
       Projektet bygges og offentliggøres til det dedikerede Maven-repository for biblioteket, sammen med kildekoden og JavaDoc.
       
 
- 6. __Opdatér GUI-guiden__  
+ 9. __Opdatér GUI-guiden__  
     [Guiden til GUI'en](https://github.com/diplomit-dtu/MatadorGUIGuide) skal opdateres seperat. Hvis ikke den nye version, behøver ændringer i guiden, kan man blot lave en ny branch ud fra den nuværende version.
 
 
