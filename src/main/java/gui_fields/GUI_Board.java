@@ -50,9 +50,6 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
     
     public static Point[] points;
     public static int nextPoint = 0;
-//    static{
-//        generateSquareBoard(40);
-//    }
 
     private static void generateSquareBoard(int sideLength) {
         int offSet = (10-sideLength)/2;
@@ -89,8 +86,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.fields = fields;
         nextPoint = 0;
         
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        this.setTitle(Attrs.getString("GUI_Board.Title")+(year%100));
+        this.setTitle(Attrs.getString("GUI_Board.Title"));
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         for(GUI_Field field : fields){

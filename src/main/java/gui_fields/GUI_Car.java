@@ -19,14 +19,13 @@ import org.jetbrains.annotations.Nullable;
  *  be created for a {@link GUI_Player#GUI_Player(String)} on construction.<br><br>
  *
  *  Cars won't be placed on the board automatically, but has to be placed using
- *  the {@link GUI_Field#setCar(GUI_Player, boolean)} method on a GUI_Field.
- *  You may move the car around using this method as well.
+ *  the {@link GUI_Car#setPosition(GUI_Field)} method.
  *
- *  @author Ronnie
+ *  @author Ronnie, Malte
  */
 public final class GUI_Car extends Observable {
 
-    // Enum representing different car types
+    // Enum representing different car typess
     public enum Type {
         CAR(0, 15), TRACTOR(1, 11), RACECAR(2, 13), UFO(3, 10);
         private final int x, h;

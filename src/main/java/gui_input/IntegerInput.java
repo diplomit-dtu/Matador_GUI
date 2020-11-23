@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
 
 
 /**
- *  Class to which displays a message, a input text field and an OK button
+ *  Class which displays a message, a input text field and an OK button
  *  to the user, and awaits until the user has entered a valid integer in
  *  the text field.
  *
@@ -68,7 +68,10 @@ public class IntegerInput {
     }
 
 
-    public boolean validateInput(String input) {
+    /*
+     * Tests whether the current value in the text field is a valid input, in
+     * terms of the given input restrictions */
+    private boolean validateInput(String input) {
         int value = 0;
         try{
             value = Integer.parseInt(input);
@@ -77,7 +80,12 @@ public class IntegerInput {
     }
 
 
-    public void returnResult() {
+    /*
+     * Signal that the final result has been decided (user has pressed enter, or
+     * pressed the OK-button).
+     * This will wake the threads waiting on the latch in the getResult(..) method.
+     */
+    private void returnResult() {
         if( validInput && inputActive ){
             inputActive = false;
             latch.countDown();
@@ -85,7 +93,8 @@ public class IntegerInput {
     }
 
 
-    public void inputChanged() {
+    // Register that the value in input field has changed
+    private void inputChanged() {
         if( !inputActive ) return;
         validInput = validateInput(inputField.getText());
         if( validInput ){
@@ -98,6 +107,8 @@ public class IntegerInput {
     }
 
 
+    /*
+     * Register that 'enter' has been pressed while focusing the input field*/
     class InputFieldKeyListener implements KeyListener {
 
         @Override
@@ -110,11 +121,13 @@ public class IntegerInput {
 
         @Override
         public void keyTyped(KeyEvent e) {}
-
         @Override
         public void keyReleased(KeyEvent e) {}
     }
 
+    /*
+     * Listener to check that the value in the input field has changed
+     * in away. Just forwards to inputChanged() */
     class InputFieldValueListener implements DocumentListener {
         @Override
         public void insertUpdate(DocumentEvent e) { inputChanged(); }
@@ -125,6 +138,4 @@ public class IntegerInput {
         @Override
         public void changedUpdate(DocumentEvent e) { inputChanged(); }
     }
-
-
 }
