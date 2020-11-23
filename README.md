@@ -13,21 +13,21 @@ Vil man benytte biblioteket, skal man derfor forbinde til dette Maven-repository
 
 
 ## Udgiv ny version
-Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny version af biblioteket
+Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny version på følgende måde:
 
- 1. __Hent projektete ned til IntelliJ__  
-    Sørg for at projektet ses som et Maven-projekt at IntelliJ
+ 1. __Hent projektet ned til IntelliJ__  
+    Sørg for at projektet ses som et Maven-projekt af IntelliJ
 
  2. __Lav dine ændringer i kildekoden__
 
- 2. __Sørg for at Maven er opdateret__  
-    Højre klik på pom.xml og tryk på Maven → Reload project
+ 2. __Sørg for at Maven-projektet er opdateret__  
+    Højre klik på `pom.xml` og tryk på `Maven → Reload project`
 
- 3. __Opdater versionsnummeret i pom.xml__  
+ 3. __Opdatér versionsnummeret i pom.xml__  
     Følg versioneringskonventionen beskrevet i [Versionspolitik](#versionspolitik)
 
  4. __Opret GitHub credentials i Maven__  
-    Man skal angive sine Github-loginoplysninger til Maven, for at den kan offentliggøre den nye version.
+    Man skal angive sine GitHub-loginoplysninger til Maven, for at den kan offentliggøre den nye version til repoet
 
     -   _Find dit "lokale Maven-repository"_  
         Dette er en mappe, der ligger i din _Home_-mappe, der hedder `.m2`. Har man en bruger _Johnny_ i _Windows_  ligger den typisk i `C:/Users/Johnny/.m2`.
@@ -50,7 +50,7 @@ Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny ve
         ```
 
         __! ADVARSEL !:__  
-        _Din kode vil ligge i _clear text_ i denne fil, og har man adgang til din computer kan man bare gå ind og læse det! Sørg derfor for at fjerne koden så snart du har deployet._
+        _Dit password til GitHub vil ligge i _clear text_ i denne fil, og har man adgang til din computer kan man bare gå ind og læse det! Sørg derfor for at fjerne koden så snart du har deployet._
 
 
  5. __Byg og deploy projektet__  

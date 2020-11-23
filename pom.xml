@@ -48,8 +48,6 @@
     </dependencies>
 
     <build>
-        <!--<sourceDirectory>Desktop_GUI/GUI</sourceDirectory>-->
-
         <resources>
           <resource>
             <directory>src/main/java/</directory>
@@ -61,7 +59,7 @@
 
         <plugins>
 
-            <!-- Plugin to attach sources to the jar-->
+            <!-- Plugin to attach source code to the jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
