@@ -81,6 +81,8 @@ public final class GUI_BoardController {
      * Displays a message for the user and a textfield for the user to fill out.<br>
      * Is a breaking call.<br>
      * @param msg The message for the user.
+     * @param minLength Minimum length of the input text (inclusive)
+     * @param maxLength Maximum length of the input text (inclusive)
      * @return The text entered by the user.
      */
     public String getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace) {

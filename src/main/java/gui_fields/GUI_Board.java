@@ -176,6 +176,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
      * @param components : input components (buttons, textfields, drop-down, etc.)
      */
     public void getUserInput(String message, Component... components) {
+        this.clearInputPanel();
         this.messageArea.setText(message);
         for(Component c : components) {
             this.inputPanel.add(c);
@@ -373,15 +374,12 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         }
         player.setNumber(i);
         player.addObserver(this);
-        player.setValidator(new IPlayerNameValidator() {
-            @Override
-            public boolean checkName(String name) {
-                if(name == null || name.isEmpty()) return false;
-                for(GUI_Player p : playerList){
-                    if(p != null && name.equals(p.getName())) return false;
-                }
-                return true;
+        player.setValidator(name -> {
+            if(name == null || name.isEmpty()) return false;
+            for(GUI_Player p : playerList){
+                if(p != null && name.equals(p.getName())) return false;
             }
+            return true;
         });
         player.getCar().addObserver(this);
         player.getCar().addPositionChangedListener(this::carPositionChanged);
