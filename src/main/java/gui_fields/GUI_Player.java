@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import gui_codebehind.Observable;
 import gui_resources.Attrs;
 
+
 /**
  * Class which represents the player object, and the information displayed on the
  * GUI regarding the player. This includes:
@@ -24,7 +25,7 @@ import gui_resources.Attrs;
  *
  * @author Ronnie
  */
-public class GUI_Player extends Observable{
+public class GUI_Player extends Observable {
 	private int number = -1;
 	private String name;
 	private int balance;

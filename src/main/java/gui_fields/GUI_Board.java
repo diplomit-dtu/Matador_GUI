@@ -22,6 +22,7 @@ import gui_codebehind.Observer;
 import gui_codebehind.SwingComponentFactory;
 import gui_fields.GUI_Player.IPlayerNameValidator;
 import gui_resources.Attrs;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The board
@@ -49,9 +50,6 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
     
     public static Point[] points;
     public static int nextPoint = 0;
-//    static{
-//        generateSquareBoard(40);
-//    }
 
     private static void generateSquareBoard(int sideLength) {
         int offSet = (10-sideLength)/2;
@@ -88,8 +86,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.fields = fields;
         nextPoint = 0;
         
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        this.setTitle(Attrs.getString("GUI_Board.Title")+(year%100));
+        this.setTitle(Attrs.getString("GUI_Board.Title"));
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
         for(GUI_Field field : fields){
@@ -172,12 +169,14 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.base.add(this.inputPanel, this.factory.createGridBagConstraints(labelOffset, labelOffset, 9, 3));
     }
 
+
     /**
      * Adds Input components to the board
      * @param message The message for the user
      * @param components : input components (buttons, textfields, drop-down, etc.)
      */
     public void getUserInput(String message, Component... components) {
+        this.clearInputPanel();
         this.messageArea.setText(message);
         for(Component c : components) {
             this.inputPanel.add(c);
@@ -185,6 +184,7 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         this.inputPanel.validate();
         this.inputPanel.repaint();
     }
+
 
     /**
      * Resets input panel
@@ -374,21 +374,22 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
         }
         player.setNumber(i);
         player.addObserver(this);
-        player.setValidator(new IPlayerNameValidator() {
-            @Override
-            public boolean checkName(String name) {
-                if(name == null || name.isEmpty()) return false;
-                for(GUI_Player p : playerList){
-                    if(p != null && name.equals(p.getName())) return false;
-                }
-                return true;
+        player.setValidator(name -> {
+            if(name == null || name.isEmpty()) return false;
+            for(GUI_Player p : playerList){
+                if(p != null && name.equals(p.getName())) return false;
             }
+            return true;
         });
         player.getCar().addObserver(this);
+        player.getCar().addPositionChangedListener(this::carPositionChanged);
+
         playerList[i] = player;
         updatePlayers();
         return true;
     }
+
+
     /**
      * Updates the board in order to correct player balances
      */
@@ -458,4 +459,48 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
     public void onUpdate() {
         updatePlayers();
     }
+
+
+    /**
+     * Method which is called when the position of a Car has changed, and the display
+     * needs to be updated.
+     */
+    private void carPositionChanged(GUI_Car car, GUI_Field oldPosition, GUI_Field newPosition ){
+        if( newPosition != null && !hasField(newPosition) )
+            throw new IllegalArgumentException("Car's old position is not a field added to the GUI");
+
+        GUI_Player player = getCarOwner(car);
+        if( player == null )
+            throw new NullPointerException("Player was null and it was not expected - contact developers!");
+
+        if( oldPosition != null )
+            oldPosition.drawCar(player, false);
+
+        if( newPosition != null )
+            newPosition.drawCar(player, true);
+    }
+
+
+    /**
+     * Utility method to check if this Board contains the given GUI_Field
+     */
+    public boolean hasField(@NotNull GUI_Field field){
+        for( GUI_Field match : fields ){
+            if( match.equals(field) ) return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * @return  Returns the GUI_Player whose car is the given car, or null if no GUI_Player owns this car
+     */
+    public GUI_Player getCarOwner(GUI_Car car) {
+        for( GUI_Player player : playerList ) {
+            if( player.getCar().equals(car) ) return player;
+        }
+        return null;
+    }
+
+
 }

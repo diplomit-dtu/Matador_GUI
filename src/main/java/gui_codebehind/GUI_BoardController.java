@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+
 import gui_fields.GUI_Board;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import gui_input.EnterButton;
+import gui_input.IntegerInput;
+import gui_input.StringInput;
 
 /**
  * Provides access to GUI
@@ -26,7 +27,8 @@ public final class GUI_BoardController {
     private String userInput = null;
     private GUI_Board board;
     private static volatile Random rand = null;
-    
+
+
     public static Random rand() {
         if(rand == null) {
             synchronized (GUI_BoardController.class) {
@@ -35,121 +37,60 @@ public final class GUI_BoardController {
         }
         return rand;
     }
+
+
     /**
      * Contains service methods for board for controlling the board.
-     * @param fields 
      */
     public GUI_BoardController(GUI_Field[] fields) {
         this.board = new GUI_Board(fields);
     }
+
+
     public GUI_BoardController(GUI_Field[] fields, Color backGroundColor) {
         this.board = new GUI_Board(fields, backGroundColor);
     }
+
+
     /**
      * Displays a message for the user. The user presses OK when the message is read Is a breaking
      * call.<br>
      * @param msg The message for the user.
      */
     public void showMessage(String msg) {
+        board.clearInputPanel();
         final CountDownLatch latch = new CountDownLatch(1);
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUI_BoardController.this.board.clearInputPanel();
-                latch.countDown();
-            }
+
+        EnterButton okButton = new EnterButton("OK", () -> {
+            GUI_BoardController.this.board.clearInputPanel();
+            latch.countDown();
         });
+
         
-        okButton.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) { }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) { }
-        });
-        
-        this.board.getUserInput(msg, okButton);
-        getFocus(okButton);
+        this.board.getUserInput(msg, okButton.getJButton());
+        okButton.focus();
         try {
             latch.await();
         } catch(InterruptedException ex) {
             ex.printStackTrace();
         }
     }
-    private void getFocus(JButton okButton) {
-        try {
-            Thread.sleep(100);
-            okButton.requestFocusInWindow();
-        } catch (InterruptedException e1) {
-            
-        }
-    }
+
+
     /**
      * Displays a message for the user and a textfield for the user to fill out.<br>
      * Is a breaking call.<br>
      * @param msg The message for the user.
+     * @param minLength Minimum length of the input text (inclusive)
+     * @param maxLength Maximum length of the input text (inclusive)
      * @return The text entered by the user.
      */
-    public String getUserString(String msg) {
-        final CountDownLatch latch = new CountDownLatch(1);
-        final JTextField tf = new JTextField(20);
-        
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUI_BoardController.this.userInput = tf.getText();
-                GUI_BoardController.this.board.clearInputPanel();
-                latch.countDown();
-            }
-        });
-        tf.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) { }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.userInput = tf.getText();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) { }
-        });
-        okButton.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) { }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.userInput = tf.getText();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) { }
-        });
-        this.board.getUserInput(msg, tf, okButton);
-        tf.requestFocusInWindow();
-        try {
-            latch.await();
-            return this.userInput;
-        } catch(InterruptedException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+    public String getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace) {
+        StringInput input = new StringInput(board, msg, minLength, maxLength, allowWhitespace);
+        return input.getResult();
     }
+
+
     /**
      * Displays a message for the user and a textfield for the user to fill out. Only numbers are
      * allowed if the number isn't in range the user can't press OK.<br>
@@ -159,77 +100,13 @@ public final class GUI_BoardController {
      * @param max The high end of the valid range (inclusive).
      * @return The number entered by the user.
      */
-    public int getUserInteger(String msg, final int min, final int max) {
-        if((min < 0) || (max < 1) || (max <= min)) {
-            return -1;
-        }
-        if("".equals(msg)) {
-            return -1;
-        }
-        final CountDownLatch latch = new CountDownLatch(1);
-        final JButton okButton = new JButton("OK");
-        okButton.setEnabled(false);
-        
-        final JTextField tf = new JTextField(20);
-        tf.setHorizontalAlignment(SwingConstants.RIGHT);
-        tf.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent ke) {}
-            @Override
-            public void keyReleased(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.userInput = tf.getText();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-                String input = tf.getText() + ke.getKeyChar();
-                String output = "";
-                for(int i = 0; i < input.toCharArray().length - 1; i++) {
-                    char c = input.toCharArray()[i];
-                    if(c >= '0' && c <= '9' && i < 9) {
-                        output += c;
-                    }
-                }
-                tf.setText(output);
-                int val = -1;
-                try {
-                    val = Integer.parseInt(output);
-                    if((min <= val) && (val <= max)) {
-                        tf.setForeground(Color.BLACK);
-                    } else {
-                        tf.setForeground(Color.RED);
-                    }
-                } catch(Exception ex) {
-                    tf.setForeground(Color.RED);
-                }
-                
-                okButton.setEnabled(tf.getForeground().equals(Color.BLACK));
-            }
-            @Override
-            public void keyPressed(KeyEvent ke) {}
-        });
-        okButton.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUI_BoardController.this.userInput = tf.getText();
-                GUI_BoardController.this.board.clearInputPanel();
-                latch.countDown();
-            }
-        });
-        this.board.getUserInput(msg, tf, okButton);
-        
-        try {
-            latch.await();
-            return Integer.parseInt(this.userInput);
-        } catch(InterruptedException ex) {
-            ex.printStackTrace();
-            return -1;
-        } catch(NumberFormatException ex) {
-            ex.printStackTrace();
-            return -1;
-        }
+    public int getUserInteger( String msg, final int min, final int max) {
+        board.clearInputPanel();
+        IntegerInput input = new IntegerInput(this.board, msg, min, max);
+        return input.getResult();
     }
+
+
     /**
      * Displays a message for the user along with a row of buttons.<br>
      * Is a breaking call.<br>
@@ -242,44 +119,25 @@ public final class GUI_BoardController {
             return null;
         }
         final CountDownLatch latch = new CountDownLatch(1);
+
         JButton[] buttons = new JButton[buttonTexts.length];
-        JButton primaryButton = null;
         for(int i = 0; i < buttonTexts.length; i++) {
             String string = buttonTexts[i];
             if("".equals(string)) {
                 return null;
             }
-            JButton btn = new JButton(string);
-            primaryButton = btn;
-            btn.setName(string);
-            btn.addActionListener(new ActionListener() {
-                
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    GUI_BoardController.this.userInput = ((JButton) e.getSource()).getName();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
+
+            EnterButton button = new EnterButton(string, () -> {
+                GUI_BoardController.this.userInput = string;
+                GUI_BoardController.this.board.clearInputPanel();
+                latch.countDown();
             });
-            btn.addKeyListener(new KeyListener() {
-                @Override
-                public void keyTyped(KeyEvent e) { }
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                        GUI_BoardController.this.userInput = ((JButton) e.getSource()).getName();
-                        GUI_BoardController.this.board.clearInputPanel();
-                        latch.countDown();
-                    }
-                }
-                @Override
-                public void keyPressed(KeyEvent e) { }
-            });
-            
-            buttons[i] = btn;
+
+            buttons[i] = button.getJButton();
+            button.focus();
         }
+
         this.board.getUserInput(msg, buttons);
-        getFocus(primaryButton);
         
         try {
             latch.await();
@@ -308,35 +166,14 @@ public final class GUI_BoardController {
             }
         }
         final JComboBox<String> dropdown = new JComboBox<String>(options);
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUI_BoardController.this.userInput = dropdown.getSelectedItem().toString();
-                GUI_BoardController.this.board.clearInputPanel();
-                latch.countDown();
-            }
+
+        EnterButton okButton = new EnterButton("OK", () -> {
+            GUI_BoardController.this.userInput = dropdown.getSelectedItem().toString();
+            GUI_BoardController.this.board.clearInputPanel();
+            latch.countDown();
         });
-        
-        okButton.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) { }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    GUI_BoardController.this.userInput = dropdown.getSelectedItem().toString();
-                    GUI_BoardController.this.board.clearInputPanel();
-                    latch.countDown();
-                }
-            }
-            @Override
-            public void keyPressed(KeyEvent e) { }
-        });
-        
-        
-        this.board.getUserInput(msg, dropdown, okButton);
-        okButton.requestFocusInWindow();
+
+        this.board.getUserInput(msg, dropdown, okButton.getJButton());
         try {
             latch.await();
             return this.userInput;

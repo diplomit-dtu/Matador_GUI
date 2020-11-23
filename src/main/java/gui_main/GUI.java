@@ -5,6 +5,7 @@ import gui_codebehind.GUI_BoardController;
 import gui_codebehind.GUI_FieldFactory;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -119,39 +120,58 @@ public final class GUI {
 
     /**
      * Displays a message to the user, and prompt the user for a text input.
+     * The text input cannot be empty, but may contain whitespace.
+     *
      * Blocks/hangs until an input has been entered.
      *
      * @param msg The message that prompts the user.
-     * @return The string that the user has entered.
+     * @return The string that the user has entered
      */
-    public String getUserString(String msg) {
-        return boardController.getUserString(msg);
-    }
-
-
-
-    /**
-     * Displays a message to the user and awaits the integer response. Only
-     * values between min and max are allowed.
-     *
-     * @param msg The message that promts the user.
-     * @param min The minimum value the user is allowed to enter.
-     * @param max The maximum value the user is allowed to enter.
-     * @return The integer that the user selected.
-     */
-    public int getUserInteger(String msg, int min, int max) {
-        return boardController.getUserInteger(msg, min, max);
+    public @NotNull String getUserString(String msg) {
+        return boardController.getUserString(msg, 1, Integer.MAX_VALUE, true);
     }
 
 
     /**
-     * Displays a message to the user and awaits the integer response.<br>
+     * Displays a message to the user, and prompt the user for a text input with specific
+     * attributes (parameters). The method ensures that the returned string matches the
+     * given attributes.
      *
-     * @param msg The message that promts the user.
-     * @return The integer that the user selected.
+     * Blocks/hangs until an input has been entered.
+     *
+     * @param msg The message that prompts the user.
+     * @param minLength The minimum length of the user input. Must be at least 0 (which allows empty strings)
+     * @param maxLength The maximum length the user input. Must not be less than 'minLength' and larger than 0.
+     * @param allowWhitespace Whether or not to allow whitespace in input (spaces, tabs, newlines)
+     * @return String which matches the parameters, and is not null
+     */
+    public @NotNull String getUserString(String msg, int minLength, int maxLength, boolean allowWhitespace) {
+        return boardController.getUserString(msg, minLength, maxLength, allowWhitespace);
+    }
+
+
+    /**
+     * Prompts the user to enter any integer value between minValue and maxValue (both inclusive).
+     *
+     * @param msg Message to display to the user
+     * @param minValue The minimum value the user is allowed to enter (inclusive)
+     * @param maxValue The maximum value the user is allowed to enter (inclusive)
+     * @return The integer that the user selected
+     * @throws IllegalArgumentException If the maximum value is less than the minimum value
+     */
+    public int getUserInteger(String msg, int minValue, int maxValue) {
+        return boardController.getUserInteger(msg, minValue, maxValue);
+    }
+
+
+    /**
+     * Prompts the user to enter any integer value.
+     *
+     * @param msg Message to display to the user
+     * @return The integer that the user selected (between Integer.MIN_VALUE and Integer.MAX_VALUE)
      */
     public int getUserInteger(String msg) {
-        return boardController.getUserInteger(msg, 0, 999999999);
+        return boardController.getUserInteger(msg, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
 

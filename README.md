@@ -24,7 +24,7 @@ Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny ve
     Højre klik på `pom.xml` og tryk på `Maven → Reload project`
 
  3. __Opdatér versionsnummeret i pom.xml__  
-    Konventionen er, at hvis der laves ændringer der gør at projektet ikke er bagudkompatibelt, skal _major_ versionen inkrementeres (f.eks. fra 3.x.x to 4.x.x).
+    Følg versioneringskonventionen beskrevet i [Versionspolitik](#versionspolitik)
 
  4. __Opret GitHub credentials i Maven__  
     Man skal angive sine GitHub-loginoplysninger til Maven, for at den kan offentliggøre den nye version til repoet
@@ -66,3 +66,17 @@ Når der er lavet ændringer i biblioteket, skal det offentligøres som en ny ve
 
  6. __Opdatér GUI-guiden__  
     [Guiden til GUI'en](https://github.com/diplomit-dtu/MatadorGUIGuide) skal opdateres seperat. Hvis ikke den nye version, behøver ændringer i guiden, kan man blot lave en ny branch ud fra den nuværende version.
+
+
+## Versionspolitik
+Bibliotekets versionsnummer er beskrevet med 3 niveaue3: `major.minor.patch`. Hvor hvert niveau betyder følgende:
+
+ - __`major`__  
+   Der er laves markante ændringer, der ikke behøver at være kompatible med tidligere versioner. Deprecated metoder kan fjernes.
+
+ - __`minor`__  
+   Små nye features. Metoder kan deprecates, men må ikke fjernes og skal stadig fungere.
+
+ - __`patch`__  
+   Små bug fixes, og dokumentation af kode, der ikke bringer nye features til brugeren.
+   
