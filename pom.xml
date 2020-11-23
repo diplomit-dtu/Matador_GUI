@@ -3,7 +3,7 @@
 
     <groupId>diplomitdtu</groupId>
     <artifactId>matadorgui</artifactId>
-    <version>3.2.0-SNAPSHOT</version>
+    <version>3.2.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
+            <version>20.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -65,6 +65,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -79,6 +80,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -122,21 +124,25 @@
                   <message>Maven artifacts for ${project.version}</message>
                   <!-- disable webpage processing -->
                   <noJekyll>true</noJekyll>
+
                   <!-- matches distribution management repository url above -->
                   <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
                   <!-- remote branch name -->
+                  <!--<branch>refs/heads/repository</branch>-->
                   <branch>refs/heads/repository</branch>
                   <!-- If you remove this then the old artifact will be removed and new
                    one will replace. But with the merge tag you can just release by changing
                                                     the version -->
                   <merge>true</merge>
+
                   <includes>
                     <include>**/*</include>
-                    </includes>
+                  </includes>
+
                     <!-- github repo name -->
-                    <repositoryName>Matador_GUI</repositoryName>
-                    <!-- github username -->
-                    <repositoryOwner>diplomit-dtu</repositoryOwner>
+                  <repositoryName>Matador_GUI</repositoryName>
+                  <!-- github username -->
+                  <repositoryOwner>diplomit-dtu</repositoryOwner>
                 </configuration>
                 <executions>
                     <execution>
