@@ -3,7 +3,7 @@
 
     <groupId>diplomitdtu</groupId>
     <artifactId>matadorgui</artifactId>
-    <version>3.1.8</version>
+    <version>3.1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -42,8 +42,6 @@
     </dependencies>
 
     <build>
-        <!--<sourceDirectory>Desktop_GUI/GUI</sourceDirectory>-->
-
         <resources>
           <resource>
             <directory>src/main/java/</directory>
@@ -55,7 +53,7 @@
 
         <plugins>
 
-            <!-- Plugin to attach sources to the jar-->
+            <!-- Plugin to attach source code to the jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -144,15 +142,6 @@
                     </execution>
                 </executions>
             </plugin>
-    <!--
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                <source>1.6</source>
-                <target>1.6</target>
-                </configuration>
-            </plugin>-->
 
         </plugins>
     </build>
