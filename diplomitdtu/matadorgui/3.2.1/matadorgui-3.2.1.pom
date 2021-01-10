@@ -1,0 +1,157 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>diplomitdtu</groupId>
+    <artifactId>matadorgui</artifactId>
+    <version>3.2.1</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- Server corresponds to -->
+        <github.global.server>github</github.global.server>
+
+    </properties>
+
+    <!-- Target for local maven compilation -->
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
+        </repository>
+    </distributionManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.0</version>
+            <type>maven-plugin</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.2.0</version>
+            <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>20.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+          <resource>
+            <directory>src/main/java/</directory>
+            <excludes>
+              <exclude>**/*.java</exclude>
+            </excludes>
+          </resource>
+        </resources>
+
+        <plugins>
+
+            <!-- Plugin to attach source code to the jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- PLugin to attach java documentation to the jar, such that you can see it from within the project-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Problems when attaching javadoc without this-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+
+            <!-- Problems when attaching javadoc without this-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+            <!-- plugin for maven artifact compilation -->
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                       <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+                </configuration>
+            </plugin>
+
+            <!-- plugin to commit to github -->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                  <!-- git commit message -->
+                  <message>Maven artifacts for ${project.version}</message>
+                  <!-- disable webpage processing -->
+                  <noJekyll>true</noJekyll>
+
+                  <!-- matches distribution management repository url above -->
+                  <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                  <!-- remote branch name -->
+                  <!--<branch>refs/heads/repository</branch>-->
+                  <branch>refs/heads/repository</branch>
+                  <!-- If you remove this then the old artifact will be removed and new
+                   one will replace. But with the merge tag you can just release by changing
+                                                    the version -->
+                  <merge>true</merge>
+
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+
+                    <!-- github repo name -->
+                  <repositoryName>Matador_GUI</repositoryName>
+                  <!-- github username -->
+                  <repositoryOwner>diplomit-dtu</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                             <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
