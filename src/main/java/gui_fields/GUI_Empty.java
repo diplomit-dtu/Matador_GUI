@@ -9,7 +9,7 @@ public class GUI_Empty extends GUI_Field {
         this(BASECOLOR, Color.BLACK, "", "", "");
     }
     public GUI_Empty(Color bgColor, Color fgColor, String title, String subText, String description) {
-        super(bgColor, fgColor, subText, description, null);
+        super(bgColor, fgColor, title, subText, description, null);
     }
     @Override
     protected void displayOnCenter(GUI_Player[] playerList) { }
