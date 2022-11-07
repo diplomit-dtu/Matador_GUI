@@ -1,6 +1,7 @@
 package gui.fields;
 
 import java.awt.Color;
+import java.net.URL;
 import javax.swing.JLabel;
 import gui.codebehind.GUI_Center;
 import gui.codebehind.SwingComponentFactory;
@@ -35,7 +36,7 @@ public final class GUI_Chance extends GUI_Field {
     @Override
     protected void displayOnCenter(GUI_Player[] playerList) {
         super.displayOnCenter(playerList);
-        String path = Attrs.getImagePath("GUI_Field.Image.Luck");
+        URL path = Attrs.getImagePath("GUI_Field.Image.Luck");
         GUI_Center.label[1].setIcon(this.factory.createIcon(path));
         GUI_Center.label[2].setText("__________________________");
         GUI_Center.label[3].setText(this.description);

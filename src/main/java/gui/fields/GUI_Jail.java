@@ -1,6 +1,7 @@
 package gui.fields;
 
 import java.awt.Color;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import gui.codebehind.GUI_Center;
@@ -23,8 +24,8 @@ public final class GUI_Jail extends GUI_Field{
 
 		if("default".equalsIgnoreCase(picture)){
 			int p = (picCounter++ % 2);
-			String path1 = Attrs.getImagePath("GUI_Field.Image.GoToJail");
-			String path2 = Attrs.getImagePath("GUI_Field.Image.Jail");
+			URL path1 = Attrs.getImagePath("GUI_Field.Image.GoToJail");
+			URL path2 = Attrs.getImagePath("GUI_Field.Image.Jail");
             this.icon = this.factory.createIcon(p>0 ? path1 : path2);
 		}else{
 			try{

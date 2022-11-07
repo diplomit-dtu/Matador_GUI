@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -57,8 +58,8 @@ public class SwingComponentFactory {
 	 * @param path - absolute path - start with / to set path relative to project
 	 * @return an ImageIcon
 	 */
-	public ImageIcon createIcon(String path) {
-		return new ImageIcon(getClass().getResource(path));
+	public ImageIcon createIcon(URL path) {
+		return new ImageIcon(path);
 	}
 	/**
 	 * Sets the size of a component. Short for calling setMaximumSize, setMinimimSize and
@@ -79,10 +80,10 @@ public class SwingComponentFactory {
 	 * @param src The source
 	 * @return A new image object
 	 */
-	public BufferedImage createImage(String src) {
+	public BufferedImage createImage(URL src) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource(src));
+			image = ImageIO.read(src);
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}

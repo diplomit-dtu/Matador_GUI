@@ -1,10 +1,11 @@
 package gui.resources;
 
+import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class Attrs {
-    private static final String BUNDLE_NAME = "gui_resources.attributes";
+    private static final String BUNDLE_NAME = "attributes";
     
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
         
@@ -16,11 +17,10 @@ public class Attrs {
             throw new NullPointerException("Bad key [" + key + "]!");
         }
     }
-    public static String getImagePath(String key) {
+    public static URL getImagePath(String key) {
         try {
-            String path = RESOURCE_BUNDLE.getString("Image.Path");
             String file = RESOURCE_BUNDLE.getString(key);
-            return path + file;
+            return Attrs.class.getClassLoader().getResource(file);
         } catch (MissingResourceException e) {
             throw new NullPointerException("Bad key [" + key + "]!");
         }

@@ -1,6 +1,7 @@
 package gui.fields;
 
 import java.awt.Color;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import gui.codebehind.GUI_Center;
@@ -24,7 +25,7 @@ public final class GUI_Shipping extends GUI_Ownable {
 		
 		if("default".equalsIgnoreCase(picture)) {
 			int p = (picCounter++ % 4) + 1;
-			String path = Attrs.getImagePath(String.format("GUI_Field.Image.Ferry%d", p));
+			URL path = Attrs.getImagePath(String.format("GUI_Field.Image.Ferry%d", p));
             this.icon = this.factory.createIcon(path);
 		} else {
 			try {

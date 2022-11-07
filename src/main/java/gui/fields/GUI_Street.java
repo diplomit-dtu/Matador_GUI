@@ -1,6 +1,7 @@
 package gui.fields;
 
 import java.awt.Color;
+import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -58,7 +59,7 @@ public final class GUI_Street extends GUI_Ownable {
         if(houseCount == 0){
             icon = null;
         } else {
-            String path = Attrs.getImagePath(String.format("GUI_Field.Image.House%d", houseCount));
+            URL path = Attrs.getImagePath(String.format("GUI_Field.Image.House%d", houseCount));
             icon = this.factory.createIcon(path);
         }
         this.houseLabel.setIcon(icon);
@@ -66,7 +67,7 @@ public final class GUI_Street extends GUI_Ownable {
     public void setHotel(boolean hasHotel) {
         Icon icon;
         if(hasHotel){
-            String path = Attrs.getImagePath("GUI_Field.Image.Hotel");
+            URL path = Attrs.getImagePath("GUI_Field.Image.Hotel");
             icon = this.factory.createIcon(path);
         } else {
             icon = null;

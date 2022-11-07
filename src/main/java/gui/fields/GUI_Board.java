@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -114,8 +115,8 @@ public final class GUI_Board extends javax.swing.JFrame implements Observer {
      */
     private void makeDice() {
         try {
-            String path = Attrs.getImagePath("GUI_Board.Dice");
-            BufferedImage image = ImageIO.read(getClass().getResource(path));
+            URL path = Attrs.getImagePath("GUI_Board.Dice");
+            BufferedImage image = ImageIO.read(path);
             for(int value = 0; value < 6; value++) {
                 int x = 0;
                 int y = 55 * value;

@@ -1,6 +1,7 @@
 package gui.fields;
 
 import java.awt.Color;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import gui.codebehind.GUI_Center;
@@ -22,7 +23,7 @@ public final class GUI_Refuge extends GUI_Field {
         super(bgColor, fgColor, title, subText, description);
         
         if ("default".equalsIgnoreCase(picture)) {
-            String path = Attrs.getImagePath("GUI_Field.Image.Cones");
+            URL path = Attrs.getImagePath("GUI_Field.Image.Cones");
             this.icon = this.factory.createIcon(path);
         } else {
             try {

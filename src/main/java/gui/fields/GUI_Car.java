@@ -2,6 +2,7 @@ package gui.fields;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -147,10 +148,10 @@ public final class GUI_Car extends Observable {
     // Constants
     private static final int WIDTH = 40;
     private static final int HEIGHT = 21;
-    private static final String PATH = Attrs.getImagePath("GUI_Car.Image");
+    private static final URL PATH = Attrs.getImagePath("GUI_Car.Image");
     private static final int PRIMARYCOLORSTANDIN = 0xffff0000;
     private static final Color[] COLORS = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.BLACK, Color.WHITE };
-    private static final Map<Pattern, String> patternImages = new HashMap<Pattern, String>();
+    private static final Map<Pattern, URL> patternImages = new HashMap<>();
     static {
         patternImages.put(Pattern.DIAGONAL_DUAL_COLOR, Attrs.getImagePath("GUI_Car.Image.Pattern.Diagonal_Dual_Color"));
         patternImages.put(Pattern.DOTTED, Attrs.getImagePath("GUI_Car.Image.Pattern.Dotted"));
@@ -214,7 +215,7 @@ public final class GUI_Car extends Observable {
 
     private BufferedImage paintDiagonalDualColor(BufferedImage img,
         Color c1, Color c2) {
-        String path = patternImages.get(Pattern.DIAGONAL_DUAL_COLOR);
+        URL path = patternImages.get(Pattern.DIAGONAL_DUAL_COLOR);
         BufferedImage patternImg =
             new SwingComponentFactory().createImage(path);
         return paintPattern(patternImg, img, c1, c2);
@@ -256,19 +257,19 @@ public final class GUI_Car extends Observable {
         return img;
     }
     private BufferedImage paintCheckered(BufferedImage img, Color c1, Color c2) {
-        String path = patternImages.get(Pattern.CHECKERED);
+        URL path = patternImages.get(Pattern.CHECKERED);
         BufferedImage patternImg =
             new SwingComponentFactory().createImage(path);
         return paintPattern(patternImg, img, c1, c2);
     }
     private BufferedImage paintDotted(BufferedImage img, Color c1, Color c2) {
-        String path = patternImages.get(Pattern.DOTTED);
+        URL path = patternImages.get(Pattern.DOTTED);
         BufferedImage patternImg =
             new SwingComponentFactory().createImage(path);
         return paintPattern(patternImg, img, c1, c2);
     }
     private BufferedImage paintZebra(BufferedImage img, Color c1, Color c2) {
-        String path = patternImages.get(Pattern.ZEBRA);
+        URL path = patternImages.get(Pattern.ZEBRA);
         BufferedImage patternImg =
             new SwingComponentFactory().createImage(path);
         return paintPattern(patternImg, img, c1, c2);

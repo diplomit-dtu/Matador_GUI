@@ -3,6 +3,7 @@ package gui.codebehind;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -89,8 +90,8 @@ public final class GUI_Center{
 	public void displayDefault(){
 		centerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK, 3));
 		clearLabels();
-		String path = Attrs.getImagePath("GUI_Field.Image.Luck");
-		label[0].setIcon(new ImageIcon(getClass().getResource(path)));
+		URL path = Attrs.getImagePath("GUI_Field.Image.Luck");
+		label[0].setIcon(new ImageIcon(path));
 		label[0].setText(" ");
 		label[0].setFont(new Font(label[1].getFont().getName(), Font.BOLD, 20));
 		label[0].setVerticalTextPosition(SwingConstants.TOP);
