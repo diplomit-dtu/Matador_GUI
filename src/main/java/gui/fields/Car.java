@@ -17,20 +17,20 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  *  Class representing the car images on the board. A car will automatically
- *  be created for a {@link GUI_Player#GUI_Player(String)} on construction.<br><br>
+ *  be created for a {@link Player#Player(String)} on construction.<br><br>
  *
  *  Cars won't be placed on the board automatically, but has to be placed using
- *  the {@link GUI_Car#setPosition(GUI_Field)} method.
+ *  the {@link Car#setPosition(Field)} method.
  *
  *  @author Ronnie, Malte
  */
-public final class GUI_Car extends Observable {
+public final class Car extends Observable {
 
     // Enum representing different car typess
     public enum Type {
         CAR(0, 15), TRACTOR(1, 11), RACECAR(2, 13), UFO(3, 10);
         private final int x, h;
-        private final int width = GUI_Car.WIDTH + 1;
+        private final int width = Car.WIDTH + 1;
         public final static int size = Type.values().length;
         Type(int no, int h) {
             this.x = no * this.width;
@@ -71,15 +71,15 @@ public final class GUI_Car extends Observable {
     private Pattern pattern;
     private BufferedImage image;
 
-    private GUI_Field position = null;
+    private Field position = null;
     private ArrayList<PositionChangedListener> positionChangedListeners = new ArrayList<>();
 
 
     /**
-     * Default constructor for GUI_Car. Constructs a regular car, with no pattern
+     * Default constructor for Car. Constructs a regular car, with no pattern
      * and a random color.
      */
-    public GUI_Car(){
+    public Car(){
         this(null, null, Type.CAR, Pattern.FILL);
     }
 
@@ -92,7 +92,7 @@ public final class GUI_Car extends Observable {
      * @param type          Type of car. Either CAR, TRACTOR, UFO or RACECAR.
      * @param pattern       Pattern of the car FILL, DOTTED, HORIZONTOL_GRADIENT etc.
      */
-    public GUI_Car(Color primaryColor, Color patternColor, Type type, Pattern pattern){
+    public Car(Color primaryColor, Color patternColor, Type type, Pattern pattern){
         this.primaryColor = primaryColor;
         this.secondaryColor = patternColor;
         this.type = type;
@@ -148,15 +148,15 @@ public final class GUI_Car extends Observable {
     // Constants
     private static final int WIDTH = 40;
     private static final int HEIGHT = 21;
-    private static final URL PATH = Attrs.getImagePath("GUI_Car.Image");
+    private static final URL PATH = Attrs.getImagePath("Car.Image");
     private static final int PRIMARYCOLORSTANDIN = 0xffff0000;
     private static final Color[] COLORS = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.BLACK, Color.WHITE };
     private static final Map<Pattern, URL> patternImages = new HashMap<>();
     static {
-        patternImages.put(Pattern.DIAGONAL_DUAL_COLOR, Attrs.getImagePath("GUI_Car.Image.Pattern.Diagonal_Dual_Color"));
-        patternImages.put(Pattern.DOTTED, Attrs.getImagePath("GUI_Car.Image.Pattern.Dotted"));
-        patternImages.put(Pattern.CHECKERED, Attrs.getImagePath("GUI_Car.Image.Pattern.Checkered"));
-        patternImages.put(Pattern.ZEBRA, Attrs.getImagePath("GUI_Car.Image.Pattern.Zebra"));
+        patternImages.put(Pattern.DIAGONAL_DUAL_COLOR, Attrs.getImagePath("Car.Image.Pattern.Diagonal_Dual_Color"));
+        patternImages.put(Pattern.DOTTED, Attrs.getImagePath("Car.Image.Pattern.Dotted"));
+        patternImages.put(Pattern.CHECKERED, Attrs.getImagePath("Car.Image.Pattern.Checkered"));
+        patternImages.put(Pattern.ZEBRA, Attrs.getImagePath("Car.Image.Pattern.Zebra"));
     }
     
     
@@ -295,14 +295,14 @@ public final class GUI_Car extends Observable {
      * If the new position is null, then the Car will be removed from the board.
      *
      * If the new position is not the same as the existing, all listeners registered
-     * through {@link GUI_Car#addPositionChangedListener(PositionChangedListener)} will be notified.
+     * through {@link Car#addPositionChangedListener(PositionChangedListener)} will be notified.
      *
      * @param newPosition New position of the car. If not null, the field must be added to the GUI
      */
-    public void setPosition(@Nullable GUI_Field newPosition){
+    public void setPosition(@Nullable Field newPosition){
         if( Objects.equals(newPosition, position) ) return;
 
-        GUI_Field oldPosition = position;
+        Field oldPosition = position;
         position = newPosition;
         for( PositionChangedListener listener : positionChangedListeners) {
             listener.positionChanged(this, oldPosition, newPosition);
@@ -313,7 +313,7 @@ public final class GUI_Car extends Observable {
     /**
      * @return  The position of this Car, or null of the car is not placed on any field
      */
-    public GUI_Field getPosition(){
+    public Field getPosition(){
         return position;
     }
 
@@ -330,7 +330,7 @@ public final class GUI_Car extends Observable {
 
     @Override
     public String toString() {
-        return "GUI_Car [primaryColor=" + primaryColor + ", secondaryColor="
+        return "Car [primaryColor=" + primaryColor + ", secondaryColor="
             + secondaryColor + ", type=" + type + ", pattern=" + pattern
             + ", image=" + image + "]";
     }
@@ -340,7 +340,7 @@ public final class GUI_Car extends Observable {
      * Signature of listener to be called when a Car's field position has changed
      */
     public interface PositionChangedListener {
-        void positionChanged(GUI_Car car, GUI_Field oldPosition, GUI_Field newPosition);
+        void positionChanged(Car car, Field oldPosition, Field newPosition);
     }
     
     

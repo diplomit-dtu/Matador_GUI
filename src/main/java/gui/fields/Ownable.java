@@ -2,21 +2,22 @@ package gui.fields;
 
 import java.awt.Color;
 import javax.swing.border.Border;
-import gui.codebehind.GUI_Center;
+
+import gui.codebehind.Center;
 import gui.codebehind.SwingComponentFactory;
 import gui.resources.Attrs;
 
-public abstract class GUI_Ownable extends GUI_Field{
+public abstract class Ownable extends Field {
 	public String ownableLable, rentLable;
 	private Color color1, color2;
 	protected String ownerName;
 	private String rent;
 	
-	public GUI_Ownable(Color bgColor, Color fgColor, String title, String subText, String description, String leje){
+	public Ownable(Color bgColor, Color fgColor, String title, String subText, String description, String leje){
 		super(bgColor, fgColor, title, subText, description);
 		this.rent = leje;
-		ownableLable = Attrs.getString("GUI_Field.Label.owns");
-		rentLable = Attrs.getString("GUI_Field.Label.rent");
+		ownableLable = Attrs.getString("Field.Label.owns");
+		rentLable = Attrs.getString("Field.Label.rent");
 		if(color1 == null) color1 = Color.BLACK;
         if(color2 == null) color2 = new Color(color1.getRed(), color1.getGreen(), color1.getBlue());
 	}
@@ -56,16 +57,16 @@ public abstract class GUI_Ownable extends GUI_Field{
 	public void setRent(String rent){ this.rent = rent; }
 	
 	@Override
-	protected void displayOnCenter(GUI_Player[] playerList){
+	protected void displayOnCenter(Player[] playerList){
 		super.displayOnCenter(playerList);
 		Border border;
 		if(this.ownerName != null){
 			SwingComponentFactory factory = new SwingComponentFactory();
 			border = factory.createDashedBorder(3, 10, color1, color2);
-			GUI_Center.getInstance().getCenterPanel().setBorder(border);
+			Center.getInstance().getCenterPanel().setBorder(border);
 		}else{
 			border = javax.swing.BorderFactory.createLineBorder(Color.BLACK, 3);
 		}
-		GUI_Center.getInstance().getCenterPanel().setBorder(border);
+		Center.getInstance().getCenterPanel().setBorder(border);
 	}
 }

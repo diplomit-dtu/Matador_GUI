@@ -8,9 +8,9 @@ import java.awt.event.MouseListener;
  * @author Ronnie
  */
 public class CenterMouseListener implements MouseListener{
-	private GUI_Center center;
+	private Center center;
 	
-	public CenterMouseListener(GUI_Center center){
+	public CenterMouseListener(Center center){
 		this.center = center;
 	}
 	/**
@@ -18,7 +18,7 @@ public class CenterMouseListener implements MouseListener{
      */
 	@Override
 	public void mouseClicked(MouseEvent e){
-		GUI_Center.getInstance().displayChanceCard();
+		Center.getInstance().displayChanceCard();
 	}
 	/**
      * Called when the mouse is no longer over the centerField

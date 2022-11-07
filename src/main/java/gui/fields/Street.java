@@ -5,20 +5,21 @@ import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import gui.codebehind.GUI_Center;
+
+import gui.codebehind.Center;
 import gui.codebehind.SwingComponentFactory;
 import gui.resources.Attrs;
 
-public final class GUI_Street extends GUI_Ownable {
+public final class Street extends Ownable {
     private static final int TITLEHEIGHT = 24;
     private static final int SUBTEXTHEIGHT = 10;
     private JLabel houseLabel;
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public GUI_Street(){
+    public Street(){
         this(TITLE, SUBTEXT, DESCRIPTION, RENT, BG_COLOR, FG_COLOR);
     }
-    public GUI_Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
+    public Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
         title = title.replace("\n", "<BR>");
         
@@ -36,7 +37,7 @@ public final class GUI_Street extends GUI_Ownable {
         super.layered.setLayer(super.subTextLabel, 1);
         super.layered.setLayer(this.houseLabel, 0);
     }
-    public GUI_Street setTextColor(Color textColor) {
+    public Street setTextColor(Color textColor) {
         this.titleLabel.setForeground(textColor);
         this.subTextLabel.setForeground(textColor);
         return this;
@@ -59,7 +60,7 @@ public final class GUI_Street extends GUI_Ownable {
         if(houseCount == 0){
             icon = null;
         } else {
-            URL path = Attrs.getImagePath(String.format("GUI_Field.Image.House%d", houseCount));
+            URL path = Attrs.getImagePath(String.format("Field.Image.House%d", houseCount));
             icon = this.factory.createIcon(path);
         }
         this.houseLabel.setIcon(icon);
@@ -67,7 +68,7 @@ public final class GUI_Street extends GUI_Ownable {
     public void setHotel(boolean hasHotel) {
         Icon icon;
         if(hasHotel){
-            URL path = Attrs.getImagePath("GUI_Field.Image.Hotel");
+            URL path = Attrs.getImagePath("Field.Image.Hotel");
             icon = this.factory.createIcon(path);
         } else {
             icon = null;
@@ -75,23 +76,23 @@ public final class GUI_Street extends GUI_Ownable {
         this.houseLabel.setIcon(icon);
     }
     @Override
-    protected void displayOnCenter(GUI_Player[] playerList) {
+    protected void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
-        GUI_Center.label[1].setText("__________________________");
-        GUI_Center.label[2].setText(this.description);
-        GUI_Center.label[3].setText(this.subText);
+        Center.label[1].setText("__________________________");
+        Center.label[2].setText(this.description);
+        Center.label[3].setText(this.subText);
         
         if (this.ownerName != null) {
-            GUI_Center.label[4].setText(getOwnableLabel() + getOwnerName());
-            GUI_Center.label[5].setText(getRentLabel() + getRent());
+            Center.label[4].setText(getOwnableLabel() + getOwnerName());
+            Center.label[5].setText(getRentLabel() + getRent());
         }
-        GUI_Center.label[6].setIcon(this.houseLabel.getIcon());
+        Center.label[6].setIcon(this.houseLabel.getIcon());
         
         super.displayCarOnCenter(playerList);
     }
     @Override
     public String toString() {
-        return "GUI_Street [ownerName=" + ownerName + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
+        return "Street [ownerName=" + ownerName + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
             + title + ", subText=" + subText + ", description=" + description
             + "]";
     }

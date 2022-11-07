@@ -16,21 +16,21 @@ import gui.resources.Attrs;
  *  - Car (position and color is determined by the car object, not the player)
  *
  * Once an object of this class is constructed (a player is created), it should be
- * added to the GUI using the {@link GUI#addPlayer(GUI_Player)} method.
+ * added to the GUI using the {@link GUI#addPlayer(Player)} method.
  *
- * Updating the GUI_Player object using the set methods, will also update the information
+ * Updating the Player object using the set methods, will also update the information
  * displayed on within the GUI.
  *
  * The position of the player (the player's car to be exact) is set  using the
- * {@link GUI_Field#setCar(GUI_Player, boolean)} method on the particular Field object.
+ * {@link Field#setCar(Player, boolean)} method on the particular Field object.
  *
  * @author Ronnie
  */
-public class GUI_Player extends Observable {
+public class Player extends Observable {
 	private int number = -1;
 	private String name;
 	private int balance;
-	private GUI_Car car;
+	private Car car;
 	private static int nextId = 0;
     private int id;
 	
@@ -40,37 +40,37 @@ public class GUI_Player extends Observable {
 
 	// TODO: Remove this constructor, as it implements game logic
 	/**
-	 * Constructs a new GUI_Player with a given name,
+	 * Constructs a new Player with a given name,
 	 * default balance of 1000 and a car with a random color.
 	 *
 	 * @param name Name of the player to be displayed on the board.
 	 */
-	public GUI_Player(String name){
-	    this(name, 1000, new GUI_Car());
+	public Player(String name){
+	    this(name, 1000, new Car());
 	}
 
 
 	/**
-	 * Constructs a new GUI_Player with a given name and balance,
+	 * Constructs a new Player with a given name and balance,
 	 * and a car with a random color.
 	 *
 	 * @param name Name of the player to be displayed on the board
 	 * @param balance Balance of the player to be displayed on the board
 	 */
-	public GUI_Player(String name, int balance){
-	    this(name, balance, new GUI_Car());
+	public Player(String name, int balance){
+	    this(name, balance, new Car());
 	}
 
 
 	/**
-	 * Constructs a new GUI_Player with a given name, balance and
+	 * Constructs a new Player with a given name, balance and
 	 * custom car object.
 	 *
 	 * @param name Name of the player to be displayed on the board
 	 * @param balance Balance of the player to be displayed on the board
 	 * @param car Car object for to use
 	 */
-	public GUI_Player(String name, int balance, GUI_Car car){
+	public Player(String name, int balance, Car car){
 		this.name = name;
 		this.balance = balance;
 		this.car = car;
@@ -85,7 +85,7 @@ public class GUI_Player extends Observable {
 	public Color getPrimaryColor(){ return this.car.getPrimaryColor(); }
 	public Color getSecondaryColor(){ return this.car.getSecondaryColor(); }
 	protected BufferedImage getImage() { return this.car.getImage(); }
-    public GUI_Car getCar() { return car; }
+    public Car getCar() { return car; }
     protected int getId(){ return id; }
 	
 	//Setters
@@ -125,10 +125,10 @@ public class GUI_Player extends Observable {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof GUI_Player)) {
+		if (!(obj instanceof Player)) {
 			return false;
 		}
-		GUI_Player other = (GUI_Player) obj;
+		Player other = (Player) obj;
 		if (this.name == null) {
 			if(other.name != null) {
 				return false;
@@ -153,7 +153,7 @@ public class GUI_Player extends Observable {
 	
 	@Override
     public String toString() {
-        return "GUI_Player [number=" + number + ", name=" + name + ", balance="
+        return "Player [number=" + number + ", name=" + name + ", balance="
             + balance + ", car=" + car + "]";
     }
 

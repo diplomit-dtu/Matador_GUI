@@ -1,8 +1,9 @@
 package gui.tests;
 
 import java.awt.Color;
-import gui.fields.GUI_Car;
-import gui.fields.GUI_Player;
+
+import gui.fields.Car;
+import gui.fields.Player;
 import gui.main.GUI;
 
 public class PlayerTest {
@@ -10,12 +11,12 @@ public class PlayerTest {
     public static void main(String[] args) {
         GUI gui = new GUI();
         
-        GUI_Car car1 = new GUI_Car(Color.RED, Color.BLACK, GUI_Car.Type.RACECAR, GUI_Car.Pattern.HORIZONTAL_GRADIANT);
-        GUI_Player player1 = new GUI_Player("Sebastian Vettel", 1000, car1);
+        Car car1 = new Car(Color.RED, Color.BLACK, Car.Type.RACECAR, Car.Pattern.HORIZONTAL_GRADIANT);
+        Player player1 = new Player("Sebastian Vettel", 1000, car1);
         gui.addPlayer(player1);
         
-        GUI_Car car2 = new GUI_Car(Color.RED, Color.BLACK, GUI_Car.Type.RACECAR, GUI_Car.Pattern.HORIZONTAL_GRADIANT);
-        GUI_Player player2 = new GUI_Player("Michael Schumacher", 1000, car2);
+        Car car2 = new Car(Color.RED, Color.BLACK, Car.Type.RACECAR, Car.Pattern.HORIZONTAL_GRADIANT);
+        Player player2 = new Player("Michael Schumacher", 1000, car2);
         gui.addPlayer(player2);
         
         

@@ -1,8 +1,8 @@
 package gui.tests;
 
-import gui.fields.GUI_Field;
-import gui.fields.GUI_Player;
-import gui.fields.GUI_Street;
+import gui.fields.Field;
+import gui.fields.Player;
+import gui.fields.Street;
 import gui.main.GUI;
 
 import java.util.ArrayList;
@@ -19,24 +19,24 @@ public class MoveCar {
 
         // Construct fields
         ArrayList<String> fieldNames = new ArrayList<>();
-        ArrayList<GUI_Field> fields = new ArrayList<>();
+        ArrayList<Field> fields = new ArrayList<>();
         for( int i=0; i<NUM_FIELDS; i++){
-            GUI_Field field = new GUI_Street();
+            Field field = new Street();
             field.setTitle("Field " + i);
             fieldNames.add("Field " + i);
             fields.add(field);
         }
 
-        GUI gui = new GUI(fields.toArray(new GUI_Field[0]));
+        GUI gui = new GUI(fields.toArray(new Field[0]));
 
         // Setup player
-        ArrayList<GUI_Player> players = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
         ArrayList<String> playerNames = new ArrayList<>();
         for( int i=0; i<NUM_PLAYERS; i++ ) {
             String playerName = "Player " + (i+1);
             playerNames.add(playerName);
 
-            GUI_Player player = new GUI_Player(playerName);
+            Player player = new Player(playerName);
             players.add(player);
 
             gui.addPlayer(player);
@@ -46,13 +46,13 @@ public class MoveCar {
             String button = gui.getUserButtonPressed("Choose player to move",
                 playerNames.toArray(new String[0]));
 
-            GUI_Player playerToMove = players.get( playerNames.indexOf(button) );
+            Player playerToMove = players.get( playerNames.indexOf(button));
 
             String targetFieldName = gui.getUserSelection("Choose field to move to",
                     fieldNames.toArray(new String[0])
             );
 
-            /*for( GUI_Field field : gui.getFields() )
+            /*for( Field field : gui.getFields() )
                 field.setCar(playerToMove, false);
             gui.getFields()[fieldNames.indexOf(targetFieldName)].setCar(playerToMove, true);*/
 

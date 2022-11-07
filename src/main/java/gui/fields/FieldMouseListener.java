@@ -4,7 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Timer;
 import java.util.TimerTask;
-import gui.codebehind.GUI_Center;
+
+import gui.codebehind.Center;
 
 /**
  * Listens to mouse action on fields    
@@ -12,12 +13,12 @@ import gui.codebehind.GUI_Center;
  */
 public class FieldMouseListener implements MouseListener{
     private static final boolean PRINT_COUNTER = false;
-    private GUI_Field field;
-    private GUI_Player[] playerList;
+    private Field field;
+    private Player[] playerList;
     private boolean show = true;
     private static Timer timer = null, counter = null;
     
-    public FieldMouseListener(GUI_Field field, GUI_Player[] playerList){
+    public FieldMouseListener(Field field, Player[] playerList){
         this.field = field;
         this.playerList = playerList;
     }
@@ -33,7 +34,7 @@ public class FieldMouseListener implements MouseListener{
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        //    	GUI_Center.getInstance().displayDefault();
+        //    	Center.getInstance().displayDefault();
     }
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -77,14 +78,14 @@ public class FieldMouseListener implements MouseListener{
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    GUI_Center.getInstance().displayDefault();
+                    Center.getInstance().displayDefault();
                     show = true;
                     if(counter != null) counter.cancel();
                 }
             }, delay + 5); //Adds a slight overhead to delay
         }
         else  {
-            GUI_Center.getInstance().displayDefault();
+            Center.getInstance().displayDefault();
             show = true;
             if(counter != null) counter.cancel();
             if(timer != null) timer.cancel();

@@ -1,8 +1,8 @@
 package gui.tests;
 
-import gui.fields.GUI_Field;
-import gui.fields.GUI_Ownable;
-import gui.fields.GUI_Player;
+import gui.fields.Field;
+import gui.fields.Ownable;
+import gui.fields.Player;
 import gui.main.GUI;
 
 
@@ -17,7 +17,7 @@ public class TestRunExampleGame{
 
 	private static void realExampleGame(){
 		// Setup game
-	    GUI_Player mn = new GUI_Player("Mads", 30000), sh = new GUI_Player("Stig", 30000);
+	    Player mn = new Player("Mads", 30000), sh = new Player("Stig", 30000);
 	    
 	    GUI gui = new GUI();
 		sleep();
@@ -33,19 +33,19 @@ public class TestRunExampleGame{
 		sleep();
 		gui.setDice(1, 2);
 		sleep();
-		for(GUI_Field f : gui.getFields()) f.setCar(mn, false);
+		for(Field f : gui.getFields()) f.setCar(mn, false);
 		gui.getFields()[1].setCar(mn, true);
 		sleep();
-		for(GUI_Field f : gui.getFields()) f.setCar(mn, false);
+		for(Field f : gui.getFields()) f.setCar(mn, false);
         gui.getFields()[2].setCar(mn, true);
 		sleep();
-		for(GUI_Field f : gui.getFields()) f.setCar(mn, false);
+		for(Field f : gui.getFields()) f.setCar(mn, false);
         gui.getFields()[3].setCar(mn, true);;
 		sleep();
 		mn.setBalance(28000);
-		GUI_Field f = gui.getFields()[3];
-        if(f instanceof GUI_Ownable){
-            GUI_Ownable o = (GUI_Ownable) f;
+		Field f = gui.getFields()[3];
+        if(f instanceof Ownable){
+            Ownable o = (Ownable) f;
             o.setBorder(mn.getPrimaryColor(), mn.getSecondaryColor());
         }
 		sleep();

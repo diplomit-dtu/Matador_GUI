@@ -11,14 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import gui.codebehind.GUI_Center;
+
+import gui.codebehind.Center;
 import gui.codebehind.SwingComponentFactory;
 import gui.resources.Attrs;
 
 /**
- * Abstract base-class for GUI fields. Pass array of GUI_Fields to GUI to create your own board.
+ * Abstract base-class for GUI fields. Pass array of Fields to GUI to create your own board.
  */
-public abstract class GUI_Field {
+public abstract class Field {
     public static final int FIELDWIDTH = 63;
     public static final int FIELDHEIGHT = 63;
     protected JLayeredPane layered = new JLayeredPane();
@@ -34,25 +35,25 @@ public abstract class GUI_Field {
     private JLabel[] carLabels;
 
     /** List of cars that are being drawn by this view */
-    private ArrayList<GUI_Car> drawnCars = new ArrayList<>();
+    private ArrayList<Car> drawnCars = new ArrayList<>();
     
     //Default values
-    protected static final String TITLE = Attrs.getString("GUI_Field.Default_title");
-    protected static final String SUBTEXT = Attrs.getString("GUI_Field.Default_SubText");
-    protected static final String DESCRIPTION = Attrs.getString("GUI_Field.Default_Description");
-    protected static final String PICTURE = Attrs.getString("GUI_Field.Default_Picture");
-    protected static final String RENT = Attrs.getString("GUI_Field.Default_Rent");
+    protected static final String TITLE = Attrs.getString("Field.Default_title");
+    protected static final String SUBTEXT = Attrs.getString("Field.Default_SubText");
+    protected static final String DESCRIPTION = Attrs.getString("Field.Default_Description");
+    protected static final String PICTURE = Attrs.getString("Field.Default_Picture");
+    protected static final String RENT = Attrs.getString("Field.Default_Rent");
     protected static final Color BG_COLOR = Color.LIGHT_GRAY;
     protected static final Color FG_COLOR = Color.BLACK;
 
 
     //TODO add number to parameters - just for display
-    protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description) {
+    protected Field(Color bgColor, Color fgColor, String title, String subText, String description) {
         this(bgColor, fgColor, title, subText, description, BorderFactory.createLineBorder(Color.BLACK));
     }
 
 
-    protected GUI_Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
+    protected Field(Color bgColor, Color fgColor, String title, String subText, String description, Border border) {
         title = title.replace("\n", "<BR>"); //$NON-NLS-1$ //$NON-NLS-2$
         subText = subText.replace("\n", "<BR>"); //$NON-NLS-1$ //$NON-NLS-2$
         description = description.replace("\n", "<BR>"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -86,16 +87,16 @@ public abstract class GUI_Field {
      * Checks whether or not a specific Player's car is currently
      * positioned on this field.
      *
-     * @param player    The GUI_Player whose car to check for
+     * @param player    The Player whose car to check for
      * @return  True if 'player's car is on the field.
      */
-    public boolean hasCar(GUI_Player player) {
+    public boolean hasCar(Player player) {
         return Objects.equals(player.getCar().getPosition(), this);
     }
 
 
     /**
-     * @deprecated  Cars should be placed / moved around using the {@link GUI_Car#setPosition(GUI_Field)} instead.
+     * @deprecated  Cars should be placed / moved around using the {@link Car#setPosition(Field)} instead.
      *
      * Places the car of a Player on this field.
      *
@@ -103,7 +104,7 @@ public abstract class GUI_Field {
      * @param display Whether or not the car should be displayed.
      */
     @Deprecated
-    public void setCar(GUI_Player player, boolean display) {
+    public void setCar(Player player, boolean display) {
         if( !display && !hasCar(player) ) return;
 
         if( display && hasCar(player) ) return;
@@ -136,7 +137,7 @@ public abstract class GUI_Field {
      *  Adds the car as a car, which should be drawn on this field
      *  This method should not be called by the user of the library.
      */
-    public void drawCar(GUI_Player player, boolean display){
+    public void drawCar(Player player, boolean display){
         /*  Note on this method:
             It takes over the original code from the setCar method, as that method
             should no longer update the drawing.
@@ -167,7 +168,7 @@ public abstract class GUI_Field {
     }
 
     /**
-     * @deprecated  Cars should no longer be placed using the GUI_Field class (or any inheriting classes), but the
+     * @deprecated  Cars should no longer be placed using the Field class (or any inheriting classes), but the
      *              the car class directly. This method will be removed in version 4.x
      *
      * Remove all the cars from this field
@@ -191,7 +192,7 @@ public abstract class GUI_Field {
     protected JLabel makeLabel(int height) {
         JLabel label = new JLabel();
         this.factory.setSize(label, 1 * FIELDWIDTH - 2, height);
-        label.setFont(new java.awt.Font(GUI_Board.FONT, 0, GUI_Board.FONTSIZE));
+        label.setFont(new java.awt.Font(Board.FONT, 0, Board.FONTSIZE));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBackground(this.bgColor);
         label.setForeground(this.fgColor);
@@ -284,27 +285,27 @@ public abstract class GUI_Field {
     }
 
 
-    protected void displayOnCenter(GUI_Player[] playerList){
-        GUI_Center.getInstance().clearLabels();
-        GUI_Center.getInstance().setBGColor(this.bgColor);
-        GUI_Center.getInstance().setFGColor(this.fgColor);
-        for(JLabel l : GUI_Center.label){
+    protected void displayOnCenter(Player[] playerList){
+        Center.getInstance().clearLabels();
+        Center.getInstance().setBGColor(this.bgColor);
+        Center.getInstance().setFGColor(this.fgColor);
+        for(JLabel l : Center.label){
             l.setBackground(this.bgColor);
             l.setForeground(this.fgColor);
         }
-        GUI_Center.label[0].setText(""); 
+        Center.label[0].setText("");
     }
 
 
-    protected void displayCarOnCenter(GUI_Player[] playerList) {
-        for(int i = 0; i < GUI_Board.MAX_PLAYER_COUNT; i++) {
-            GUI_Player p = playerList[i];
+    protected void displayCarOnCenter(Player[] playerList) {
+        for(int i = 0; i < Board.MAX_PLAYER_COUNT; i++) {
+            Player p = playerList[i];
             if(p != null && hasCar(p)) {
-                GUI_Center.cars[i].setIcon(new ImageIcon(p.getImage()));
-                GUI_Center.cars[i].setVisible(true);
+                Center.cars[i].setIcon(new ImageIcon(p.getImage()));
+                Center.cars[i].setVisible(true);
             } else {
-                GUI_Center.cars[i].setIcon(null);
-                GUI_Center.cars[i].setVisible(false);
+                Center.cars[i].setIcon(null);
+                Center.cars[i].setVisible(false);
             }
         }
     }

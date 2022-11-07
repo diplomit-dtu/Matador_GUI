@@ -1,6 +1,6 @@
 package gui.input;
 
-import gui.fields.GUI_Board;
+import gui.fields.Board;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -33,7 +33,7 @@ public class IntegerInput {
 
     private boolean inputActive = false;
 
-    public IntegerInput(GUI_Board board, String msg, int minValue, int maxValue) {
+    public IntegerInput(Board board, String msg, int minValue, int maxValue) {
 
         if( maxValue < minValue )
             throw new IllegalArgumentException("Maximum value must be larger than minimum");

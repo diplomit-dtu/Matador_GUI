@@ -1,18 +1,16 @@
 package gui.tests;
 
 import java.awt.Color;
-import gui.fields.GUI_Car;
-import gui.fields.GUI_Field;
-import gui.fields.GUI_Ownable;
-import gui.fields.GUI_Player;
-import gui.fields.GUI_Street;
-import gui.fields.GUI_Car.Pattern;
-import gui.fields.GUI_Car.Type;
+
+import gui.fields.*;
+import gui.fields.Car;
+import gui.fields.Car.Pattern;
+import gui.fields.Car.Type;
 import gui.main.GUI;
 
 public class Test {
     private GUI gui = new GUI();
-    private GUI_Player arthur, ford, zaphod, tricia, marvin, slart, dt;
+    private Player arthur, ford, zaphod, tricia, marvin, slart, dt;
 	
 	public static void main(String[] args) {
 		Test test = new Test();
@@ -115,30 +113,30 @@ public class Test {
 //		gui.setTitleText(fieldNr, title + fieldNr);
 //	}
 	private void testAddPlayer() {
-	    arthur = new GUI_Player("Arthur Dent", 1000);
+	    arthur = new Player("Arthur Dent", 1000);
 		gui.addPlayer(arthur);
 		
-		GUI_Car car1 = new GUI_Car(Color.MAGENTA, Color.BLUE, Type.TRACTOR, Pattern.DOTTED);
-		ford = new GUI_Player("Ford Prefect", 1000, car1);
+		Car car1 = new Car(Color.MAGENTA, Color.BLUE, Type.TRACTOR, Pattern.DOTTED);
+		ford = new Player("Ford Prefect", 1000, car1);
 		gui.addPlayer(ford);
 		
-		GUI_Car car2 = new GUI_Car(Color.BLACK, Color.RED, Type.UFO, Pattern.ZEBRA);
-		zaphod = new GUI_Player("Zaphod Beeblebrox", 100000, car2);
+		Car car2 = new Car(Color.BLACK, Color.RED, Type.UFO, Pattern.ZEBRA);
+		zaphod = new Player("Zaphod Beeblebrox", 100000, car2);
 		gui.addPlayer(zaphod);
 		
-		GUI_Car car3 = new GUI_Car(Color.DARK_GRAY, Color.CYAN, Type.RACECAR, Pattern.HORIZONTAL_LINE);
-		tricia = new GUI_Player("Tricia McMillan", 100000, car3);
+		Car car3 = new Car(Color.DARK_GRAY, Color.CYAN, Type.RACECAR, Pattern.HORIZONTAL_LINE);
+		tricia = new Player("Tricia McMillan", 100000, car3);
 		gui.addPlayer(tricia);
 		
-		GUI_Car car4 = new GUI_Car(new Color(160, 32, 240), Color.YELLOW, Type.CAR, Pattern.CHECKERED);
-		marvin = new GUI_Player("Marvin", 1000, car4); 
+		Car car4 = new Car(new Color(160, 32, 240), Color.YELLOW, Type.CAR, Pattern.CHECKERED);
+		marvin = new Player("Marvin", 1000, car4);
 		gui.addPlayer(marvin);
 		
-		GUI_Car car5 = new GUI_Car(Color.BLACK, Color.WHITE, Type.CAR, Pattern.DOTTED);
-		slart = new GUI_Player("Slartibartfast", 100000, car5);
+		Car car5 = new Car(Color.BLACK, Color.WHITE, Type.CAR, Pattern.DOTTED);
+		slart = new Player("Slartibartfast", 100000, car5);
 		gui.addPlayer(slart);
 		
-		dt = new GUI_Player("Deep Thought", 100000);
+		dt = new Player("Deep Thought", 100000);
 		gui.addPlayer(dt);
 	}
 	private void testSetBalance() {
@@ -202,95 +200,95 @@ public class Test {
 		}
 	}
 	private void testRemoveCar() {
-	    for(GUI_Field f : gui.getFields()){
+	    for(Field f : gui.getFields()){
 	        f.removeAllCars();
 	    }
 	}
 	private void testSetOwner() {
 		for(int i = 1; i <= 10; i++) {
-		    GUI_Field f = gui.getFields()[i];
-		    if(f instanceof GUI_Ownable){
-		        GUI_Ownable o = (GUI_Ownable) f;
+		    Field f = gui.getFields()[i];
+		    if(f instanceof Ownable){
+		        Ownable o = (Ownable) f;
 		        o.setBorder(ford.getPrimaryColor(), ford.getSecondaryColor());
 		    }
 		}
 		for(int i = 11; i <= 20; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Ownable){
-                GUI_Ownable o = (GUI_Ownable) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Ownable){
+                Ownable o = (Ownable) f;
                 o.setBorder(slart.getPrimaryColor(), slart.getSecondaryColor());
             }
 		}
 		for(int i = 21; i <= 30; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Ownable){
-                GUI_Ownable o = (GUI_Ownable) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Ownable){
+                Ownable o = (Ownable) f;
                 o.setBorder(arthur.getPrimaryColor(), arthur.getSecondaryColor());
             }
 		}
 	}
 	private void testRemoveOwner() {
 		for(int i = 1; i <= 5; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Ownable){
-                GUI_Ownable o = (GUI_Ownable) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Ownable){
+                Ownable o = (Ownable) f;
                 o.setBorder(null);
             }
 		}
 		for(int i = 11; i <= 15; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Ownable){
-                GUI_Ownable o = (GUI_Ownable) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Ownable){
+                Ownable o = (Ownable) f;
                 o.setBorder(null);
             }
 		}
 		for(int i = 21; i <= 25; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Ownable){
-                GUI_Ownable o = (GUI_Ownable) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Ownable){
+                Ownable o = (Ownable) f;
                 o.setBorder(null);
             }
 		}
 	}
 	private void testSetHouses() {
 		for(int i = 0; i < 10; i++) {
-		    GUI_Field f = gui.getFields()[i];
-		    if(f instanceof GUI_Street){
-		        GUI_Street s = (GUI_Street) f;
+		    Field f = gui.getFields()[i];
+		    if(f instanceof Street){
+		        Street s = (Street) f;
 		        s.setHouses(1);
 		    }
 		}
 		for(int i = 10; i < 20; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Street){
-                GUI_Street s = (GUI_Street) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Street){
+                Street s = (Street) f;
                 s.setHouses(2);
             }
 		}
 		for(int i = 20; i < 30; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Street){
-                GUI_Street s = (GUI_Street) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Street){
+                Street s = (Street) f;
                 s.setHouses(3);
             }
 		}
 		for(int i = 30; i < 40; i++) {
-		    GUI_Field f = gui.getFields()[i];
-            if(f instanceof GUI_Street){
-                GUI_Street s = (GUI_Street) f;
+		    Field f = gui.getFields()[i];
+            if(f instanceof Street){
+                Street s = (Street) f;
                 s.setHouses(4);
             }
 		}
-		GUI_Field f38 = gui.getFields()[37];
+		Field f38 = gui.getFields()[37];
 		System.out.println(f38.getTitle());
-        if(f38 instanceof GUI_Street){
-            GUI_Street s = (GUI_Street) f38;
+        if(f38 instanceof Street){
+            Street s = (Street) f38;
             s.setHotel(true);
         }
-        GUI_Field f40 = gui.getFields()[39];
+        Field f40 = gui.getFields()[39];
         System.out.println(f40.getTitle());
-        if(f40 instanceof GUI_Street){
-            GUI_Street s = (GUI_Street) f40;
+        if(f40 instanceof Street){
+            Street s = (Street) f40;
             s.setHotel(true);
         }
 	}
@@ -301,16 +299,16 @@ public class Test {
             e.printStackTrace();
         }
 	    int i = 0;
-	    for(GUI_Field f : gui.getFields()){
+	    for(Field f : gui.getFields()){
             if(i < 38 && i % 3 == 0){
-                if(f instanceof GUI_Street){
-                    GUI_Street s = (GUI_Street) f;
+                if(f instanceof Street){
+                    Street s = (Street) f;
                     s.setHouses(0);
                 }
             }
             i++;
         }
-	    GUI_Street s40 = (GUI_Street)gui.getFields()[39];
+	    Street s40 = (Street)gui.getFields()[39];
 	    s40.setHotel(false);
 	}
 }

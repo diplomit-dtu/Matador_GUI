@@ -3,20 +3,21 @@ package gui.fields;
 import java.awt.Color;
 import java.net.URL;
 import javax.swing.JLabel;
-import gui.codebehind.GUI_Center;
+
+import gui.codebehind.Center;
 import gui.codebehind.SwingComponentFactory;
 import gui.resources.Attrs;
 
-public final class GUI_Chance extends GUI_Field {
+public final class Chance extends Field {
     private static final int TITLEHEIGHT = 47;
     private static final int SUBTEXTHEIGHT = 14;
     private SwingComponentFactory factory = new SwingComponentFactory();
     
-    public GUI_Chance(){
-        this("<html><b><font size=\"7\">"+Attrs.getString("GUI_Field.Label.Chance.Format"),
-            Attrs.getString("GUI_Field.Label.Chance.Subtext"), DESCRIPTION, new Color(204, 204, 204), FG_COLOR);
+    public Chance(){
+        this("<html><b><font size=\"7\">"+Attrs.getString("Field.Label.Chance.Format"),
+            Attrs.getString("Field.Label.Chance.Subtext"), DESCRIPTION, new Color(204, 204, 204), FG_COLOR);
     }
-    public GUI_Chance(String title, String subText, String description, Color bgColor, Color fgColor) {
+    public Chance(String title, String subText, String description, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeStreetNameLabel();
         this.subTextLabel = makeBottomLabel();
@@ -34,17 +35,17 @@ public final class GUI_Chance extends GUI_Field {
         return bottomLabel;
     }
     @Override
-    protected void displayOnCenter(GUI_Player[] playerList) {
+    protected void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
-        URL path = Attrs.getImagePath("GUI_Field.Image.Luck");
-        GUI_Center.label[1].setIcon(this.factory.createIcon(path));
-        GUI_Center.label[2].setText("__________________________");
-        GUI_Center.label[3].setText(this.description);
+        URL path = Attrs.getImagePath("Field.Image.Luck");
+        Center.label[1].setIcon(this.factory.createIcon(path));
+        Center.label[2].setText("__________________________");
+        Center.label[3].setText(this.description);
         super.displayCarOnCenter(playerList);
     }
     @Override
     public String toString() {
-        return "GUI_Chance [bgColor=" + bgColor
+        return "Chance [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

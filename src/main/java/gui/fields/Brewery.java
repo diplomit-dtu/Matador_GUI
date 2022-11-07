@@ -4,11 +4,12 @@ import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import gui.codebehind.GUI_Center;
+
+import gui.codebehind.Center;
 import gui.codebehind.SwingComponentFactory;
 import gui.resources.Attrs;
 
-public final class GUI_Brewery extends GUI_Ownable {
+public final class Brewery extends Ownable {
     private static final int TOPHEIGHT = 31;
     private static final int TITLEHEIGHT = 16;
     private static final int SUBTEXTHEIGHT = 14;
@@ -17,15 +18,15 @@ public final class GUI_Brewery extends GUI_Ownable {
     private SwingComponentFactory factory = new SwingComponentFactory();
     private static int picCounter = 0;
     
-    public GUI_Brewery(){
+    public Brewery(){
         this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, RENT, BG_COLOR, FG_COLOR);
     }
-    public GUI_Brewery(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
+    public Brewery(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
         
         if ("default".equalsIgnoreCase(picture)) {
             int p = (picCounter++ % 2) + 1;
-            URL path = Attrs.getImagePath(String.format("GUI_Field.Image.Brewery%d", p));
+            URL path = Attrs.getImagePath(String.format("Field.Image.Brewery%d", p));
             this.icon = this.factory.createIcon(path);
         } else {
             try {
@@ -60,21 +61,21 @@ public final class GUI_Brewery extends GUI_Ownable {
         return bottomLabel;
     }
     @Override
-    protected void displayOnCenter(GUI_Player[] playerList) {
+    protected void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
-        GUI_Center.label[1].setIcon(this.icon);
-        GUI_Center.label[3].setText("__________________________");
-        GUI_Center.label[3].setText(this.description);
-        GUI_Center.label[4].setText(this.subText);
+        Center.label[1].setIcon(this.icon);
+        Center.label[3].setText("__________________________");
+        Center.label[3].setText(this.description);
+        Center.label[4].setText(this.subText);
         if (this.ownerName != null) {
-            GUI_Center.label[5].setText(getOwnableLabel() + getOwnerName());
-            GUI_Center.label[6].setText(getRentLabel() + getRent());
+            Center.label[5].setText(getOwnableLabel() + getOwnerName());
+            Center.label[6].setText(getRentLabel() + getRent());
         }
         super.displayCarOnCenter(playerList);
     }
     @Override
     public String toString() {
-        return "GUI_Brewery [ownerName=" + ownerName 
+        return "Brewery [ownerName=" + ownerName
             + ", bgColor=" + bgColor + ", fgColor=" + fgColor + ", title="
             + title + ", subText=" + subText + ", description=" + description
             + "]";

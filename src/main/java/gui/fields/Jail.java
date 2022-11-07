@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import gui.codebehind.GUI_Center;
+import gui.codebehind.Center;
 import gui.codebehind.SwingComponentFactory;
 import gui.resources.Attrs;
 
-public final class GUI_Jail extends GUI_Field{
+public final class Jail extends Field {
 	private static final int TOPHEIGHT = 47;
 	private static final int SUBTEXTHEIGHT = 14;
 	private ImageIcon icon;
@@ -16,16 +16,16 @@ public final class GUI_Jail extends GUI_Field{
 	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
 
-	public GUI_Jail(){
+	public Jail(){
 	    this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, new Color(125, 125, 125), Color.BLACK);
 	}
-	public GUI_Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
+	public Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
 		super(bgColor, fgColor, title, subText, description);
 
 		if("default".equalsIgnoreCase(picture)){
 			int p = (picCounter++ % 2);
-			URL path1 = Attrs.getImagePath("GUI_Field.Image.GoToJail");
-			URL path2 = Attrs.getImagePath("GUI_Field.Image.Jail");
+			URL path1 = Attrs.getImagePath("Field.Image.GoToJail");
+			URL path2 = Attrs.getImagePath("Field.Image.Jail");
             this.icon = this.factory.createIcon(p>0 ? path1 : path2);
 		}else{
 			try{
@@ -55,16 +55,16 @@ public final class GUI_Jail extends GUI_Field{
 		return this.subText;
 	}
 	@Override
-	protected void displayOnCenter(GUI_Player[] playerList){
+	protected void displayOnCenter(Player[] playerList){
 		super.displayOnCenter(playerList);
-		GUI_Center.label[1].setIcon(this.icon);
-		GUI_Center.label[2].setText("__________________________");
-		GUI_Center.label[3].setText(this.description);
+		Center.label[1].setIcon(this.icon);
+		Center.label[2].setText("__________________________");
+		Center.label[3].setText(this.description);
 		super.displayCarOnCenter(playerList);
 	}
     @Override
     public String toString() {
-        return "GUI_Jail [bgColor=" + bgColor
+        return "Jail [bgColor=" + bgColor
             + ", fgColor=" + fgColor + ", title=" + title + ", subText="
             + subText + ", description=" + description + "]";
     }

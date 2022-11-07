@@ -1,6 +1,6 @@
 package gui.input;
 
-import gui.fields.GUI_Board;
+import gui.fields.Board;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -36,7 +36,7 @@ public class StringInput {
     private boolean inputActive;
 
 
-    public StringInput(GUI_Board board, String msg, int minLength, int maxLength, boolean allowWhiteSpace) {
+    public StringInput(Board board, String msg, int minLength, int maxLength, boolean allowWhiteSpace) {
 
         if( minLength < 0 )
             throw new IllegalArgumentException("Minimum input length must be zero or positive");

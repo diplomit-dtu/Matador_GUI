@@ -1,11 +1,11 @@
 package gui.main;
 
 import java.awt.Color;
-import gui.codebehind.GUI_BoardController;
-import gui.codebehind.GUI_FieldFactory;
-import gui.fields.GUI_Board;
-import gui.fields.GUI_Field;
-import gui.fields.GUI_Player;
+import gui.codebehind.BoardController;
+import gui.codebehind.FieldFactory;
+import gui.fields.Board;
+import gui.fields.Field;
+import gui.fields.Player;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -22,25 +22,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class GUI {
 
-    private GUI_BoardController boardController;
+    private BoardController boardController;
     private static boolean null_fields_allowed = false;
 
 
     /**
      *  Starts the GUI, opening a GUI window, with the default Monpoly fields.
-     *  Use {@link GUI#GUI(GUI_Field[])} constructor if you want to use custom fields.
+     *  Use {@link GUI#GUI(Field[])} constructor if you want to use custom fields.
      */
     public GUI(){
-        GUI_Field[] fields = GUI_FieldFactory.makeFields();
+        Field[] fields = FieldFactory.makeFields();
         for(int i = 0; i < fields.length; i++){
             fields[i] = fields[i];
         }
-        boardController = new GUI_BoardController(fields);
+        boardController = new BoardController(fields);
     }
 
 
     /**
-     *  Constructor for GUI. Accepts an an array of {@link GUI_Field}. Order of fields in array determine order of fields.
+     *  Constructor for GUI. Accepts an an array of {@link Field}. Order of fields in array determine order of fields.
      *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields.
      *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
      *
@@ -49,14 +49,14 @@ public final class GUI {
      * @throws NullPointerException  If {@link GUI#null_fields_allowed} is false (hasn't be set to true using {@link GUI#setNull_fields_allowed(boolean)}
      *                                  and the 'fields' param contains null values.
      */
-    public GUI(GUI_Field[] fields) {
+    public GUI(Field[] fields) {
         checkNullArray(fields);
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
         }
 
 
-        boardController = new GUI_BoardController(fields);
+        boardController = new BoardController(fields);
     }
 
 
@@ -71,32 +71,32 @@ public final class GUI {
      * @throws NullPointerException  If {@link GUI#null_fields_allowed} is false (hasn't be set to true using {@link GUI#setNull_fields_allowed(boolean)}
      *                                  and the 'fields' param contains null values.
      */
-    public GUI(GUI_Field[] fields, Color backGroundColor){
+    public GUI(Field[] fields, Color backGroundColor){
         checkNullArray(fields);
         if(!GUI.null_fields_allowed){
             check_for_null_fields(fields);
         }
-        this.boardController = new GUI_BoardController(fields, backGroundColor);
+        this.boardController = new BoardController(fields, backGroundColor);
     }
 
 
 
 
-    private void checkNullArray(GUI_Field[] fields) {
+    private void checkNullArray(Field[] fields) {
         if (fields==null){
-            throw new NullPointerException("GUI_Field[] fields is null - pass array with fields or use default constructor");
+            throw new NullPointerException("Field[] fields is null - pass array with fields or use default constructor");
         }
     }
 
 
 
 
-    private void check_for_null_fields(GUI_Field[] fields) {
+    private void check_for_null_fields(Field[] fields) {
         String msg = "Null fields!\nNull fields are not recommended! the following indices are null: ";
         String str = "{";
         String howTo = "Disable this Exception by calling the static method GUI.setNull_fields_allowed(true);";
         for(int i = 0; i < fields.length; i++){
-            GUI_Field f = fields[i];
+            Field f = fields[i];
             if(f == null){
                 str += i+", ";
             }
@@ -231,13 +231,13 @@ public final class GUI {
 
 
     /**
-     * Adds a player to the board, using an object of {@link GUI_Player}.
-     * The GUI may only have {@link GUI_Board#MAX_PLAYER_COUNT} number of players.
+     * Adds a player to the board, using an object of {@link Player}.
+     * The GUI may only have {@link Board#MAX_PLAYER_COUNT} number of players.
      *
      * @param player The player to add
      * @return True if the player is added, otherwise false (i.e. too many players)
      */
-    public boolean addPlayer(GUI_Player player) {
+    public boolean addPlayer(Player player) {
         return boardController.addPlayer(player);
     }
 
@@ -360,7 +360,7 @@ public final class GUI {
     }
 
 
-    public GUI_Field[] getFields(){
+    public Field[] getFields(){
         return boardController.getFields();
     }
 
@@ -387,7 +387,7 @@ public final class GUI {
     /**
      * Toggle whether null fields should be allowed or not,
      * when creating a new GUI with custom fields (the value
-     * null is allowed in the GUI_Field array passed to the
+     * null is allowed in the Field array passed to the
      * GUI object). Null fields will be displayed as empty
      * squares.<br>
      * Note that this has to be called BEFORE creating a GUI with null

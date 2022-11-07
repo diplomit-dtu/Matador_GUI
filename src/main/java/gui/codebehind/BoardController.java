@@ -8,9 +8,9 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.*;
 
-import gui.fields.GUI_Board;
-import gui.fields.GUI_Field;
-import gui.fields.GUI_Player;
+import gui.fields.Board;
+import gui.fields.Field;
+import gui.fields.Player;
 import gui.input.EnterButton;
 import gui.input.IntegerInput;
 import gui.input.StringInput;
@@ -19,15 +19,15 @@ import gui.input.StringInput;
  * Provides access to GUI
  * @author Ronnie
  */
-public final class GUI_BoardController {
+public final class BoardController {
     private String userInput = null;
-    private GUI_Board board;
+    private Board board;
     private static volatile Random rand = null;
 
 
     public static Random rand() {
         if(rand == null) {
-            synchronized (GUI_BoardController.class) {
+            synchronized (BoardController.class) {
                 if(rand == null) rand = new Random();
             }
         }
@@ -38,13 +38,13 @@ public final class GUI_BoardController {
     /**
      * Contains service methods for board for controlling the board.
      */
-    public GUI_BoardController(GUI_Field[] fields) {
-        this.board = new GUI_Board(fields);
+    public BoardController(Field[] fields) {
+        this.board = new Board(fields);
     }
 
 
-    public GUI_BoardController(GUI_Field[] fields, Color backGroundColor) {
-        this.board = new GUI_Board(fields, backGroundColor);
+    public BoardController(Field[] fields, Color backGroundColor) {
+        this.board = new Board(fields, backGroundColor);
     }
 
 
@@ -58,7 +58,7 @@ public final class GUI_BoardController {
         final CountDownLatch latch = new CountDownLatch(1);
 
         EnterButton okButton = new EnterButton("OK", () -> {
-            GUI_BoardController.this.board.clearInputPanel();
+            BoardController.this.board.clearInputPanel();
             latch.countDown();
         });
 
@@ -124,8 +124,8 @@ public final class GUI_BoardController {
             }
 
             EnterButton button = new EnterButton(string, () -> {
-                GUI_BoardController.this.userInput = string;
-                GUI_BoardController.this.board.clearInputPanel();
+                BoardController.this.userInput = string;
+                BoardController.this.board.clearInputPanel();
                 latch.countDown();
             });
 
@@ -164,8 +164,8 @@ public final class GUI_BoardController {
         final JComboBox<String> dropdown = new JComboBox<String>(options);
 
         EnterButton okButton = new EnterButton("OK", () -> {
-            GUI_BoardController.this.userInput = dropdown.getSelectedItem().toString();
-            GUI_BoardController.this.board.clearInputPanel();
+            BoardController.this.userInput = dropdown.getSelectedItem().toString();
+            BoardController.this.board.clearInputPanel();
             latch.countDown();
         });
 
@@ -185,7 +185,7 @@ public final class GUI_BoardController {
      * @param player : The player must be created beforehand
      * @return true if player is added, otherwise false
      */
-    public boolean addPlayer(GUI_Player player) {
+    public boolean addPlayer(Player player) {
         return this.board.addPlayer(player);
     }
     /**
@@ -313,17 +313,17 @@ public final class GUI_BoardController {
             && faceValue2 >= 1 && faceValue2 <= 6;
     }
     public void displayChanceCard(String txt) {
-        GUI_Center.getInstance().setChanceCard(txt);
-        GUI_Center.getInstance().displayChanceCard();
+        Center.getInstance().setChanceCard(txt);
+        Center.getInstance().displayChanceCard();
     }
     public void setChanceCard(String txt) {
-        GUI_Center.getInstance().setChanceCard(txt);
+        Center.getInstance().setChanceCard(txt);
     }
     public void displayChanceCard() {
-        GUI_Center.getInstance().displayChanceCard();
+        Center.getInstance().displayChanceCard();
     }
     
-    public GUI_Field[] getFields() { return board.getFields(); }
+    public Field[] getFields() { return board.getFields(); }
     
     public void setDie(int faceValue) {
         int rotation1 = rand().nextInt(360);
