@@ -23,7 +23,7 @@ public final class Street extends Ownable {
     }
     public Street(String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description, rent);
-        title = title.replace("\n", "<BR>");
+        this.title = title.replace("\n", "<BR>");
         
         super.subTextLabel = makeSubTextLabel();
         this.houseLabel = makeHouseLabel();
@@ -62,7 +62,7 @@ public final class Street extends Ownable {
         if(houseCount == 0){
             icon = null;
         } else {
-            URL path = Attrs.getImagePath(String.format("Field.Image.House%d", houseCount));
+            URL path = Attrs.getImagePath("Field.Image.House", houseCount);
             icon = this.factory.createIcon(path);
         }
         this.houseLabel.setIcon(icon);
