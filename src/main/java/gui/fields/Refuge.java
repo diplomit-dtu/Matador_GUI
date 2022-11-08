@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.core.Center;
+import gui.util.SwingComponentFactory;
+import gui.core.Field;
+import gui.core.Player;
+import gui.util.Attrs;
 
 public final class Refuge extends Field {
     private static final int TOPHEIGHT = 47;
@@ -48,7 +50,7 @@ public final class Refuge extends Field {
         return bottomLabel;
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) {
+    public void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
         Center.label[1].setText(this.title.replace("<html><center>", ""));
         Center.label[2].setIcon(this.icon);

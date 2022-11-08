@@ -6,9 +6,11 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.core.Center;
+import gui.core.Ownable;
+import gui.util.SwingComponentFactory;
+import gui.core.Player;
+import gui.util.Attrs;
 
 public final class Street extends Ownable {
     private static final int TITLEHEIGHT = 24;
@@ -76,7 +78,7 @@ public final class Street extends Ownable {
         this.houseLabel.setIcon(icon);
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) {
+    public void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
         Center.label[1].setText("__________________________");
         Center.label[2].setText(this.description);

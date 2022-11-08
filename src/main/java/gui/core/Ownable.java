@@ -1,11 +1,10 @@
-package gui.fields;
+package gui.core;
 
 import java.awt.Color;
 import javax.swing.border.Border;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.util.SwingComponentFactory;
+import gui.util.Attrs;
 
 public abstract class Ownable extends Field {
 	public String ownableLable, rentLable;
@@ -57,7 +56,7 @@ public abstract class Ownable extends Field {
 	public void setRent(String rent){ this.rent = rent; }
 	
 	@Override
-	protected void displayOnCenter(Player[] playerList){
+	public void displayOnCenter(Player[] playerList){
 		super.displayOnCenter(playerList);
 		Border border;
 		if(this.ownerName != null){

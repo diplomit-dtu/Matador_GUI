@@ -1,7 +1,7 @@
 package gui.tests;
 
-import gui.fields.Field;
-import gui.fields.Player;
+import gui.core.Field;
+import gui.core.Player;
 import gui.fields.Street;
 import gui.main.GUI;
 

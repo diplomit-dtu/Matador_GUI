@@ -1,4 +1,4 @@
-package gui.fields;
+package gui.core;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -12,9 +12,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.util.SwingComponentFactory;
+import gui.input.FieldMouseListener;
+import gui.util.Attrs;
 
 /**
  * Abstract base-class for GUI fields. Pass array of Fields to GUI to create your own board.
@@ -280,12 +280,12 @@ public abstract class Field {
     /**
      * Each type of field displays information on the center
      */
-    protected void addMouseListener(FieldMouseListener listener){
+    public void addMouseListener(FieldMouseListener listener){
         this.layered.addMouseListener(listener);
     }
 
 
-    protected void displayOnCenter(Player[] playerList){
+    public void displayOnCenter(Player[] playerList){
         Center.getInstance().clearLabels();
         Center.getInstance().setBGColor(this.bgColor);
         Center.getInstance().setFGColor(this.fgColor);

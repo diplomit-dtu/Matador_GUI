@@ -1,10 +1,10 @@
-package gui.fields;
+package gui.core;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import gui.codebehind.Observable;
+import gui.util.Observable;
 import gui.main.GUI;
-import gui.resources.Attrs;
+import gui.util.Attrs;
 
 
 /**
@@ -84,9 +84,9 @@ public class Player extends Observable {
 	public int getBalance(){ return this.balance; }
 	public Color getPrimaryColor(){ return this.car.getPrimaryColor(); }
 	public Color getSecondaryColor(){ return this.car.getSecondaryColor(); }
-	protected BufferedImage getImage() { return this.car.getImage(); }
+	public BufferedImage getImage() { return this.car.getImage(); }
     public Car getCar() { return car; }
-    protected int getId(){ return id; }
+    public int getId(){ return id; }
 	
 	//Setters
     protected void setNumber(int number) { this.number = number; }

@@ -1,11 +1,13 @@
-package gui.fields;
+package gui.input;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import gui.codebehind.Center;
+import gui.core.Center;
+import gui.core.Field;
+import gui.core.Player;
 
 /**
  * Listens to mouse action on fields    

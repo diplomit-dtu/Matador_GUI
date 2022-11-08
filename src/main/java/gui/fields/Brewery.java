@@ -5,9 +5,11 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.core.Center;
+import gui.core.Ownable;
+import gui.util.SwingComponentFactory;
+import gui.core.Player;
+import gui.util.Attrs;
 
 public final class Brewery extends Ownable {
     private static final int TOPHEIGHT = 31;
@@ -24,8 +26,8 @@ public final class Brewery extends Ownable {
 
         SwingComponentFactory factory = new SwingComponentFactory();
         if ("default".equalsIgnoreCase(picture)) {
-            int p = (picCounter++ % 2) + 1;
-            URL path = Attrs.getImagePath(String.format("Field.Image.Brewery%d", p));
+            int p = (picCounter++ % 2);
+            URL path = Attrs.getImagePath("Field.Image.Brewery", p);
             this.icon = factory.createIcon(path);
         } else {
             try {
@@ -60,7 +62,7 @@ public final class Brewery extends Ownable {
         return bottomLabel;
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) {
+    public void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
         Center.label[1].setIcon(this.icon);
         Center.label[3].setText("__________________________");

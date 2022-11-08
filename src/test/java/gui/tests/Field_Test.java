@@ -1,8 +1,8 @@
 package gui.tests;
 
-import gui.codebehind.FieldFactory;
-import gui.fields.Field;
-import gui.fields.Player;
+import gui.util.FieldFactory;
+import gui.core.Field;
+import gui.core.Player;
 import gui.main.GUI;
 
 public class Field_Test {

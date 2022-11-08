@@ -1,4 +1,4 @@
-package gui.codebehind;
+package gui.util;
 
 import java.awt.Color;
 import java.awt.Component;

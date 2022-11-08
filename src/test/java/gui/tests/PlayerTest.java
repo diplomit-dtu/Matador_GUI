@@ -2,8 +2,8 @@ package gui.tests;
 
 import java.awt.Color;
 
-import gui.fields.Car;
-import gui.fields.Player;
+import gui.core.Car;
+import gui.core.Player;
 import gui.main.GUI;
 
 public class PlayerTest {

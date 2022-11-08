@@ -1,4 +1,4 @@
-package gui.codebehind;
+package gui.core;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -10,10 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import gui.fields.Board;
-import gui.fields.Field;
-import gui.fields.Player;
-import gui.resources.Attrs;
+
+import gui.input.CenterMouseListener;
+import gui.util.Attrs;
+import gui.util.SwingComponentFactory;
 
 public final class Center {
 	private static Center center;

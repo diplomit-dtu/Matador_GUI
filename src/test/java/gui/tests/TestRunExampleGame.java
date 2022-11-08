@@ -1,8 +1,8 @@
 package gui.tests;
 
-import gui.fields.Field;
-import gui.fields.Ownable;
-import gui.fields.Player;
+import gui.core.Field;
+import gui.core.Ownable;
+import gui.core.Player;
 import gui.main.GUI;
 
 

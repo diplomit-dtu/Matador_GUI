@@ -1,6 +1,9 @@
 package gui.fields;
 
-import static gui.fields.Board.BASECOLOR;
+import gui.core.Field;
+import gui.core.Player;
+
+import static gui.core.Board.BASECOLOR;
 import java.awt.Color;
 
 public class Empty extends Field {
@@ -12,7 +15,7 @@ public class Empty extends Field {
         super(bgColor, fgColor, title, subText, description, null);
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) { }
+    public void displayOnCenter(Player[] playerList) { }
     
     @Override
     public String toString() {

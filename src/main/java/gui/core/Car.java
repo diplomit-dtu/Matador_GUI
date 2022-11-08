@@ -1,4 +1,4 @@
-package gui.fields;
+package gui.core;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import gui.codebehind.Observable;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.util.Observable;
+import gui.util.SwingComponentFactory;
+import gui.util.Attrs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -125,7 +125,7 @@ public final class Car extends Observable {
         }
     }
     
-    private BufferedImage getImage() {
+    public BufferedImage getImage() {
         return this.image;
     }
     public Color getPrimaryColor() {

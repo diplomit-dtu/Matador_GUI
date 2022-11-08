@@ -1,6 +1,6 @@
 package gui.input;
 
-import gui.fields.Board;
+import gui.core.Board;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

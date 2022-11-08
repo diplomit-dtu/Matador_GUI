@@ -1,4 +1,4 @@
-package gui.fields;
+package gui.core;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -17,11 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-import gui.codebehind.Center;
-import gui.codebehind.JLabelRotatable;
-import gui.codebehind.Observer;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.util.JLabelRotatable;
+import gui.util.Observer;
+import gui.util.SwingComponentFactory;
+import gui.input.FieldMouseListener;
+import gui.util.Attrs;
 import org.jetbrains.annotations.NotNull;
 
 /**

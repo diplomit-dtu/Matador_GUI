@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.net.URL;
 import javax.swing.JLabel;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
-import gui.resources.Attrs;
+import gui.core.Center;
+import gui.util.SwingComponentFactory;
+import gui.core.Field;
+import gui.core.Player;
+import gui.util.Attrs;
 
 public final class Chance extends Field {
     private static final int TITLEHEIGHT = 47;
@@ -35,7 +37,7 @@ public final class Chance extends Field {
         return bottomLabel;
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) {
+    public void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
         URL path = Attrs.getImagePath("Field.Image.Luck");
         Center.label[1].setIcon(this.factory.createIcon(path));

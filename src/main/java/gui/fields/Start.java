@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
+import gui.core.Center;
+import gui.util.SwingComponentFactory;
+import gui.core.Field;
+import gui.core.Player;
 
 public final class Start extends Field {
     private static final int TITLEHEIGHT = 47;
@@ -35,7 +37,7 @@ public final class Start extends Field {
         return l;
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) {
+    public void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
         Center.label[1].setText(this.title.replace("<html><center>", ""));
         Center.label[2].setText("__________________________");

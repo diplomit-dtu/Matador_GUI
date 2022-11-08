@@ -2,9 +2,13 @@ package gui.tests;
 
 import java.awt.Color;
 
+import gui.core.Car;
+import gui.core.Field;
+import gui.core.Ownable;
+import gui.core.Player;
 import gui.fields.*;
-import gui.fields.Car.Pattern;
-import gui.fields.Car.Type;
+import gui.core.Car.Pattern;
+import gui.core.Car.Type;
 import gui.main.GUI;
 
 public class Test {

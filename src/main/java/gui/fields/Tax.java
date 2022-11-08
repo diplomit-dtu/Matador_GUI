@@ -3,8 +3,10 @@ package gui.fields;
 import java.awt.Color;
 import javax.swing.JLabel;
 
-import gui.codebehind.Center;
-import gui.codebehind.SwingComponentFactory;
+import gui.core.Center;
+import gui.util.SwingComponentFactory;
+import gui.core.Field;
+import gui.core.Player;
 
 public final class Tax extends Field {
     private static final int TITLEHEIGHT = 47;
@@ -33,7 +35,7 @@ public final class Tax extends Field {
         return l;
     }
     @Override
-    protected void displayOnCenter(Player[] playerList) {
+    public void displayOnCenter(Player[] playerList) {
         super.displayOnCenter(playerList);
         Center.label[1].setText("__________________________");
         Center.label[2].setText(this.description);

@@ -1,4 +1,4 @@
-package gui.resources;
+package gui.util;
 
 import java.net.URL;
 import java.util.MissingResourceException;
@@ -17,12 +17,16 @@ public class Attrs {
             throw new NullPointerException("Bad key [" + key + "]!");
         }
     }
+
     public static URL getImagePath(String key) {
+        return getImagePath(key, 0);
+    }
+    public static URL getImagePath(String key, int index) {
         try {
-            String file = RESOURCE_BUNDLE.getString(key);
-            return Attrs.class.getClassLoader().getResource(file);
-        } catch (MissingResourceException e) {
-            throw new NullPointerException("Bad key [" + key + "]!");
+            String [] file = RESOURCE_BUNDLE.getString(key).split(",");
+            return Attrs.class.getClassLoader().getResource(file[index]);
+        } catch (IndexOutOfBoundsException | MissingResourceException e) {
+            throw new UnknownError("Bad key [" + key + "," + index + "]!");
         }
     }
 }

@@ -1,4 +1,6 @@
-package gui.codebehind;
+package gui.input;
+
+import gui.core.Center;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

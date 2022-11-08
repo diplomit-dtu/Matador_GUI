@@ -1,7 +1,8 @@
-package gui.codebehind;
+package gui.util;
 
 import java.awt.Color;
 
+import gui.core.Field;
 import gui.fields.*;
 
 /**

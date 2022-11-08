@@ -1,4 +1,4 @@
-package gui.codebehind;
+package gui.core;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -8,9 +8,6 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.*;
 
-import gui.fields.Board;
-import gui.fields.Field;
-import gui.fields.Player;
 import gui.input.EnterButton;
 import gui.input.IntegerInput;
 import gui.input.StringInput;

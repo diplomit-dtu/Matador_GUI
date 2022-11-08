@@ -1,11 +1,11 @@
 package gui.main;
 
 import java.awt.Color;
-import gui.codebehind.BoardController;
-import gui.codebehind.FieldFactory;
-import gui.fields.Board;
-import gui.fields.Field;
-import gui.fields.Player;
+import gui.core.BoardController;
+import gui.util.FieldFactory;
+import gui.core.Board;
+import gui.core.Field;
+import gui.core.Player;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
  *         Daniel Rubin-Grøn (daniel@koru.dk)
  *         Version 3.1 updates by Christian Budtz (chbu@dtu.dk)
  *         Malte Bryndum Pedersen (s185139)
+ *         Chirstian Gram Kalhauge (chrg@dtu.dk)
  */
 public final class GUI {
 
