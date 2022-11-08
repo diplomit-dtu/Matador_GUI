@@ -21,10 +21,11 @@ import org.jetbrains.annotations.NotNull;
  *         Malte Bryndum Pedersen (s185139)
  *         Chirstian Gram Kalhauge (chrg@dtu.dk)
  */
+@SuppressWarnings("unused")
 public final class GUI {
 
     private final BoardController boardController;
-    private static boolean null_fields_allowed = false;
+    private static boolean nullFieldsAllowed = false;
 
 
     /**
@@ -32,28 +33,25 @@ public final class GUI {
      *  Use {@link GUI#GUI(Field[])} constructor if you want to use custom fields.
      */
     public GUI(){
-        Field[] fields = FieldFactory.makeFields();
-        for(int i = 0; i < fields.length; i++){
-            fields[i] = fields[i];
-        }
-        boardController = new BoardController(fields);
+        this(FieldFactory.makeFields());
     }
 
 
     /**
-     *  Constructor for GUI. Accepts an an array of {@link Field}. Order of fields in array determine order of fields.
+     *  Constructor for GUI. Accepts an array of {@link Field}. Order of fields in array determine order of fields.
      *  Call any function on gui to show gui (ie. gui.showMessage). Board will try to resize to accommodate fields.
      *  Invoke GUI.set_null_fields_allowed prior to allow null fields (not recommendable)
      *
      * @param fields The fields to display.
      *
-     * @throws NullPointerException  If {@link GUI#null_fields_allowed} is false (hasn't be set to true using {@link GUI#setNull_fields_allowed(boolean)}
+     * @throws NullPointerException  If {@link GUI#nullFieldsAllowed} is false
+     *                  (hasn't been set to true using {@link GUI#setNullFieldsAllowed(boolean)})
      *                                  and the 'fields' param contains null values.
      */
     public GUI(Field[] fields) {
         checkNullArray(fields);
-        if(!GUI.null_fields_allowed){
-            check_for_null_fields(fields);
+        if(!GUI.nullFieldsAllowed){
+            checkForNullFields(fields);
         }
 
 
@@ -69,13 +67,13 @@ public final class GUI {
      * @param fields The fields to display.
      * @param backGroundColor Color for background.
      *
-     * @throws NullPointerException  If {@link GUI#null_fields_allowed} is false (hasn't be set to true using {@link GUI#setNull_fields_allowed(boolean)}
+     * @throws NullPointerException  If {@link GUI#nullFieldsAllowed} is false (hasn't be set to true using {@link GUI#setNullFieldsAllowed(boolean)}
      *                                  and the 'fields' param contains null values.
      */
     public GUI(Field[] fields, Color backGroundColor){
         checkNullArray(fields);
-        if(!GUI.null_fields_allowed){
-            check_for_null_fields(fields);
+        if(!GUI.nullFieldsAllowed){
+            checkForNullFields(fields);
         }
         this.boardController = new BoardController(fields, backGroundColor);
     }
@@ -92,18 +90,19 @@ public final class GUI {
 
 
 
-    private void check_for_null_fields(Field[] fields) {
+    private void checkForNullFields(Field[] fields) {
         String msg = "Null fields!\nNull fields are not recommended! the following indices are null: ";
-        String str = "{";
+        String str;
         String howTo = "Disable this Exception by calling the static method GUI.setNull_fields_allowed(true);";
+        StringBuilder strBuilder = new StringBuilder("{");
         for(int i = 0; i < fields.length; i++){
             Field f = fields[i];
             if(f == null){
-                str += i+", ";
+                strBuilder.append(i).append(", ");
             }
         }
-        str += "}";
-        str = str.replace(", }", "}");
+        strBuilder.append("}");
+        str = strBuilder.toString().replace(", }", "}");
         if(str.length() > 2) throw new NullPointerException(msg+str+"\n"+howTo);
     }    
 
@@ -122,10 +121,8 @@ public final class GUI {
 
     /**
      * Displays a message to the user, and prompt the user for a text input.
-     * The text input cannot be empty, but may contain whitespace.
-     *
-     * Blocks/hangs until an input has been entered.
-     *
+     * The text input cannot be empty, but may contain whitespace.<br>
+     * Blocks/hangs until an input has been entered.<br>
      * @param msg The message that prompts the user.
      * @return The string that the user has entered
      */
@@ -137,8 +134,7 @@ public final class GUI {
     /**
      * Displays a message to the user, and prompt the user for a text input with specific
      * attributes (parameters). The method ensures that the returned string matches the
-     * given attributes.
-     *
+     * given attributes.<br>
      * Blocks/hangs until an input has been entered.
      *
      * @param msg The message that prompts the user.
@@ -210,7 +206,7 @@ public final class GUI {
         for(int i = 0; i < options.length; i++){
             options[i] = options[i].replace("\n", "<BR>");
         }
-        return boardController.getUserSelection(msg, options).toString();
+        return boardController.getUserSelection(msg, options);
     }
 
 
@@ -380,8 +376,8 @@ public final class GUI {
      *
      * @return True if null fields allowed, otherwise falls
      */
-    public static boolean isNull_fields_allowed() {
-        return null_fields_allowed;
+    public static boolean isNullFieldsAllowed() {
+        return nullFieldsAllowed;
     }
 
 
@@ -400,8 +396,8 @@ public final class GUI {
      *
      * @param allowed True if null fields should be allowed, false if not
      */
-    public static void setNull_fields_allowed(boolean allowed) {
-        GUI.null_fields_allowed = allowed;
+    public static void setNullFieldsAllowed(boolean allowed) {
+        GUI.nullFieldsAllowed = allowed;
     }
 
 }
