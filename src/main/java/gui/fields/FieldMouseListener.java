@@ -13,8 +13,8 @@ import gui.codebehind.Center;
  */
 public class FieldMouseListener implements MouseListener{
     private static final boolean PRINT_COUNTER = false;
-    private Field field;
-    private Player[] playerList;
+    private final Field field;
+    private final Player[] playerList;
     private boolean show = true;
     private static Timer timer = null, counter = null;
     

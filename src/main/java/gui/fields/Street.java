@@ -13,8 +13,8 @@ import gui.resources.Attrs;
 public final class Street extends Ownable {
     private static final int TITLEHEIGHT = 24;
     private static final int SUBTEXTHEIGHT = 10;
-    private JLabel houseLabel;
-    private SwingComponentFactory factory = new SwingComponentFactory();
+    private final JLabel houseLabel;
+    private final SwingComponentFactory factory = new SwingComponentFactory();
     
     public Street(){
         this(TITLE, SUBTEXT, DESCRIPTION, RENT, BG_COLOR, FG_COLOR);

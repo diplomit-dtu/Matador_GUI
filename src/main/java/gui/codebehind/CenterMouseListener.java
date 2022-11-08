@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
  * @author Ronnie
  */
 public class CenterMouseListener implements MouseListener{
-	private Center center;
+	private final Center center;
 	
 	public CenterMouseListener(Center center){
 		this.center = center;

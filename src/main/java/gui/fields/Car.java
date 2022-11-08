@@ -30,6 +30,7 @@ public final class Car extends Observable {
     public enum Type {
         CAR(0, 15), TRACTOR(1, 11), RACECAR(2, 13), UFO(3, 10);
         private final int x, h;
+        @SuppressWarnings("FieldCanBeLocal")
         private final int width = Car.WIDTH + 1;
         public final static int size = Type.values().length;
         Type(int no, int h) {
@@ -72,7 +73,7 @@ public final class Car extends Observable {
     private BufferedImage image;
 
     private Field position = null;
-    private ArrayList<PositionChangedListener> positionChangedListeners = new ArrayList<>();
+    private final ArrayList<PositionChangedListener> positionChangedListeners = new ArrayList<>();
 
 
     /**
@@ -124,7 +125,7 @@ public final class Car extends Observable {
         }
     }
     
-    protected BufferedImage getImage() {
+    private BufferedImage getImage() {
         return this.image;
     }
     public Color getPrimaryColor() {

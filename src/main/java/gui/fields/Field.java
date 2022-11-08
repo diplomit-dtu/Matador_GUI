@@ -22,7 +22,7 @@ import gui.resources.Attrs;
 public abstract class Field {
     public static final int FIELDWIDTH = 63;
     public static final int FIELDHEIGHT = 63;
-    protected JLayeredPane layered = new JLayeredPane();
+    protected final JLayeredPane layered = new JLayeredPane();
     protected JLabel titleLabel;
     protected JLabel subTextLabel;
     protected Color bgColor;
@@ -30,12 +30,12 @@ public abstract class Field {
     protected String title;
     protected String subText;
     protected String description;
-    private SwingComponentFactory factory = new SwingComponentFactory();
-    private HashMap<Integer, JLabel> carLabelsMap = new HashMap<Integer, JLabel>();
+    private final SwingComponentFactory factory = new SwingComponentFactory();
+    private final HashMap<Integer, JLabel> carLabelsMap = new HashMap<Integer, JLabel>();
     private JLabel[] carLabels;
 
     /** List of cars that are being drawn by this view */
-    private ArrayList<Car> drawnCars = new ArrayList<>();
+    private final ArrayList<Car> drawnCars = new ArrayList<>();
     
     //Default values
     protected static final String TITLE = Attrs.getString("Field.Default_title");

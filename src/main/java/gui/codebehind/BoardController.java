@@ -21,7 +21,7 @@ import gui.input.StringInput;
  */
 public final class BoardController {
     private String userInput = null;
-    private Board board;
+    private final Board board;
     private static volatile Random rand = null;
 
 

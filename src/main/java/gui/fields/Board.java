@@ -35,16 +35,16 @@ public final class Board extends javax.swing.JFrame implements Observer {
     public static final Color BASECOLOR = new Color(51, 204, 0);
     public static final int MAX_PLAYER_COUNT = 6;
     
-    private SwingComponentFactory factory = new SwingComponentFactory();
+    private final SwingComponentFactory factory = new SwingComponentFactory();
     public Player[] playerList = new Player[MAX_PLAYER_COUNT];
     private JLayeredPane base;
-    private JLayeredPane[][] carPanes = new JLayeredPane[11][11];
-    private JLabelRotatable[][] diceLabels = new JLabelRotatable[11][11];
-    private JLabel[] playerLabels = new JLabel[MAX_PLAYER_COUNT];
-    private JLabel[] iconLabels = new JLabel[MAX_PLAYER_COUNT];
+    private final JLayeredPane[][] carPanes = new JLayeredPane[11][11];
+    private final JLabelRotatable[][] diceLabels = new JLabelRotatable[11][11];
+    private final JLabel[] playerLabels = new JLabel[MAX_PLAYER_COUNT];
+    private final JLabel[] iconLabels = new JLabel[MAX_PLAYER_COUNT];
     private JPanel inputPanel = new JPanel();
-    private JTextArea messageArea = new JTextArea();
-    private ImageIcon[] diceIcons = new ImageIcon[6];
+    private final JTextArea messageArea = new JTextArea();
+    private final ImageIcon[] diceIcons = new ImageIcon[6];
     private Field[] fields = null;
     private int die1x = 1, die1y = 1, die2x = 1, die2y = 1;
     

@@ -30,9 +30,9 @@ public class Player extends Observable {
 	private int number = -1;
 	private String name;
 	private int balance;
-	private Car car;
+	private final Car car;
 	private static int nextId = 0;
-    private int id;
+    private final int id;
 	
 	public static final int ICON_WIDTH = 41;
 	public static final int ICON_HEIGHT = 22;

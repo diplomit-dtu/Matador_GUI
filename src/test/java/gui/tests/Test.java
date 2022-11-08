@@ -3,15 +3,19 @@ package gui.tests;
 import java.awt.Color;
 
 import gui.fields.*;
-import gui.fields.Car;
 import gui.fields.Car.Pattern;
 import gui.fields.Car.Type;
 import gui.main.GUI;
 
 public class Test {
-    private GUI gui = new GUI();
-    private Player arthur, ford, zaphod, tricia, marvin, slart, dt;
-	
+    private final GUI gui = new GUI();
+    private Player arthur;
+	private Player ford;
+	private Player zaphod;
+	private Player tricia;
+	private Player marvin;
+	private Player slart;
+
 	public static void main(String[] args) {
 		Test test = new Test();
 		test.test();
@@ -19,9 +23,7 @@ public class Test {
 	
 	private void test(){
 	    setDiceAngleAndCoordinates();
-//	    testSetText();
-//	    testSetTexts();
-	    testAddPlayer();
+		testAddPlayer();
 	    testSetBalance();
 	    testSetDice();
 	    testInput();
@@ -44,75 +46,9 @@ public class Test {
 		System.out.println("testInput:"
 			+ gui.getUserSelection("Vælg en grund", "Hvidovrevej", "Rødovrevej", "Peters vej",
 				"Oskars vej") + "");
-		// System.out.println(gui.getUserLeftButtonPressed("Vil du gå fallit?", "Yes", "No"));
-		// System.out.println("testInput:" + gui.getUserButtonPressed("Vælg en grund",
-		// "Hvidovrevej", "Rødovrevej", "Peters vej", "Oskars vej") + ".");
-		// int returInt = gui.getUserInteger("Indtast tal [0-999999999]");
-		// int returInt = gui.getUserInteger("Indtast tal [2-22]", 2, 22);
-		// String retur = gui.getUserString("222");
-		// System.out.println("Retur fra getUserInteger: " + returInt);
-		// gui.showMessage("HEJ");
 	}
 	
-//	private void testSetText() {
-//		gui.setTitleText(3, "Ocean Blv.");
-//		gui.setSubText(3, "Price: 1 mio.");
-//		gui.setDescriptionText(
-//			3,
-//			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac libero lorem. Aliquam ligula mauris, luctus interdum malesuada non, adipiscing ut mauris.");
-//		gui.setTitleText(34, "Start");
-//		gui.setSubText(1, "Daniel2");
-//		gui.setDescriptionText(
-//			1,
-//			"Daniel3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac libero lorem. Aliquam ligula mauris, luctus interdum malesuada non, adipiscing ut mauris.");
-//	}
-//	private void testSetTexts() {
-//		int fieldNr = 0;
-//		String desc = "description";
-//		String sub = "subtext";
-//		String title = "title";
-//		// Start - 1
-//		fieldNr = 34;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Brewery - 13
-//		fieldNr = 13;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Chance - 3
-//		fieldNr = 3;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Jail - 11
-//		fieldNr = 11;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Refuge - 21
-//		fieldNr = 21;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Shipping - 6
-//		fieldNr = 6;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Street - 2
-//		fieldNr = 2;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//		// Tax - 5
-//		fieldNr = 5;
-//		gui.setDescriptionText(fieldNr, desc + fieldNr);
-//		gui.setSubText(fieldNr, sub + fieldNr);
-//		gui.setTitleText(fieldNr, title + fieldNr);
-//	}
-	private void testAddPlayer() {
+private void testAddPlayer() {
 	    arthur = new Player("Arthur Dent", 1000);
 		gui.addPlayer(arthur);
 		
@@ -135,17 +71,14 @@ public class Test {
 		Car car5 = new Car(Color.BLACK, Color.WHITE, Type.CAR, Pattern.DOTTED);
 		slart = new Player("Slartibartfast", 100000, car5);
 		gui.addPlayer(slart);
-		
-		dt = new Player("Deep Thought", 100000);
+
+		Player dt = new Player("Deep Thought", 100000);
 		gui.addPlayer(dt);
 	}
 	private void testSetBalance() {
 		ford.setBalance(100);
 	}
 	private void testSetDice() {
-		// int d1 = (int)(Math.random()*6+1);
-		// int d2 = (int)(Math.random()*6+1);
-		// gui.setDice(d1, d2);
 		gui.setDice(2, 3);
 	}
 	private void testSetDiceAllAngles() {

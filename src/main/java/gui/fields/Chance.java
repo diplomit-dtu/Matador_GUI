@@ -11,7 +11,7 @@ import gui.resources.Attrs;
 public final class Chance extends Field {
     private static final int TITLEHEIGHT = 47;
     private static final int SUBTEXTHEIGHT = 14;
-    private SwingComponentFactory factory = new SwingComponentFactory();
+    private final SwingComponentFactory factory = new SwingComponentFactory();
     
     public Chance(){
         this("<html><b><font size=\"7\">"+Attrs.getString("Field.Label.Chance.Format"),

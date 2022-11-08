@@ -12,19 +12,17 @@ public final class Refuge extends Field {
     private static final int TOPHEIGHT = 47;
     private static final int SUBTEXTHEIGHT = 14;
     private ImageIcon icon;
-    private JLabel topLabel;
-    
-    private SwingComponentFactory factory = new SwingComponentFactory();
-    
+
     public Refuge(){
         this(PICTURE, TITLE, SUBTEXT, DESCRIPTION, BG_COLOR, FG_COLOR);
     }
     public Refuge(String picture, String title, String subText, String description, Color bgColor, Color fgColor) {
         super(bgColor, fgColor, title, subText, description);
-        
+
+        SwingComponentFactory factory = new SwingComponentFactory();
         if ("default".equalsIgnoreCase(picture)) {
             URL path = Attrs.getImagePath("Field.Image.Cones");
-            this.icon = this.factory.createIcon(path);
+            this.icon = factory.createIcon(path);
         } else {
             try {
                 this.icon = new ImageIcon(picture);
@@ -33,11 +31,11 @@ public final class Refuge extends Field {
                 System.out.println(Attrs.getString("Error.BadArgument.ImagePath", picture));
             }
         }
-        
-        this.topLabel = makeTopLabel();
+
+        JLabel topLabel = makeTopLabel();
         this.subTextLabel = makeBottomLabel(this.subText);
-        this.layered.add(this.topLabel, this.factory.createGridBagConstraints(0, 0));
-        this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 1));
+        this.layered.add(topLabel, factory.createGridBagConstraints(0, 0));
+        this.layered.add(this.subTextLabel, factory.createGridBagConstraints(0, 1));
     }
     private JLabel makeTopLabel() {
         JLabel l = makeLabel(TOPHEIGHT);

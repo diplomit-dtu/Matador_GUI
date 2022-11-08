@@ -52,10 +52,6 @@ public class MoveCar {
                     fieldNames.toArray(new String[0])
             );
 
-            /*for( Field field : gui.getFields() )
-                field.setCar(playerToMove, false);
-            gui.getFields()[fieldNames.indexOf(targetFieldName)].setCar(playerToMove, true);*/
-
             playerToMove.getCar().setPosition(gui.getFields()[fieldNames.indexOf(targetFieldName)]);
         }
 

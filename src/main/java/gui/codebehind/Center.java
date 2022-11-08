@@ -18,16 +18,14 @@ import gui.resources.Attrs;
 public final class Center {
 	private static Center center;
 	private static JPanel centerPanel;
-	public static JLabel[] label = new JLabel[7];
-	public static JLabel[] cars = new JLabel[Board.MAX_PLAYER_COUNT];
+	public static final JLabel[] label = new JLabel[7];
+	public static final JLabel[] cars = new JLabel[Board.MAX_PLAYER_COUNT];
 	public static String chanceCardText = "Prøv Lykken";
-	private JLayeredPane playersPane = new JLayeredPane();
-	
-	private SwingComponentFactory factory = new SwingComponentFactory();
 
 	private Center(){
 		centerPanel = new javax.swing.JPanel();
-		this.factory.setSize(centerPanel, 3* Field.FIELDWIDTH, 3* Field.FIELDHEIGHT);
+		SwingComponentFactory factory = new SwingComponentFactory();
+		factory.setSize(centerPanel, 3* Field.FIELDWIDTH, 3* Field.FIELDHEIGHT);
 		centerPanel.addMouseListener(new CenterMouseListener(this));
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		 
@@ -38,16 +36,17 @@ public final class Center {
 			label[i].setAlignmentX(Component.CENTER_ALIGNMENT);
 			centerPanel.add(label[i]);
 		}
+		JLayeredPane playersPane = new JLayeredPane();
 		for(int i = 0; i < cars.length; i++){
 			JLabel l = new JLabel();
 			cars[i] = l;
 			l.setOpaque(false);
 			l.setBounds(25*i+3, 0, Player.ICON_WIDTH, Player.ICON_HEIGHT);
-			this.playersPane.setLayer(l, i+6);
+			playersPane.setLayer(l, i+6);
 			l.setVisible(false);
-			this.playersPane.add(l);
+			playersPane.add(l);
 		}
-		centerPanel.add(this.playersPane);
+		centerPanel.add(playersPane);
 		displayDefault();
 	}
 	/**

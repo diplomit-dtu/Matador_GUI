@@ -13,9 +13,7 @@ public final class Shipping extends Ownable {
 	private static final int TOPHEIGHT = 31;
 	private static final int TITLEHEIGHT = 16;
 	private static final int SUBTEXTHEIGHT = 14;
-	private JLabel topLabel;
 	private ImageIcon icon;
-	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
 	
 	public Shipping(){
@@ -23,11 +21,12 @@ public final class Shipping extends Ownable {
 	}
 	public Shipping(String picture, String title, String subText, String description, String rent, Color bgColor, Color fgColor) {
 		super(bgColor, fgColor, title, subText, description, rent);
-		
+
+		SwingComponentFactory factory = new SwingComponentFactory();
 		if("default".equalsIgnoreCase(picture)) {
 			int p = (picCounter++ % 4) + 1;
 			URL path = Attrs.getImagePath(String.format("Field.Image.Ferry%d", p));
-            this.icon = this.factory.createIcon(path);
+            this.icon = factory.createIcon(path);
 		} else {
 			try {
 				this.icon = new ImageIcon(picture);
@@ -36,13 +35,13 @@ public final class Shipping extends Ownable {
 				System.out.println(Attrs.getString("Error.BadArgument.ImagePath", picture));
 			}
 		}
-		
-		this.topLabel = makeTopLabel();
+
+		JLabel topLabel = makeTopLabel();
 		super.titleLabel = makeRoadNameLabel(this.title);
 		super.subTextLabel = makeBottomLabel(this.subText);
-		this.layered.add(this.topLabel, this.factory.createGridBagConstraints(0, 0));
-		this.layered.add(this.titleLabel, this.factory.createGridBagConstraints(0, 1));
-		this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 2));
+		this.layered.add(topLabel, factory.createGridBagConstraints(0, 0));
+		this.layered.add(this.titleLabel, factory.createGridBagConstraints(0, 1));
+		this.layered.add(this.subTextLabel, factory.createGridBagConstraints(0, 2));
 	}
 	private JLabel makeTopLabel() {
 		JLabel l = makeLabel(TOPHEIGHT);

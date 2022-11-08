@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class GUI {
 
-    private BoardController boardController;
+    private final BoardController boardController;
     private static boolean null_fields_allowed = false;
 
 

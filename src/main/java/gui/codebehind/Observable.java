@@ -3,7 +3,7 @@ package gui.codebehind;
 import java.util.ArrayList;
 
 public abstract class Observable {
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private final ArrayList<Observer> observers = new ArrayList<Observer>();
     
     public void addObserver(Observer obs){
         observers.add(obs);

@@ -12,8 +12,6 @@ public final class Jail extends Field {
 	private static final int TOPHEIGHT = 47;
 	private static final int SUBTEXTHEIGHT = 14;
 	private ImageIcon icon;
-	private JLabel topLabel;
-	private SwingComponentFactory factory = new SwingComponentFactory();
 	private static int picCounter = 0;
 
 	public Jail(){
@@ -22,11 +20,12 @@ public final class Jail extends Field {
 	public Jail(String picture, String title, String subText, String description, Color bgColor, Color fgColor){
 		super(bgColor, fgColor, title, subText, description);
 
+		SwingComponentFactory factory = new SwingComponentFactory();
 		if("default".equalsIgnoreCase(picture)){
 			int p = (picCounter++ % 2);
 			URL path1 = Attrs.getImagePath("Field.Image.GoToJail");
 			URL path2 = Attrs.getImagePath("Field.Image.Jail");
-            this.icon = this.factory.createIcon(p>0 ? path1 : path2);
+            this.icon = factory.createIcon(p>0 ? path1 : path2);
 		}else{
 			try{
 			this.icon = new ImageIcon(picture);
@@ -35,11 +34,11 @@ public final class Jail extends Field {
 				System.out.println("Bad Resource: "+picture);
 			}
 		}
-		
-		this.topLabel = makeTopLabel();
+
+		JLabel topLabel = makeTopLabel();
 		this.subTextLabel = makeBottomLabel(this.subText);
-		this.layered.add(this.topLabel, this.factory.createGridBagConstraints(0, 0));
-		this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 1));
+		this.layered.add(topLabel, factory.createGridBagConstraints(0, 0));
+		this.layered.add(this.subTextLabel, factory.createGridBagConstraints(0, 1));
 	}
 	private JLabel makeTopLabel(){
 		JLabel l = makeLabel(TOPHEIGHT);

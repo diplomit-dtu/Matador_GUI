@@ -3,7 +3,6 @@ package gui.codebehind;
 import java.awt.Color;
 
 import gui.fields.*;
-import gui.fields.Chance;
 
 /**
  * Creates all the fields

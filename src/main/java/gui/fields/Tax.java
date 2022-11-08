@@ -9,8 +9,7 @@ import gui.codebehind.SwingComponentFactory;
 public final class Tax extends Field {
     private static final int TITLEHEIGHT = 47;
     private static final int SUBTEXTHEIGHT = 14;
-    private SwingComponentFactory factory = new SwingComponentFactory();
-    
+
     public Tax(){
         this(TITLE, SUBTEXT, DESCRIPTION, BG_COLOR, FG_COLOR);
     }
@@ -19,8 +18,9 @@ public final class Tax extends Field {
         super(bgColor, fgColor, title, subText, description);
         this.titleLabel = makeTitleLabel(this.title);
         this.subTextLabel = makeSubTextLabel(this.subText);
-        this.layered.add(this.titleLabel, this.factory.createGridBagConstraints(0, 0));
-        this.layered.add(this.subTextLabel, this.factory.createGridBagConstraints(0, 1));
+        SwingComponentFactory factory = new SwingComponentFactory();
+        this.layered.add(this.titleLabel, factory.createGridBagConstraints(0, 0));
+        this.layered.add(this.subTextLabel, factory.createGridBagConstraints(0, 1));
     }
     private JLabel makeTitleLabel(String titleTax) {
         JLabel l = makeLabel(TITLEHEIGHT);
